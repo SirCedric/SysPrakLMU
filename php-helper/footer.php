@@ -50,7 +50,7 @@
         <div class="mdl-logo">Title</div>
         <ul class="mdl-mega-footer__link-list">
             <li><a href="#">Help</a></li>
-            <li><a href="php-pages/impressum.php">Impressum</a></li>
+            <li><a href="impressum.php">Impressum</a></li>
         </ul>
     </div>
 

@@ -58,10 +58,26 @@
                     </form>
 
                     <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect SingIn">
                             Anmelden
                         </a>
                     </div>
+                    <script type="text/javascript">
+                        $('.SingIn').click(function() {
+
+                            $.ajax({
+                                type: "POST",
+                                url: "LogInVerification.php",
+                            })
+
+                        });
+                        if(true){
+                            location.href = "index.php"
+                        }
+                        else {
+                            //Todo Fehlermeldung
+                        }
+                    </script>
                 </div>
                 </form>
                 <div class="mdl-layout-spacer"></div>

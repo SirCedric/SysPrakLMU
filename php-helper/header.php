@@ -13,7 +13,6 @@
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
             <a class="mdl-navigation__link" href="">Chat</a>
-            <a class="mdl-navigation__link" href="">Homepage</a>
             <a class="mdl-navigation__link" href="">Forum</a>
             <a class="mdl-navigation__link" href="">Galerie</a>
         </nav>
