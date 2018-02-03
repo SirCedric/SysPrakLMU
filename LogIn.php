@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="css/main.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 </head>
 <body style="background-color:cornflowerblue;">
@@ -28,6 +29,9 @@
                 <input type="submit">
 
             </div>
+            <?php
+            include "php-helper/footer.php";
+            ?>
         </div>
     </main>
 </div>
