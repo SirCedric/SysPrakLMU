@@ -6,7 +6,7 @@
     .demo-layout-transparent .mdl-layout__drawer-button {
         /* This background is dark, so we set text to white. Use 87% black instead if
            your background is light. */
-        color: black;
+        color: white;
     }
 </style>
 
@@ -29,7 +29,7 @@
     <div class="mdl-layout__drawer">
         <span class="mdl-layout-title ">Title</span>
         <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="LogIn.php">LogIn</a>
             <a class="mdl-navigation__link" href="">Link</a>
             <a class="mdl-navigation__link" href="">Link</a>
             <a class="mdl-navigation__link" href="">Link</a>
