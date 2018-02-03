@@ -16,7 +16,7 @@
 <body style="background-color:cornflowerblue;">
       <div class="mdl-layout mdl-js-layout">
         <?php
-         include "php/header.php";
+         include "php-helper/header.php";
         ?>
         <main class="mdl-layout__content">
             <div class="page-content"><!-- Your content goes here -->
