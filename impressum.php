@@ -27,6 +27,9 @@
                         width: 512px;
                     }
                 </style>
+
+                <div class="mdl-layout-spacer"></div>
+
                 <div class="mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--6-col-phone">
                     <div class="demo-card-wide mdl-card mdl-shadow--2dp">
                         <div class="mdl-card__title">
@@ -62,6 +65,8 @@
                     </div>
                 </div>
 
+                <div class="mdl-layout-spacer"></div>
+
                 <div class="mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--6-col-phone">
                     <div class="demo-card-wide mdl-card mdl-shadow--2dp">
                         <div class="mdl-card__title">
@@ -88,7 +93,14 @@
                     </div>
                 </div>
 
-                <span>Haftungshinweis:  Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich </span>
+                <div class="mdl-layout-spacer"></div>
+
+                <span>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    Haftungshinweis:  Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich </span>
 
 
             </div>
