@@ -40,7 +40,7 @@
                         Rosalie Nitzl </br>
                         Bahnhofstr. 1A</br>
                         85591 Vaterstetten</br>
-                        E-Mail: stavo(at)dpsg-windrose.de
+                        E-Mail:</br><a href="mailto:stavo@dpsg-windrose.de">stavo@dpsg-windrose.de</a>
                     </span>
                       </li>
                       <li class="mdl-list__item">
@@ -49,7 +49,7 @@
                         Dominik Hohl</br>
                         Zugspitzstraße 16</br>
                         85586 Poing</br>
-                        E-Mail: stavo(at)dpsg-windrose.de
+                        E-Mail:<a href="mailto:stavo@dpsg-windrose.de">stavo@dpsg-windrose.de</a>
                       </span>
                       </li>
                     </ul>
@@ -87,6 +87,9 @@
               </div>
             </div>
           </div>
+
+<span>Haftungshinweis: Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich </span>
+
 
             </div>
             <?php

@@ -4,6 +4,7 @@
         padding-right: 0;
     }
 </style>
+
 <header class="mdl-layout__header mdl-layout__header--waterfall">
     <!-- Top row, always visible -->
     <div class="mdl-layout__header-row">
