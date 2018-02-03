@@ -27,12 +27,13 @@
                 <style>
                     .demo-card-square.mdl-card {
                         width: 320px;
-                        height: 320px;
+                        height: 370px;
                     }
 
                     .demo-card-square > .mdl-card__title {
-                        color: #fff;
-                        background: url('Bilder/Header_Bild.jpg') center 50% no-repeat #46B6AC;
+                        /*color: #fff*/;
+                        background: url('Bilder/stammeslogo.png') center 50% no-repeat white;
+                        color: black;
                     }
                 </style>
 

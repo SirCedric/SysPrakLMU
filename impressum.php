@@ -80,7 +80,7 @@
                       Cedric Kummer </br>
                           Flurstrasse 10</br>
                           Anzing</br>
-                          E-Mail: is_Geheim_Sorry
+                          E-Mail:<a href="mailto:webmaster@dpsg-windrose.de">webmaster@dpsg-windrose.de</a>
                       </span>
                                 </li>
                             </ul>
@@ -95,14 +95,13 @@
 
                 <div class="mdl-layout-spacer"></div>
 
-                <span>
+                <span class="ImpressumHaftungshinweis">
                     </br>
                     </br>
                     </br>
                     </br>
-                    Haftungshinweis:  Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich </span>
-
-
+                    Haftungshinweis: Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich
+                </span>
             </div>
             <?php
             include 'php-helper/footer.php';

@@ -14,7 +14,6 @@
         <nav class="mdl-navigation">
             <a class="mdl-navigation__link" href="">Chat</a>
             <a class="mdl-navigation__link" href="">Forum</a>
-            <a class="mdl-navigation__link" href="">Galerie</a>
         </nav>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
                   mdl-textfield--floating-label mdl-textfield--align-right">
@@ -35,9 +34,12 @@
 
     <nav class="mdl-navigation">
         <a class="mdl-navigation__link" href="LogIn.php">LogIn</a>
-        <a class="mdl-navigation__link" href="">Link</a>
-        <a class="mdl-navigation__link" href="">Link</a>
-        <a class="mdl-navigation__link" href="">Link</a>
+        <a class="mdl-navigation__link" href="">Stufen</a>
+        <a class="mdl-navigation__link" href="">Stamm</a>
+        <a class="mdl-navigation__link" href="">Ausrüstung</a>
+        <a class="mdl-navigation__link" href="">Zelt- & Bootsverleih</a>
+        <a class="mdl-navigation__link" href="">Förderkreis</a>
+        <a class="mdl-navigation__link" href="">Galerie</a>
     </nav>
 </div>
 <main class="mdl-layout__content">

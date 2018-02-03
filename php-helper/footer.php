@@ -47,9 +47,9 @@
     </div>
 
     <div class="mdl-mega-footer__bottom-section">
-        <div class="mdl-logo">Title</div>
+        <div class="mdl-logo">Administratives</div>
         <ul class="mdl-mega-footer__link-list">
-            <li><a href="#">Help</a></li>
+            <li><a href="impressum.php">Kontakt</a></li>
             <li><a href="impressum.php">Impressum</a></li>
         </ul>
     </div>
