@@ -4,13 +4,11 @@
         padding-right: 0;
     }
 </style>
-
-
 <header class="mdl-layout__header mdl-layout__header--waterfall">
     <!-- Top row, always visible -->
     <div class="mdl-layout__header-row">
         <!-- Title -->
-        <span class="mdl-layout-title header--home_button"><a href="index.php">DPSG Windrose</a></span>
+        <span class="mdl-layout-title "><a class="header_button" href="index.php">DPSG Windrose</a></span>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
             <a class="mdl-navigation__link" href="">Chat</a>
@@ -33,7 +31,7 @@
 
 </header>
 <div class="mdl-layout__drawer">
-    <span class="mdl-layout-title header--home_button"><a href="index.php">DPSG Windrose</a></span>
+    <span class="mdl-layout-title"><a class="header_button" href="index.php">DPSG Windrose</a></span>
 
     <nav class="mdl-navigation">
         <a class="mdl-navigation__link" href="LogIn.php">LogIn</a>

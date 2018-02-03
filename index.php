@@ -23,7 +23,6 @@
         <div class="page-content"><!-- Your content goes here -->
             <div class="mdl-grid">
 
-
                 <p> ich bin inhalt, der erste Inhalt den wir hier so haben </p>
                 <div class="demo-card-wide mdl-card mdl-shadow--2dp">
                     <div class="mdl-card__title">
