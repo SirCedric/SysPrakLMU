@@ -10,7 +10,9 @@
 <?php
 include "php/header.php";
 ?>
-hallo dies ist ein test
-  einer html seite
+hallo dies ist ein test einer html seite
+<input type="text" id="username">
+<input type="password" id="password">
+<input type="submit">
   </body>
 </html>
