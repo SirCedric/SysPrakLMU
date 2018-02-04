@@ -1,5 +1,5 @@
 # was noch zu tun ist
-Login seite 
-## Login Seite
 
+## Login Seite
+Ist erledigt, zusätzlich Registrierung programmiert
 ## Impressum
