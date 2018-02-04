@@ -43,16 +43,16 @@
                     </div>
                     <!-- Textfield with Floating Label -->
 
-                    <form action="#">
+                    <form action="Username.php">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="text" id="username">
+                         <input class="mdl-textfield__input" name="username" type="text" id="username">
                             <label class="mdl-textfield__label" for="sample3">Benutzername</label>
                         </div>
                         <!-- Textfield with Floating Label -->
 
-                        <form action="#">
+                        <form action="Password.php">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="password" id="password">
+                           <input class="mdl-textfield__input" name="password" type="password" id="password">
                                 <label class="mdl-textfield__label" for="sample3">Passwort</label>
                             </div>
                         </form>

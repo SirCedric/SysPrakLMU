@@ -17,7 +17,8 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "SELECT Username , Password FROM User WHERE Username='Cedric'";
+$sql = "SELECT Username , Password FROM User WHERE Username LIKE '".
+    .my($Username)."'";
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
