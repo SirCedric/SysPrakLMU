@@ -23,6 +23,26 @@
         <div class="page-content"><!-- Your content goes here -->
             <div class="mdl-grid">
 
+
+              <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                <div class="demo-card-wide mdl-shadow--2dp CN_index_Main_Card">
+                  <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">Herzlich Willkommen</h2>
+                  </div>
+                  <div>
+                    <div class="CN_index_Main_Card-text">
+                      bei den Pfadfindern des Stammes Windrose aus Anzing und Poing. </br>
+                      Unser Stamm hat ungefähr 80 Mitglieder im Alter von 7 bis ... Jahren.</br>
+                      Wir <b>Pfadfinder</b> treffen uns regelmäßig in den Stufen zu Gruppenstunden</br>
+                      und zu gemeinsamen Aktionen entweder im Pfarrheim in <b>Poing</b> oder auf unserem Stammesplatz in <b>Anzing</b>.
+                    </div>
+                    <div class="CN_index_Main_Card-logo">
+                        <img src="images/logo/stammeslogo_home.png" alt="stammeslogo_home">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
                 <p> ich bin inhalt, der erste Inhalt den wir hier so haben </p>
                 <div class="demo-card-wide mdl-card mdl-shadow--2dp">
                     <div class="mdl-card__title">
