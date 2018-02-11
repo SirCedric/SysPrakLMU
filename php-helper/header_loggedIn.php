@@ -10,9 +10,10 @@
     <!-- Top row, always visible -->
     <div class="mdl-layout__header-row">
         <!-- Title -->
-        <span class="mdl-layout-title "><a class="header_button" href="index.php">DPSG Windrose</a></span>
+        <span class="mdl-layout-title "><a class="header_button" href="../index.php">DPSG Windrose</a></span>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="logout.php">LogOut</a>
             <a class="mdl-navigation__link" href="">Chat</a>
             <a class="mdl-navigation__link" href="">Forum</a>
         </nav>
@@ -27,14 +28,15 @@
                        id="waterfall-exp">
             </div>
         </div>
+
     </div>
 
 </header>
 <div class="mdl-layout__drawer">
-    <span class="mdl-layout-title"><a class="header_button" href="index.php">DPSG Windrose</a></span>
+    <span class="mdl-layout-title"><a class="header_button" href="../index.php">DPSG Windrose</a></span>
 
     <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="LogIn.php">LogIn</a>
+        <a class="mdl-navigation__link" href="../LogIn.php">LogIn</a>
         <a class="mdl-navigation__link" href="">Stufen</a>
         <a class="mdl-navigation__link" href="">Stamm</a>
         <a class="mdl-navigation__link" href="">Ausrüstung</a>
