@@ -23,6 +23,69 @@
         <div class="page-content"><!-- Your content goes here -->
             <div class="mdl-grid">
 
+              <ul class='mdl-list'>
+                  <form action="http://yourserver/contact.php" method="post">
+
+
+                    <li class="mdl-list__item">
+                      <span class="mdl-list__item-primary-content">
+                        <i class="material-icons  mdl-list__item-avatar">person</i>
+                        Aaron Paul
+                      </span>
+                      <span class="mdl-list__item-secondary-action">
+                        <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-1">
+                          <input type="radio" id="list-option-1" class="mdl-radio__button" name="options" value="1" checked />
+                        </label>
+                      </span>
+                    </li>
+
+                <li class="mdl-list__item">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="sample3">
+                    <label class="mdl-textfield__label" for="sample3">Vorname...</label>
+                  </div>
+                </li>
+                <li class="mdl-list__item">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="sample3">
+                    <label class="mdl-textfield__label" for="sample3">Nachname...</label>
+                  </div>
+                </li>
+                <li class="mdl-list__item">
+                  <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
+                    <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1" checked>
+                    <span class="mdl-radio__label">Herr</span>
+                  </label>
+                  <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+                    <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="2">
+                    <span class="mdl-radio__label">Frau</span>
+                  </label>
+                </li>
+
+                <li class="mdl-list__item">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="sample3">
+                    <label class="mdl-textfield__label" for="sample3">E-Mail...</label>
+                  </div>
+                </li>
+                <li class="mdl-list__item">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="sample3">
+                    <label class="mdl-textfield__label" for="sample3">Betreff...</label>
+                  </div>
+                </li>
+                <li class="mdl-list__item">
+                <div class="mdl-textfield mdl-js-textfield">
+                  <textarea class="mdl-textfield__input" type="text" rows= "3" id="sample5" ></textarea>
+                  <label class="mdl-textfield__label" for="sample5">Mitteilung...</label>
+                </div>
+              </li>
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                    Senden
+                  </button>
+                  </form>
+              </ul>
+
 
               <form action="http://yourserver/contact.php" method="post">
               <table border="0" cellspacing="0" cellpadding="2">
@@ -51,34 +114,7 @@
                       <input name="Anrede" type="radio" value="Frau" /> Frau
                     </td>
                   </tr>
-                  <tr>
-                    <td>Vorname:</td>
-                    <td>
-                      <input maxlength="50" name="Vorname" size="45" type="text" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Nachname:</td>
-                    <td>
-                      <input name="Nachname" size="45" type="text" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Email:</td>
-                    <td>
-                      <input name="Email" size="45" type="text" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Betreff:</td>
-                    <td>
-                      <input name="Betreff" size="45" type="text" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Mitteilung:</td>
-                    <td><textarea cols="30" rows="5" name="Mitteilung">Ihre Mitteilung</textarea></td>
-                  </tr>
+
                   <tr>
                     <td></td>
                     <td>
