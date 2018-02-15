@@ -26,18 +26,18 @@
               <ul class='mdl-list'>
                   <form action="http://yourserver/contact.php" method="post">
 
-
-                    <li class="mdl-list__item">
-                      <span class="mdl-list__item-primary-content">
-                        <i class="material-icons  mdl-list__item-avatar">person</i>
-                        Aaron Paul
-                      </span>
-                      <span class="mdl-list__item-secondary-action">
-                        <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-1">
-                          <input type="radio" id="list-option-1" class="mdl-radio__button" name="options" value="1" checked />
-                        </label>
-                      </span>
-                    </li>
+                <select name="Abteilung">
+                  <option value="Vorstand">Vorstand</option>
+                  <option value="Woelflingsleiter">Woelflingsleiter</option>
+                  <option value="Jupfleiter">Jupfleiter</option>
+                  <option value="Pfadleiter">Pfadleiter</option>
+                  <option value="Roverleiter">Roverleiter</option>
+                  <option value="Webmaster">Webmaster</option>
+                  <option value="Zeltverleih">Zeltverleih</option>
+                  <option value="Bootsverleih">Bootsverleih</option>
+                  <option value="Platzwart">Platzwart</option>
+                  <option value="Foerderkreis">Foerderkreis</option>
+                </select>
 
                 <li class="mdl-list__item">
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -83,50 +83,9 @@
                   <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
                     Senden
                   </button>
+                  <input type="submit" value="Abschicken" />
                   </form>
               </ul>
-
-
-              <form action="http://yourserver/contact.php" method="post">
-              <table border="0" cellspacing="0" cellpadding="2">
-                <tbody>
-                  <tr>
-                    <td>Abteilung:</td>
-                    <td>
-                      <select name="Abteilung">
-                        <option value="Vorstand">Vorstand</option>
-                        <option value="Woelflingsleiter">Woelflingsleiter</option>
-                        <option value="Jupfleiter">Jupfleiter</option>
-                        <option value="Pfadleiter">Pfadleiter</option>
-                        <option value="Roverleiter">Roverleiter</option>
-                        <option value="Webmaster">Webmaster</option>
-                        <option value="Zeltverleih">Zeltverleih</option>
-                        <option value="Bootsverleih">Bootsverleih</option>
-                        <option value="Platzwart">Platzwart</option>
-                        <option value="Foerderkreis">Foerderkreis</option>
-                      </select>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Anrede:</td>
-                    <td>
-                      <input checked="checked" name="Anrede" type="radio" value="Herr" /> Herr
-                      <input name="Anrede" type="radio" value="Frau" /> Frau
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td></td>
-                    <td>
-                      <input type="submit" value="Abschicken" />
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              </form>
-
-
-
             </div>
             <?php
             include 'php-helper/footer.php';

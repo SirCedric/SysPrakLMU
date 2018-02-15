@@ -49,7 +49,7 @@
     <div class="mdl-mega-footer__bottom-section">
         <div class="mdl-logo">Administratives</div>
         <ul class="mdl-mega-footer__link-list">
-            <li><a href="kontakt.php">Help / Kontakt</a></li>
+            <li><a href="contact.php">Help / contact</a></li>
             <li><a href="impressum.php">Impressum</a></li>
         </ul>
     </div>
