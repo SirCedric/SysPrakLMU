@@ -67,10 +67,10 @@
                       Am 4. Advent haben wir das Friedenslicht von der Frauenkirche geholt, den Gottesdienst zum Friedenslicht mitgestaltet und den Kindergottesdienst besucht. </br>
                       Auch ihr könnt Euch bis Weihnachten noch das Friedenslicht in der Kirche in Poing und Anzing abholen.
                     </div>
-                    <div class="mdl-card__menu">
-                        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                            <i class="material-icons">share</i>
-                        </button>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="contentPage.php?article=1">
+                            Mehr
+                        </a>
                     </div>
                 </div>
               </div>
@@ -86,197 +86,46 @@
                       </br></br>
                       Danke an allem die da waren, vor allem an die Eltern! :)
                     </div>
-                    <div class="mdl-card__menu">
-                        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                            <i class="material-icons">share</i>
-                        </button>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="contentPage.php?article=2">
+                            Mehr
+                        </a>
                     </div>
                 </div>
               </div>
-
-
-
-
-                <p> ich bin inhalt, der erste Inhalt den wir hier so haben </p>
-                <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+              <div class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+                <div class="mdl-card mdl-shadow--2dp CN_full-size_card">
                     <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Welcome</h2>
+                        <h2 class="mdl-card__title-text">Übergabeevent 2016</h2>
                     </div>
                     <div class="mdl-card__supporting-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Mauris sagittis pellentesque lacus eleifend lacinia...
+                      Liebe Pfadfinder,</br>
+                      wir laden Euch herzlich zu unserem diesjährigen Übergabeevent ein.</br>
+                      Wir werden gemeinsam einen aufregenden Tag im....</br>
                     </div>
                     <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                            Get Started
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="contentPage.php?article=3">
+                            Mehr
                         </a>
                     </div>
-                    <div class="mdl-card__menu">
-                        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                            <i class="material-icons">share</i>
-                        </button>
-                    </div>
                 </div>
-                <p> ich bin inhalt, der erste Inhalt den wir hier so haben </p>
-                <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+              </div>
+              <div class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+                <div class="mdl-card mdl-shadow--2dp CN_full-size_card">
                     <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Welcome</h2>
+                        <h2 class="mdl-card__title-text">Stammesversammlung 2016</h2>
                     </div>
                     <div class="mdl-card__supporting-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Mauris sagittis pellentesque lacus eleifend lacinia...
+                      Liebe Pfadfinder des DPSG Stammes Windrose,</br>
+                      wir laden euch herzlich Stammesversammlung am....</br>
                     </div>
                     <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                            Get Started
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="contentPage.php?article=4">
+                            Mehr
                         </a>
                     </div>
-                    <div class="mdl-card__menu">
-                        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                            <i class="material-icons">share</i>
-                        </button>
-                    </div>
                 </div>
-                <p> ich bin inhalt, der erste Inhalt den wir hier so haben </p>
-                <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Welcome</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Mauris sagittis pellentesque lacus eleifend lacinia...
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                            Get Started
-                        </a>
-                    </div>
-                    <div class="mdl-card__menu">
-                        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                            <i class="material-icons">share</i>
-                        </button>
-                    </div>
-                </div>
-                <p> ich bin inhalt, der erste Inhalt den wir hier so haben </p>
-                <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Welcome</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Mauris sagittis pellentesque lacus eleifend lacinia...
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                            Get Started
-                        </a>
-                    </div>
-                    <div class="mdl-card__menu">
-                        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                            <i class="material-icons">share</i>
-                        </button>
-                    </div>
-                </div>
-                <p> ich bin inhalt, der erste Inhalt den wir hier so haben </p>
-                <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Welcome</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Mauris sagittis pellentesque lacus eleifend lacinia...
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                            Get Started
-                        </a>
-                    </div>
-                    <div class="mdl-card__menu">
-                        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                            <i class="material-icons">share</i>
-                        </button>
-                    </div>
-                </div>
-                <p> ich bin inhalt, der erste Inhalt den wir hier so haben </p>
-                <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Welcome</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Mauris sagittis pellentesque lacus eleifend lacinia...
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                            Get Started
-                        </a>
-                    </div>
-                    <div class="mdl-card__menu">
-                        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                            <i class="material-icons">share</i>
-                        </button>
-                    </div>
-                </div>
-                <p> ich bin inhalt, der erste Inhalt den wir hier so haben </p>
-                <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Welcome</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Mauris sagittis pellentesque lacus eleifend lacinia...
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                            Get Started
-                        </a>
-                    </div>
-                    <div class="mdl-card__menu">
-                        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                            <i class="material-icons">share</i>
-                        </button>
-                    </div>
-                </div>
-                <p> ich bin inhalt, der erste Inhalt den wir hier so haben </p>
-                <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Welcome</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Mauris sagittis pellentesque lacus eleifend lacinia...
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                            Get Started
-                        </a>
-                    </div>
-                    <div class="mdl-card__menu">
-                        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                            <i class="material-icons">share</i>
-                        </button>
-                    </div>
-                </div>
-                <p> ich bin inhalt, der erste Inhalt den wir hier so haben </p>
-                <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Welcome</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Mauris sagittis pellentesque lacus eleifend lacinia...
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                            Get Started
-                        </a>
-                    </div>
-                    <div class="mdl-card__menu">
-                        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                            <i class="material-icons">share</i>
-                        </button>
-                    </div>
-                </div>
+              </div>
             </div>
             <?php
             include 'php-helper/footer.php';
