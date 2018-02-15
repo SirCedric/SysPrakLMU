@@ -73,6 +73,3 @@
         <a class="mdl-navigation__link" href="https://onedrive.live.com/?authkey=%21AGIouanNsyXzU0Q&id=1722EAB2D67ECA0E%211758&cid=1722EAB2D67ECA0E">Galerie</a>
     </nav>
 </div>
-<main class="mdl-layout__content">
-    <div class="page-content"><!-- Your content goes here --></div>
-</main>
