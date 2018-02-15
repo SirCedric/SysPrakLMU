@@ -65,7 +65,7 @@
         </div>
 
         <a class="mdl-navigation__link" href="LogIn.php">LogIn</a>
-        <a class="mdl-navigation__link" href="">Stufen</a>
+        <a class="mdl-navigation__link" href="stufen.php">Stufen</a>
         <a class="mdl-navigation__link" href="">Stamm</a>
         <a class="mdl-navigation__link" href="">Ausrüstung</a>
         <a class="mdl-navigation__link" href="">Zelt- & Bootsverleih</a>

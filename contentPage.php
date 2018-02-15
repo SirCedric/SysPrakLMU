@@ -20,6 +20,8 @@
       include "php-helper/header.php";
       ?>
 
+<?php echo $_GET["article"]; ?>
+
       <main class="mdl-layout__content">
           <div class="page-content">
               <div class="mdl-grid">
