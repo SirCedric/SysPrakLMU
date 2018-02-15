@@ -28,7 +28,7 @@
         <div class="page-content"><!-- Your content goes here -->
             <div class="mdl-grid">
 
-              <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+              <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
                 <div class="demo-card-wide mdl-shadow--2dp CN_index_Main_Card">
                   <div class="mdl-card__title">
                     <h2 class="mdl-card__title-text">Herzlich Willkommen</h2>
@@ -46,20 +46,26 @@
                   </div>
                 </div>
               </div>
+              <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--0-col-phone">
+                <div class="mdl-card mdl-shadow--2dp CN_full-size_card">
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">Achtung</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        Diese seite befindet sich derzeit unter Wartungsarbeiten. und ist noch nicht final
+                    </div>
+                </div>
+              </div>
 
-                <p> ich bin inhalt, der erste Inhalt den wir hier so haben </p>
-                <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+
+              <div class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+                <div class="mdl-card mdl-shadow--2dp CN_full-size_card">
                     <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Welcome</h2>
+                        <h2 class="mdl-card__title-text">Pfadfinder bringen Friedenslicht nach Anzing und Poing</h2>
                     </div>
                     <div class="mdl-card__supporting-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Mauris sagittis pellentesque lacus eleifend lacinia...
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                            Get Started
-                        </a>
+                      Am 4. Advent haben wir das Friedenslicht von der Frauenkirche geholt, den Gottesdienst zum Friedenslicht mitgestaltet und den Kindergottesdienst besucht. </br>
+                      Auch ihr könnt Euch bis Weihnachten noch das Friedenslicht in der Kirche in Poing und Anzing abholen.
                     </div>
                     <div class="mdl-card__menu">
                         <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
@@ -67,19 +73,18 @@
                         </button>
                     </div>
                 </div>
-                <p> ich bin inhalt, der erste Inhalt den wir hier so haben </p>
-                <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+              </div>
+              <div class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+                <div class="mdl-card mdl-shadow--2dp CN_full-size_card">
                     <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Welcome</h2>
+                        <h2 class="mdl-card__title-text">Ramadama Poing 2016</h2>
                     </div>
                     <div class="mdl-card__supporting-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Mauris sagittis pellentesque lacus eleifend lacinia...
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                            Get Started
-                        </a>
+                      Auch dieses Jahr haben wir wieder beim Ramadama in Poing teilgenommen.</br>
+                      Mit 16 Personen waren wir diesmal echt viele und haben unser Gebiet schnell abgearbeitet. </br>
+                      Anschließend haben wir uns auf die reichhaltige Brotzeit im Bauhof gefreut.</br>
+                      </br></br>
+                      Danke an allem die da waren, vor allem an die Eltern! :)
                     </div>
                     <div class="mdl-card__menu">
                         <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
@@ -87,26 +92,11 @@
                         </button>
                     </div>
                 </div>
-                <p> ich bin inhalt, der erste Inhalt den wir hier so haben </p>
-                <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Welcome</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Mauris sagittis pellentesque lacus eleifend lacinia...
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                            Get Started
-                        </a>
-                    </div>
-                    <div class="mdl-card__menu">
-                        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                            <i class="material-icons">share</i>
-                        </button>
-                    </div>
-                </div>
+              </div>
+
+
+
+
                 <p> ich bin inhalt, der erste Inhalt den wir hier so haben </p>
                 <div class="demo-card-wide mdl-card mdl-shadow--2dp">
                     <div class="mdl-card__title">
