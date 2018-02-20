@@ -5,29 +5,63 @@ require_once 'config.php';
 // Define variables and initialize with empty values
 $username = $firstname = $lastname = $password = $email = $confirm_password = "";
 $username_err = $firstname_err = $lastname_err = $password_err = $email_err = $confirm_password_err = "";
+define('users', 'users');
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Vorname
-    if(empty(trim($_POST["firstname"]))){
+    if(empty(trim($_POST['firstname']))){
         $firstname_err = "Bitte gib deinen Vornamen ein";
     }else{
-        $firstname = trim($_POST["firstname"]);
+        $firstname = trim($_POST['firstname']);
     }
 
     // Nachname
-    if(empty(trim($_POST["lastname"]))){
+    if(empty(trim($_POST['lastname']))){
         $lastname_err = "Bitte gib deinen Nachnamen ein";
     }else{
-        $lastname = trim($_POST["lastname"]);
+        $lastname = trim($_POST['lastname']);
     }
+
+    // E-Mail
+    /*if(empty(trim($_POST['email']))){
+        $email_err = "Bitte gib deine E-Mailadresse ein";
+    }else{
+        $email = trim($_POST['email']);
+    }*/
+
 
     // E-Mail
     if(empty(trim($_POST["email"]))){
         $email_err = "Bitte gib deine E-Mailadresse ein";
     }else{
-        $email = trim($_POST["email"]);
+        $sql = "SELECT ID FROM users WHERE Mail = ?";
+
+        if ($stmt = mysqli_prepare($link, $sql)) {
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "s", $param_email);
+
+            // Set parameters
+            $param_email = trim($_POST['email']);
+
+            // Attempt to execute the prepared statement
+            if (mysqli_stmt_execute($stmt)) {
+                /* store result*/
+                mysqli_stmt_store_result($stmt);
+
+                if (mysqli_stmt_num_rows($stmt) == 1) {
+                    $email_err = "Diese E-Mailadresse existiert bereits.";
+                } else {
+                    $email = trim($_POST['email']);
+                }
+            } else {
+                echo "Hoppla! Da ist wohl etwas schief gelaufen. Probiers bitte später nochmal.";
+            }
+        }
+
+        // Close statement
+        mysqli_stmt_close($stmt);
     }
 
     // Validate username
@@ -35,14 +69,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $username_err = "Bitte gib einen Nutzernamen ein.";
     } else {
         // Prepare a select statement
-        $sql = "SELECT id FROM Nutzer WHERE Nutzername = ?";
+        $sql = "SELECT ID FROM users WHERE Username = ?";
 
         if ($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "s", $param_username);
 
             // Set parameters
-            $param_username = trim($_POST["username"]);
+            $param_username = trim($_POST['username']);
 
             // Attempt to execute the prepared statement
             if (mysqli_stmt_execute($stmt)) {
@@ -52,7 +86,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (mysqli_stmt_num_rows($stmt) == 1) {
                     $username_err = "Dieser Nutzername existiert bereits.";
                 } else {
-                    $username = trim($_POST["username"]);
+                    $username = trim($_POST['username']);
                 }
             } else {
                 echo "Hoppla! Da ist wohl etwas schief gelaufen. Probiers bitte später nochmal.";
@@ -85,10 +119,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check input errors before inserting in database
     if (empty($lastname_err) && empty($firstname_err) && empty($email_err) && empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
 
+        $param_password = password_hash($password, PASSWORD_DEFAULT);
         // Prepare an insert statement
-        $sql = "INSERT INTO user (Firstname, Lastname, Username, Password, E-Mail) VALUES (?, ?, ?, ?, ?)";
+        $sql_Username_Password = "INSERT INTO users(Username, Password, Firstname, Lastname, Mail) VALUES ('$username', '$param_password', '$firstname', '$lastname', '$email')";
 
-        if ($stmt = mysqli_prepare($link, $sql)) {
+        $sql_email = "INSERT INTO users(Mail) VALUES ()";
+
+        mysqli_query($link, $sql_Username_Password);
+        mysqli_query($link, $sql_email);
+
+        header("location: LogIn.php");
+       /* if ($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "sssss", $param_firstname, $param_lastname, $param_username, $param_password, $param_email);
 
@@ -106,14 +147,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 echo "Es ist etwas schief gelaufen :( Probiers später nochmal ;)";
             }
-        }
 
         // Close statement
         mysqli_stmt_close($stmt);
+        }*/
 
 
         // Close connection
         mysqli_close($link);
+        mysqli_close($link);
+    }
+    else{
+        echo "Es ist etwas schief gelaufen :( Probiers später nochmal ;)";
     }
 }
 ?>
@@ -152,7 +197,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 <style>
                     .demo-card-square.mdl-card {
                         width: 320px;
-                        height: 600px;
+                        height: 750px;
                     }
 
                     .demo-card-square > .mdl-card__title {
@@ -186,6 +231,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             <span class="help-block"><?php echo $username_err; ?></span>
         </div>
 
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
+            <input type="text" name="email"class="mdl-textfield__input" value="<?php echo $email; ?>">
+            <label class="mdl-textfield__label" for="email">E-Mail</label>
+            <span class="help-block"><?php echo $email_err; ?></span>
+        </div>
 
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
             <input type="password" name="password" class="mdl-textfield__input" value="<?php echo $password; ?>">
@@ -198,11 +248,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             <span class="help-block"><?php echo $confirm_password_err; ?></span>
         </div>
 
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
-            <input type="text" name="email"class="mdl-textfield__input" value="<?php echo $email; ?>">
-            <label class="mdl-textfield__label" for="email">E-Mail</label>
-            <span class="help-block"><?php echo $email_err; ?></span>
-        </div>
 
         <div class="mdl-card__actions mdl-card--border">
             <input type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect Register" value="Submit">
