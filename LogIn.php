@@ -94,7 +94,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body class="mainColor">
 <div class="mdl-layout mdl-js-layout">
     <?php
-    include "php-helper/header.php";
+    session_start();
+    if(isset($_SESSION['username'])){
+        include "php-helper/header_loggedIn.php";
+    }else {
+        include "php-helper/special_Header_Login.php";
+    }
     ?>
     <main class="mdl-layout__content">
         <div class="page-content"><!-- Your content goes here -->

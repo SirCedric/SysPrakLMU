@@ -112,7 +112,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <body class="mainColor">
 <div class="mdl-layout mdl-js-layout">
     <?php
-    include "php-helper/header.php";
+    session_start();
+    if(isset($_SESSION['username'])){
+        include "php-helper/header_loggedIn.php";
+    }else {
+        include "php-helper/header.php";
+    }
     ?>
     <main class="mdl-layout__content">
         <div class="page-content"><!-- Your content goes here -->
@@ -157,7 +162,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <input type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect Register" value="Submit">
             <input type="reset" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect Register" value="Reset">
         </div>
-        <p>Bereits registriert? <a href="logInVerification.php">Hier gehts zur Anmeldung</a>.</p>
+        <p>Bereits registriert? <a href="LogIn.php">Hier gehts zur Anmeldung</a>.</p>
     </form>
 </div>
                 <div class="mdl-layout-spacer"></div>

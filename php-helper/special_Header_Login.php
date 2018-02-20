@@ -15,7 +15,6 @@
         <nav class="mdl-navigation">
             <a class="mdl-navigation__link" href="">Chat</a>
             <a class="mdl-navigation__link" href="forum.php">Forum</a>
-            <a class="mdl-navigation__link" href="logout.php">Logout</a>
         </nav>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
                   mdl-textfield--floating-label mdl-textfield--align-right">
@@ -36,8 +35,8 @@
     <span class="mdl-layout-title"><a class="header_button" href="index.php">DPSG Windrose</a></span>
 
     <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="logout.php">Logout</a>
-        <a class="mdl-navigation__link" href="">Stufen</a>
+        <a class="mdl-navigation__link" href="LogIn.php">LogIn</a>
+        <a class="mdl-navigation__link" href="stufen.php">Stufen</a>
         <a class="mdl-navigation__link" href="">Stamm</a>
         <a class="mdl-navigation__link" href="">Ausrüstung</a>
         <a class="mdl-navigation__link" href="">Zelt- & Bootsverleih</a>
