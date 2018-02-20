@@ -17,7 +17,12 @@
 <body class="mainColor">
   <div class="mdl-layout mdl-js-layout">
       <?php
-      include "php-helper/header.php";
+      session_start();
+      if(isset($_SESSION['username'])){
+          include "php-helper/header_loggedIn.php";
+      }else {
+          include "php-helper/header.php";
+      }
       ?>
       <main class="mdl-layout__content">
           <div class="page-content">

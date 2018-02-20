@@ -48,10 +48,10 @@
               </div>
               <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--0-col-phone">
                 <div class="mdl-card mdl-shadow--2dp CN_full-size_card">
-                    <div class="mdl-card__title">
+                    <div class="mdl-card__title attention_message">
                         <h2 class="mdl-card__title-text">Achtung</h2>
                     </div>
-                    <div class="mdl-card__supporting-text">
+                    <div class="mdl-card__supporting-text attention_message">
                         Diese seite befindet sich derzeit unter Wartungsarbeiten. und ist noch nicht final
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                       Mit 16 Personen waren wir diesmal echt viele und haben unser Gebiet schnell abgearbeitet. </br>
                       Anschließend haben wir uns auf die reichhaltige Brotzeit im Bauhof gefreut.</br>
                       </br></br>
-                      Danke an allem die da waren, vor allem an die Eltern! :)
+                      Danke an alle die da waren, vor allem an die Eltern! :)
                     </div>
                     <div class="mdl-card__actions mdl-card--border">
                         <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="contentPage.php?article=2">

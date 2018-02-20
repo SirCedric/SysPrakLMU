@@ -3,20 +3,41 @@
 require_once 'config.php';
 
 // Define variables and initialize with empty values
-$username = $password = $confirm_password = "";
-$username_err = $password_err = $confirm_password_err = "";
+$username = $firstname = $lastname = $password = $email = $confirm_password = "";
+$username_err = $firstname_err = $lastname_err = $password_err = $email_err = $confirm_password_err = "";
 
 // Processing form data when form is submitted
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    // Vorname
+    if(empty(trim($_POST["firstname"]))){
+        $firstname_err = "Bitte gib deinen Vornamen ein";
+    }else{
+        $firstname = trim($_POST["firstname"]);
+    }
+
+    // Nachname
+    if(empty(trim($_POST["lastname"]))){
+        $lastname_err = "Bitte gib deinen Nachnamen ein";
+    }else{
+        $lastname = trim($_POST["lastname"]);
+    }
+
+    // E-Mail
+    if(empty(trim($_POST["email"]))){
+        $email_err = "Bitte gib deine E-Mailadresse ein";
+    }else{
+        $email = trim($_POST["email"]);
+    }
 
     // Validate username
-    if(empty(trim($_POST["username"]))){
-        $username_err = "Please enter a username.";
-    } else{
+    if (empty(trim($_POST["username"]))) {
+        $username_err = "Bitte gib einen Nutzernamen ein.";
+    } else {
         // Prepare a select statement
-        $sql = "SELECT id FROM users WHERE username = ?";
+        $sql = "SELECT id FROM Nutzer WHERE Nutzername = ?";
 
-        if($stmt = mysqli_prepare($link, $sql)){
+        if ($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "s", $param_username);
 
@@ -24,17 +45,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_username = trim($_POST["username"]);
 
             // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
+            if (mysqli_stmt_execute($stmt)) {
                 /* store result */
                 mysqli_stmt_store_result($stmt);
 
-                if(mysqli_stmt_num_rows($stmt) == 1){
-                    $username_err = "This username is already taken.";
-                } else{
+                if (mysqli_stmt_num_rows($stmt) == 1) {
+                    $username_err = "Dieser Nutzername existiert bereits.";
+                } else {
                     $username = trim($_POST["username"]);
                 }
-            } else{
-                echo "Oops! Something went wrong. Please try again later.";
+            } else {
+                echo "Hoppla! Da ist wohl etwas schief gelaufen. Probiers bitte später nochmal.";
             }
         }
 
@@ -43,53 +64,57 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     // Validate password
-    if(empty(trim($_POST['password']))){
+    if (empty(trim($_POST['password']))) {
         $password_err = "Please enter a password.";
-    } elseif(strlen(trim($_POST['password'])) < 6){
+    } elseif (strlen(trim($_POST['password'])) < 6) {
         $password_err = "Password must have atleast 6 characters.";
-    } else{
+    } else {
         $password = trim($_POST['password']);
     }
 
     // Validate confirm password
-    if(empty(trim($_POST["confirm_password"]))){
+    if (empty(trim($_POST["confirm_password"]))) {
         $confirm_password_err = 'Please confirm password.';
-    } else{
+    } else {
         $confirm_password = trim($_POST['confirm_password']);
-        if($password != $confirm_password){
+        if ($password != $confirm_password) {
             $confirm_password_err = 'Password did not match.';
         }
     }
 
     // Check input errors before inserting in database
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+    if (empty($lastname_err) && empty($firstname_err) && empty($email_err) && empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
 
         // Prepare an insert statement
-        $sql = "INSERT INTO users (Username, Password) VALUES (?, ?)";
+        $sql = "INSERT INTO user (Firstname, Lastname, Username, Password, E-Mail) VALUES (?, ?, ?, ?, ?)";
 
-        if($stmt = mysqli_prepare($link, $sql)){
+        if ($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
+            mysqli_stmt_bind_param($stmt, "sssss", $param_firstname, $param_lastname, $param_username, $param_password, $param_email);
 
             // Set parameters
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+            $param_lastname = $lastname;
+            $param_firstname = $firstname;
+            $param_email = $email;
 
             // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
-                // Redirect to login page
-                header("location: logIn.php");
-            } else{
-                echo "Something went wrong. Please try again later.";
+            if (mysqli_stmt_execute($stmt)) {
+                // Redirect to Homepage
+                header("location: index.php");
+            } else {
+                echo "Es ist etwas schief gelaufen :( Probiers später nochmal ;)";
             }
         }
 
         // Close statement
         mysqli_stmt_close($stmt);
-    }
 
-    // Close connection
-    mysqli_close($link);
+
+        // Close connection
+        mysqli_close($link);
+    }
 }
 ?>
 
@@ -116,7 +141,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(isset($_SESSION['username'])){
         include "php-helper/header_loggedIn.php";
     }else {
-        include "php-helper/header.php";
+        include "php-helper/special_Header_Login.php";
     }
     ?>
     <main class="mdl-layout__content">
@@ -142,12 +167,26 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         <h2 class="mdl-card__title-text">Registrieren</h2>
                     </div>
 
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label <?php echo (!empty($firstname_err)) ? 'has-error' : ''; ?>">
+            <input type="text" name="firstname"class="mdl-textfield__input" value="<?php echo $firstname; ?>">
+            <label class="mdl-textfield__label" for="firstname">Vorname</label>
+            <span class="help-block"><?php echo $firstname_err; ?></span>
+        </div>
+
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label <?php echo (!empty($lastname_err)) ? 'has-error' : ''; ?>">
+            <input type="text" name="lastname"class="mdl-textfield__input" value="<?php echo $lastname; ?>">
+            <label class="mdl-textfield__label" for="lastname">Nachname</label>
+            <span class="help-block"><?php echo $lastname_err; ?></span>
+        </div>
+
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
             <input type="text" name="username"class="mdl-textfield__input" value="<?php echo $username; ?>">
             <label class="mdl-textfield__label" for="username">Benutzername</label>
             <span class="help-block"><?php echo $username_err; ?></span>
         </div>
+
+
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
             <input type="password" name="password" class="mdl-textfield__input" value="<?php echo $password; ?>">
             <label class="mdl-textfield__label" for="password">Passwort</label>
@@ -158,6 +197,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <label class="mdl-textfield__label" for="password">Passwort bestätigen</label>
             <span class="help-block"><?php echo $confirm_password_err; ?></span>
         </div>
+
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
+            <input type="text" name="email"class="mdl-textfield__input" value="<?php echo $email; ?>">
+            <label class="mdl-textfield__label" for="email">E-Mail</label>
+            <span class="help-block"><?php echo $email_err; ?></span>
+        </div>
+
         <div class="mdl-card__actions mdl-card--border">
             <input type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect Register" value="Submit">
             <input type="reset" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect Register" value="Reset">
