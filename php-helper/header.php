@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
             <a class="mdl-navigation__link" href="">Chat</a>
-            <a class="mdl-navigation__link" href="forum.php">Forum</a>
+            <a class="mdl-navigation__link" href="http://www.dpsg-windrose.de/index.php?action=community">Forum</a>
         </nav>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
                   mdl-textfield--floating-label mdl-textfield--align-right">

@@ -5,7 +5,7 @@
 
 .header_login {
   max-width: 90%;
-  background-color: cornflowerblue;
+  background-color: transparent;
   border-left-width: 5px;
   margin-left: 5%;
 }
@@ -16,7 +16,7 @@
 }
 
 .mainColor{
-  background-color:cornflowerblue;
+  background-color: #adff2f;
 }
 
 .CN_index_Main_Card{
