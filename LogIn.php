@@ -109,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <style>
                     .demo-card-square.mdl-card {
                         width: 320px;
-                        height: 420px;
+                        height: 465px;
                     }
 
                     .demo-card-square > .mdl-card__title {

@@ -37,7 +37,7 @@
 
     <nav class="mdl-navigation">
         <a class="mdl-navigation__link" href="logout.php">Logout</a>
-        <a class="mdl-navigation__link" href="">Stufen</a>
+        <a class="mdl-navigation__link" href="stufen.php">Stufen</a>
         <a class="mdl-navigation__link" href="">Stamm</a>
         <a class="mdl-navigation__link" href="">Ausrüstung</a>
         <a class="mdl-navigation__link" href="">Zelt- & Bootsverleih</a>

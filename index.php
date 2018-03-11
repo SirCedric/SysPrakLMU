@@ -52,7 +52,7 @@
                         <h2 class="mdl-card__title-text">Achtung</h2>
                     </div>
                     <div class="mdl-card__supporting-text attention_message">
-                        Diese seite befindet sich derzeit unter Wartungsarbeiten. und ist noch nicht final
+                        Diese seite befindet sich derzeit im Aufbau und ist noch nicht final
                     </div>
                 </div>
               </div>

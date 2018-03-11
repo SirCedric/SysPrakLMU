@@ -77,16 +77,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!-- Uses a header that contracts as the page scrolls down. -->
 <style>
-    .demo-layout-waterfall .mdl-layout__header-row .mdl-navigation__link:last-of-type {
+    .demo-layout-transparent .demo-layout-waterfall .mdl-layout__header-row .mdl-navigation__link:last-of-type {
         padding-right: 0;
     }
 </style>
 
-<header class="mdl-layout__header mdl-layout__header--waterfall">
+<header class="mdl-layout__header mdl-layout__header--transparent mdl-layout__header--waterfall ">
     <!-- Top row, always visible -->
-    <div class="mdl-layout__header-row">
+    <div class="mdl-layout__header-row header_color">
         <!-- Title -->
-        <span class="mdl-layout-title "><a class="header_button" href="index.php">DPSG Windrose Anzing/Poing</a></span>
+        <span class="mdl-layout-title"><a class ="header_button" href="index.php">DPSG Windrose Anzing/Poing</a></span>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
             <a class="mdl-navigation__link" href="">Chat</a>

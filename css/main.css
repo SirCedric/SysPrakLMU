@@ -1,11 +1,15 @@
 .header_button {
   text-decoration: none;
-  color: #FC5D19;
+  color: red;
+}
+
+.header_color{
+  background-color: rebeccapurple;
 }
 
 .header_login {
   max-width: 90%;
-  background-color: transparent;
+  background-color: gray;
   border-left-width: 5px;
   margin-left: 5%;
 }
@@ -15,8 +19,10 @@
   font-size: 20px;
 }
 
+/*noinspection ALL*/
 .mainColor{
-  background-color: #adff2f;
+  background-color: yellowgreen;
+  /*background-image: "Home_Bild.png";*/
 }
 
 .CN_index_Main_Card{
