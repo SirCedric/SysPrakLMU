@@ -1,10 +1,19 @@
 .header_button {
   text-decoration: none;
-  color: red;
+  color: rgb(202, 57, 43);
+}
+.headline {
+    display: block;
+    margin: 0 auto;
+}
+
+.login_button {
+    text-decoration: none;
+    color: black;
 }
 
 .header_color{
-  background-color: rebeccapurple;
+  background-color: transparent;
 }
 
 .header_login {
@@ -21,8 +30,8 @@
 
 /*noinspection ALL*/
 .mainColor{
-  background-color: yellowgreen;
-  /*background-image: "Home_Bild.png";*/
+  background-color: lightgray;
+
 }
 
 .CN_index_Main_Card{
@@ -38,6 +47,13 @@
   background: #fff;
   border-radius: 2px;
   box-sizing: border-box;
+}
+
+.news_Card_location {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 10px;
+
 }
 
 .CN_index_Main_Card-text{
@@ -57,6 +73,14 @@
   padding: 16px;
 }
 
+.image_settings{
+    max-width: 50%;
+    display: block;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 40px;
+}
+
 div.CN_index_Main_Card-logo img{
   width: 60%;
 }
@@ -67,6 +91,7 @@ div.CN_index_Main_Card-logo img{
 }
 
 .attention_message {
-  color: red;
+  color: white;
   font-weight: bold;
+  background-color: red;
 }

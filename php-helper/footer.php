@@ -1,7 +1,7 @@
 <footer class="mdl-mega-footer">
-    <div class="mdl-mega-footer__middle-section">
+     <div class="mdl-mega-footer__middle-section">
 
-        <div class="mdl-mega-footer__drop-down-section">
+        <!--<div class="mdl-mega-footer__drop-down-section">
             <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
             <h1 class="mdl-mega-footer__heading">Features</h1>
             <ul class="mdl-mega-footer__link-list">
@@ -44,13 +44,14 @@
             </ul>
         </div>
 
-    </div>
+    </div> -->
 
     <div class="mdl-mega-footer__bottom-section">
         <div class="mdl-logo">Administratives</div>
         <ul class="mdl-mega-footer__link-list">
             <li><a href="contact.php">Help / contact</a></li>
             <li><a href="impressum.php">Impressum</a></li>
+            <li><a href="">Datenschutzerklärung</a></li>
         </ul>
     </div>
 

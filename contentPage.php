@@ -17,46 +17,47 @@
 <body class="mainColor">
   <div class="mdl-layout mdl-js-layout">
       <?php
-      session_start();
-      if(isset($_SESSION['username'])){
-          include "php-helper/header_loggedIn.php";
-      }else {
-          include "php-helper/header.php";
-      }
+      //session_start();
+      //if(isset($_SESSION['username'])){
+      // include "php-helper/header_loggedIn.php";
+      //}else {
+      include "php-helper/header.php";
+      //}
       ?>
 
-<?php echo $_GET["article"]; ?>
+<?php //echo $_GET["article"]; ?>
 
       <main class="mdl-layout__content">
           <div class="page-content">
               <div class="mdl-grid">
                 <?php
+                require_once 'config.php';
                 $Headline = "";
                 $ContentPart = "";
 
-               $servername = "localhost";
-               $username = "phpNewPage";
-               $password = "phpNewPage";
-               $dbname = "neueSeite";
+               //$servername = "localhost";
+               //$username = "Website";
+               //$password = "Rdt-bEX-Z37-ov5";
+               //$dbname = "neueSeite";
                //parameter uebergabe aus der URL
                $article = $_GET["article"];
 
                // Create connection
-               $conn = new mysqli($servername, $username, $password, $dbname);
+               //$conn = new mysqli($servername, $username, $password, $dbname);
                // Check connection
-               if ($conn->connect_error) {
-                   die("Connection failed: " . $conn->connect_error);
+               if ($link->connect_error) {
+                   die("Connection failed: " . $link->connect_error);
                }
 
-               $sql = "SELECT Headline, Content FROM contentPage WHERE contentid=$article";
-               $result = $conn->query($sql);
+               $sql = "SELECT Headline, Content FROM contentPage WHERE contentID=$article";
+               $result = $link->query($sql);
 
                while($row = $result->fetch_assoc()) {
                     $Headline = $row["Headline"];
                     $ContentPart = $row["Content"];
                    //echo "id: " . $row["Headline"]. "<br>";
                }
-               $conn->close();
+                $link->close();
 
                echo "<div class='mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col'>";
                echo "<div class='mdl-card__title'>";

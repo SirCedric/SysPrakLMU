@@ -17,7 +17,12 @@
 <body class="mainColor">
   <div class="mdl-layout mdl-js-layout">
       <?php
+      //session_start();
+      //if(isset($_SESSION['username'])){
+      // include "php-helper/header_loggedIn.php";
+      //}else {
       include "php-helper/header.php";
+      //}
       ?>
       <main class="mdl-layout__content">
           <div class="page-content">
@@ -38,7 +43,7 @@
                               <span class="mdl-list__item-sub-title">Die erste von insgesamt 5 Stufen</span>
                             </span>
                             <span class="mdl-list__item-secondary-content">
-                              <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="contentPage.php?article=stufe1">
+                              <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="stufenContent.php?article=1">
                                   Hier erfahren Sie mehr zu den Woelflingen
                               </a>
                             </span>
@@ -50,7 +55,7 @@
                               <span class="mdl-list__item-sub-title">Die zweite und Jugendlichere Stufen</span>
                             </span>
                             <span class="mdl-list__item-secondary-content">
-                              <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="contentPage.php?article=stufe2">
+                              <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="stufenContent.php?article=2">
                                   Hier erfahren Sie mehr zu den Jungpfadfindern
                               </a>
                             </span>
@@ -62,7 +67,7 @@
                               <span class="mdl-list__item-sub-title">Der klassiker unter all den Stufen</span>
                             </span>
                             <span class="mdl-list__item-secondary-content">
-                              <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="contentPage.php?article=stufe3">
+                              <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="stufenContent.php?article=3">
                                   Hier erfahren Sie mehr zu den Pfadfindern
                               </a>
                             </span>
@@ -74,7 +79,7 @@
                               <span class="mdl-list__item-sub-title">Rover sein heißt "unterwegs sein"</span>
                             </span>
                             <span class="mdl-list__item-secondary-content">
-                              <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="contentPage.php?article=stufe4">
+                              <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="stufenContent.php?article=4">
                                   Alles hierzu erfahren Sie hier
                               </a>
                             </span>
@@ -86,7 +91,7 @@
                               <span class="mdl-list__item-sub-title">Hier finden sie alle Stufenleiter und mehr</span>
                             </span>
                             <span class="mdl-list__item-secondary-content">
-                              <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="contentPage.php?article=stufe5">
+                              <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="stufenContent.php?article=5">
                                   Die Leiterrunde
                               </a>
                             </span>

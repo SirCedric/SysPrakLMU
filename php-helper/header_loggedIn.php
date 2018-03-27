@@ -6,9 +6,9 @@
     }
 </style>
 
-<header class="mdl-layout__header mdl-layout__header--waterfall">
+<header class="mdl-layout__header mdl-layout__header--transparent mdl-layout__header--waterfall">
     <!-- Top row, always visible -->
-    <div class="mdl-layout__header-row">
+    <div class="mdl-layout__header-row header_color">
         <!-- Title -->
         <span class="mdl-layout-title "><a class="header_button" href="index.php">DPSG Windrose Anzing/Poing</a></span>
         <div class="mdl-layout-spacer"></div>
@@ -36,7 +36,7 @@
     <span class="mdl-layout-title"><a class="header_button" href="index.php">DPSG Windrose</a></span>
 
     <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="logout.php">Logout</a>
+        <a class="mdl-navigation__link" href="aktuelles.php">News</a>
         <a class="mdl-navigation__link" href="stufen.php">Stufen</a>
         <a class="mdl-navigation__link" href="">Stamm</a>
         <a class="mdl-navigation__link" href="">Ausrüstung</a>

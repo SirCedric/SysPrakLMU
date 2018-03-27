@@ -109,13 +109,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="mdl-layout__drawer">
     <?php
     session_start();
+    require_once('/home/www/rover/forum/SSI.php');
     ?>
-    <span class="mdl-layout-title"><a class="header_button" href="index.php">DPSG Windrose</a></span>
+    <span class="mdl-layout-title"><a class="login_button" href="index.php">DPSG Windrose</a></span>
 
     <nav class="mdl-navigation">
         <div class="demo-card-square mdl-card header_login">
           <div class="mdl-card__title mdl-card--expand">
-            <h2 class="mdl-card__title-text">Login</h2>
+            <h2 class="mdl-card__title-text login_button"><a href="LogIn.php">Login</a></h2>
           </div>
           <div class="mdl-card__supporting-text">
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
@@ -133,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <span class="help-block"><?php echo $password_err; ?></span>
                 </div>
                 <p>Noch nicht registriert? </p>
-                <p><a href="register.php">Jetzt Account erstellen</a>.</p>
+                <p><a href="register.php">Jetzt Account erstellen</a></p>
                 <div class="mdl-card__actions mdl-card--border">
                     <input type="submit"
                            class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect SingIn"
@@ -143,7 +144,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </div>
         </div>
 
-        <a class="mdl-navigation__link" href="LogIn.php">LogIn</a>
+        <a class="mdl-navigation__link" href="aktuelles.php">News</a>
         <a class="mdl-navigation__link" href="stufen.php">Stufen</a>
         <a class="mdl-navigation__link" href="">Stamm</a>
         <a class="mdl-navigation__link" href="">Ausrüstung</a>

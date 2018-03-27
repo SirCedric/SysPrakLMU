@@ -17,18 +17,20 @@
 <body class="mainColor">
 <div class="mdl-layout mdl-js-layout">
     <?php
-    session_start();
-    if(isset($_SESSION['username'])){
-        include "php-helper/header_loggedIn.php";
+    require_once('/home/www/rover/forum/SSI.php');
+    if($context['user']['is guest']){
+     include "php-helper/header_loggedIn.php";
     }else {
-        include "php-helper/header.php";
+    include "php-helper/header.php";
     }
     ?>
     <main class="mdl-layout__content">
         <div class="page-content"><!-- Your content goes here -->
             <div class="mdl-grid">
 
-              <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                <?php include "wartungsnachricht.php" ?>
+
+              <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
                 <div class="demo-card-wide mdl-shadow--2dp CN_index_Main_Card">
                   <div class="mdl-card__title">
                     <h2 class="mdl-card__title-text">Herzlich Willkommen</h2>
@@ -46,89 +48,14 @@
                   </div>
                 </div>
               </div>
-              <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--0-col-phone">
-                <div class="mdl-card mdl-shadow--2dp CN_full-size_card">
-                    <div class="mdl-card__title attention_message">
-                        <h2 class="mdl-card__title-text">Achtung</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text attention_message">
-                        Diese seite befindet sich derzeit im Aufbau und ist noch nicht final
-                    </div>
-                </div>
-              </div>
 
+                <?php
+                include 'aktuellsteNews.php';
+                ?>
 
-              <div class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
-                <div class="mdl-card mdl-shadow--2dp CN_full-size_card">
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Pfadfinder bringen Friedenslicht nach Anzing und Poing</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                      Am 4. Advent haben wir das Friedenslicht von der Frauenkirche geholt, den Gottesdienst zum Friedenslicht mitgestaltet und den Kindergottesdienst besucht. </br>
-                      Auch ihr könnt Euch bis Weihnachten noch das Friedenslicht in der Kirche in Poing und Anzing abholen.
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="contentPage.php?article=1">
-                            Mehr
-                        </a>
-                    </div>
-                </div>
-              </div>
-              <div class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
-                <div class="mdl-card mdl-shadow--2dp CN_full-size_card">
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Ramadama Poing 2016</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                      Auch dieses Jahr haben wir wieder beim Ramadama in Poing teilgenommen.</br>
-                      Mit 16 Personen waren wir diesmal echt viele und haben unser Gebiet schnell abgearbeitet. </br>
-                      Anschließend haben wir uns auf die reichhaltige Brotzeit im Bauhof gefreut.</br>
-                      </br></br>
-                      Danke an alle die da waren, vor allem an die Eltern! :)
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="contentPage.php?article=2">
-                            Mehr
-                        </a>
-                    </div>
-                </div>
-              </div>
-              <div class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
-                <div class="mdl-card mdl-shadow--2dp CN_full-size_card">
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Übergabeevent 2016</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                      Liebe Pfadfinder,</br>
-                      wir laden Euch herzlich zu unserem diesjährigen Übergabeevent ein.</br>
-                      Wir werden gemeinsam einen aufregenden Tag im....</br>
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="contentPage.php?article=3">
-                            Mehr
-                        </a>
-                    </div>
-                </div>
-              </div>
-              <div class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
-                <div class="mdl-card mdl-shadow--2dp CN_full-size_card">
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Stammesversammlung 2016</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                      Liebe Pfadfinder des DPSG Stammes Windrose,</br>
-                      wir laden euch herzlich Stammesversammlung am....</br>
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="contentPage.php?article=4">
-                            Mehr
-                        </a>
-                    </div>
-                </div>
-              </div>
             </div>
             <?php
-            include 'php-helper/footer.php';
+                include 'php-helper/footer.php';
             ?>
         </div>
     </main>
