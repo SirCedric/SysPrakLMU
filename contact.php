@@ -17,12 +17,8 @@
 <body class="mainColor">
 <div class="mdl-layout mdl-js-layout">
     <?php
-    session_start();
-    if(isset($_SESSION['username'])){
-        include "php-helper/header_loggedIn.php";
-    }else {
-        include "php-helper/header.php";
-    }
+    require_once('/home/www/rover/forum/SSI.php');
+    include "php-helper/headerTest.php";
     ?>
     <main class="mdl-layout__content">
         <div class="page-content"><!-- Your content goes here -->

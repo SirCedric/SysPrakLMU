@@ -14,15 +14,11 @@
     <link rel="stylesheet" href="css/main.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 </head>
-<body style="background-color:cornflowerblue;">
+<body class="mainColor">
 <div class="mdl-layout mdl-js-layout">
     <?php
-    session_start();
-    if(isset($_SESSION['username'])){
-        include "php-helper/header_loggedIn.php";
-    }else {
-        include "php-helper/header.php";
-    }
+    require_once('/home/www/rover/forum/SSI.php');
+    include "php-helper/headerTest.php";
     ?>
     <main class="mdl-layout__content">
         <div class="page-content"><!-- Your content goes here -->
@@ -35,7 +31,7 @@
 
                 <div class="mdl-layout-spacer"></div>
 
-                <div class="mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--6-col-phone">
+                <div class="mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
                     <div class="demo-card-wide mdl-card mdl-shadow--2dp">
                         <div class="mdl-card__title">
                             <h2 class="mdl-card__title-text">Stammesvorstand</h2>
@@ -48,7 +44,8 @@
                         Rosalie Nitzl </br>
                             Bahnhofstr. 1A</br>
                             85591 Vaterstetten</br>
-                            E-Mail:<a href="mailto:stavo@dpsg-windrose.de">stavo@dpsg-windrose.de</a>
+                            E-Mail:</br>
+                            <a href="mailto:stavo@dpsg-windrose.de">stavo@dpsg-windrose.de</a>
                     </span>
                                 </li>
                                 <li class="mdl-list__item">
@@ -57,7 +54,8 @@
                         Dominik Hohl</br>
                             Zugspitzstraße 16</br>
                             85586 Poing</br>
-                            E-Mail:<a href="mailto:stavo@dpsg-windrose.de">stavo@dpsg-windrose.de</a>
+                            E-Mail:</br>
+                            <a href="mailto:stavo@dpsg-windrose.de">stavo@dpsg-windrose.de</a>
                       </span>
                                 </li>
                             </ul>
@@ -72,7 +70,7 @@
 
                 <div class="mdl-layout-spacer"></div>
 
-                <div class="mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--6-col-phone">
+                <div class="mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
                     <div class="demo-card-wide mdl-card mdl-shadow--2dp">
                         <div class="mdl-card__title">
                             <h2 class="mdl-card__title-text">Administrator</h2>
@@ -82,10 +80,11 @@
                                 <li class="mdl-list__item">
                       <span class="mdl-list__item-primary-content">
                       <i class="material-icons mdl-list__item-icon">person</i>
-                      Cedric Kummer </br>
-                          Flurstrasse 10</br>
-                          Anzing</br>
-                          E-Mail:<a href="mailto:webmaster@dpsg-windrose.de">webmaster@dpsg-windrose.de</a>
+                      Martin Donauer </br>
+                          Siglfinger Straße 1A</br>
+                          85435 Erding</br>
+                          E-Mail:</br>
+                          <a href="mailto:webmaster@dpsg-windrose.de">webmaster@dpsg-windrose.de</a>
                       </span>
                                 </li>
                             </ul>

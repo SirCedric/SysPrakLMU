@@ -17,12 +17,7 @@
 <body class="mainColor">
   <div class="mdl-layout mdl-js-layout">
       <?php
-      //session_start();
-      //if(isset($_SESSION['username'])){
-      // include "php-helper/header_loggedIn.php";
-      //}else {
-      include "php-helper/header.php";
-      //}
+      include "php-helper/headerTest.php";
       ?>
       <main class="mdl-layout__content">
           <div class="page-content">
@@ -99,16 +94,18 @@
 
                         </ul>
                       </div>
+                  <div class="mdl-card__actions mdl-card--border">
+                      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="stammesInfo.php" >Zurück zur Übersicht</a>
 
                   </div>
                 </div>
 
 
               </div>
+          </div>
               <?php
               include 'php-helper/footer.php';
               ?>
-          </div>
       </main>
     </div>
 </body>

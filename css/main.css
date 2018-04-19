@@ -95,3 +95,18 @@ div.CN_index_Main_Card-logo img{
   font-weight: bold;
   background-color: red;
 }
+
+.eu_cookiebox {
+    display: block;
+    z-index: 100;
+    position: fixed;
+    bottom: 0px;
+    min-height: 30px;
+    padding: 5px;
+    margin: 0;
+    width: 100%;
+    color: #555;
+    border: 1px solid black;
+    border-bottom: none;
+    background: #fff;
+}

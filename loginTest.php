@@ -1,8 +1,4 @@
-    <?php
-    require_once('/home/www/rover/forum/SSI.php');
-    ?>
-
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html class="mdl-js">
 <head>
     <meta charset="utf-8">
@@ -20,23 +16,35 @@
 </head>
 <body class="mainColor">
 <div class="mdl-layout mdl-js-layout">
-    <?php
-    include "php-helper/headerTest.php";
-    ?>
 
-    <main class="mdl-layout__content">
-        <div class="page-content"><!-- Your content goes here -->
-            <div class="mdl-grid">
 <?php
-include 'aktuellesTest.php';
-?>
 
-            </div>
-        </div>
-        <?php
-        include 'php-helper/footer.php';
-        ?>
-    </main>
+require_once('/home/www/rover/forum/SSI.php');
+$_SESSION['login_url']='http://test.dpsg-windrose.de/index.php';
+$_SESSION['logout_url']='http://test.dpsg-windrose.de/index.php';
+/*
+
+if ($context['user']['is_guest'])
+{
+	ssi_login();
+}
+else
+{
+	//You can show other stuff here.  Like ssi_welcome().  That will show a welcome message like.
+	//Hey, username, you have 552 messages, 0 are new.
+	ssi_logout();
+}
+*/
+?>
+<?php
+include "php-helper/headerTest.php";
+?>
+<?php
+include 'logInOutDialog.php';
+?>
+<?php
+include 'php-helper/footer.php';
+?>
 </div>
 </body>
 </html>

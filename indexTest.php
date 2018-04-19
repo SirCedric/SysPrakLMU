@@ -1,9 +1,11 @@
-<?php
-require_once('/home/www/rover/forum/SSI.php');
-?>
+    <?php
+    require_once('/home/www/rover/forum/SSI.php');
+    ?>
+
 <!DOCTYPE html>
 <html class="mdl-js">
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
@@ -17,25 +19,16 @@ require_once('/home/www/rover/forum/SSI.php');
     <link rel="stylesheet" href="css/main.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
-    <!-- Start Cookie Plugin -->
-    <script type="text/javascript">
-        window.cookieconsent_options = {
-            message: 'Diese Website nutzt Cookies, um bestmögliche Funktionalität bieten zu können.',
-            dismiss: 'Ok, verstanden',
-            learnMore: 'Mehr Infos',
-            link: 'http://test.dpsg-windrose.de/datenschutzerklärung.php',
-            theme: 'light-floating'
-        };
-    </script>
-    <script type="text/javascript" src="//s3.amazonaws.com/valao-cloud/cookie-hinweis/script-v2.js"></script>
-    <!-- Ende Cookie Plugin -->
 
 </head>
 <body class="mainColor">
 <div class="mdl-layout mdl-js-layout">
     <?php
-    include "php-helper/headerTest.php";
+    include "php-helper/header.php";
     ?>
+
+
+
     <main class="mdl-layout__content">
         <div class="page-content"><!-- Your content goes here -->
             <div class="mdl-grid">
@@ -62,7 +55,7 @@ require_once('/home/www/rover/forum/SSI.php');
                 </div>
 
                 <?php
-                include 'aktuellsteNewsTest.php';
+                include 'aktuellsteNews.php';
                 ?>
 
             </div>
@@ -73,5 +66,25 @@ require_once('/home/www/rover/forum/SSI.php');
     </main>
 </div>
 
+<script language="javascript">
+    function checkok() {
+        var jetzt = new Date();
+        var lebensdauer = jetzt.getTime();
+        var verfall = lebensdauer + 86400;
+        jetzt.setTime(verfall);
+        var enddate = jetzt.toUTCString();
+        document.cookie = "fuckeu = set;expires=" + enddate;
+        document.getElementById("eu_cookiebox").style.display = "none";
+    }
+</script>
+
+<?php
+$eu_cookie_set = $_COOKIE["fuckeu"];
+if ($eu_cookie_set != "set") {
+    ?>
+    <div id="eu_cookiebox">
+        Cookies erleichtern die Bereitstellung unserer Dienste. Mit der Nutzung unserer Dienste erklärst du dich damit einverstanden, dass wir Cookies verwenden <a href="datenschutserklärung.php">Mehr Infos</a> <button onclick='checkok()'>OK</button>
+    </div>
+<?php  }; ?>
 </body>
-</html>
+</html>ƒ
