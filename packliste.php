@@ -27,19 +27,14 @@
     <script type="text/javascript" src="//s3.amazonaws.com/valao-cloud/cookie-hinweis/script-v2.js"></script>
     <!-- Ende Cookie Plugin -->
 
+    <!--  -->
+
 </head>
-<body id="body" class="mainColor">
+<body  style="background-image: url('https://k6cpxq.ch.files.1drv.com/y4mr5oyxyXAkmLHDlZej2TCYpeMErUjXe3bgz5JoqzWLF7aMarAMgCJwxVyADJpi_qRes1Q_0Y32_Ou3liiPhfbBWiwEgJUTSuFf6umUyjlM5igTsd-ks5-4OPMYer4LaUMsicyRUQigrrYMMm-l7-9wWzcv0w6zF8is5IIN2kCwo383dMcIRndzp6COV1CkNz1881aKSFUZzsRL0x7vVT7mQ?width=1024&height=683&cropmode=none'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
 <div class="mdl-layout mdl-js-layout">
     <?php
-    //session_start();
-    //if(isset($_SESSION['username'])){
-    // include "php-helper/header_loggedIn.php";
-    //}else {
-    include "php-helper/header.php";
-    //}
+    include "php-helper/headerTest.php";
     ?>
-
-    <?php //echo $_GET["article"]; ?>
 
     <main class="mdl-layout__content">
         <div class="page-content">
@@ -49,37 +44,36 @@
                 $Headline = "";
                 $ContentPart = "";
 
-
                 if ($link->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
+                    die("Connection failed: " . $link->connect_error);
                 }
 
-                $sql = "SELECT Bild1, Bild2, Bild3, Bild4, Headline, Content FROM Aktuelles WHERE contentID=$article";
+                $sql = "SELECT Headline, Content FROM Ausrüstung WHERE id=3";
                 $result = $link->query($sql);
 
                 while($row = $result->fetch_assoc()) {
-                    $Image1 = $row["Bild1"];
-                    $Image2 = $row["Bild2"];
-                    $Image3 = $row["Bild3"];
-                    $Image4 = $row["Bild4"];
                     $Headline = $row["Headline"];
                     $ContentPart = $row["Content"];
                     //echo "id: " . $row["Headline"]. "<br>";
+
+                    echo "<div class='mdl-card news_Card_location mdl-shadow--4dp mdl-cell mdl-cell--10-col mdl-cell--12-col-phone mdl-cell--10-col-tablet'>";
+                    echo "<div class='mdl-card__title headline'>";
+                    echo "<h3>$Headline</h3>";
+                    echo "</div>";
+                    echo "<div class='mdl-color-text--grey-700 mdl-card__supporting-text'>";
+                    echo "<p>$ContentPart</p>";
+                    echo "<div class=\"mdl-card__actions mdl-card--border\">";
+                    echo "<a class=\"mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect\" href=\"ausrüstung.php\">
+                            Zurück zur Übersicht
+                            </a>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo "</div>";
+
                 }
                 $link->close();
 
-                echo "<div class='mdl-card news_Card_location mdl-shadow--4dp mdl-cell mdl-cell--10-col mdl-cell--10-col-tablet mdl-cell--12-col-phone'>";
-                echo "<div class='mdl-card__title headline'>";
-                echo "<h3>$Headline</h3>";
-                echo "</div>";
-                if(!empty($Image1))echo "<img class='image_settings' src='$Image1'/>";
-                echo "<div class='mdl-color-text--grey-700 mdl-card__supporting-text'>";
-                if(!empty($ContentPart)){echo "<p>$ContentPart</p>";}
-                echo "</div>";
-                if(!empty($Image2)){echo "<img class='image_settings' src='$Image2'/>";}
-                if(!empty($Image3)){echo "<img class='image_settings' src='$Image3'/>";}
-                if(!empty($Image4)){echo "<img class='image_settings' src='$Image4'/>";}
-                echo "</div>";
+
                 ?>
 
             </div>

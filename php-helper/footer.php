@@ -1,57 +1,10 @@
-<footer class="mdl-mega-footer">
-     <div class="mdl-mega-footer__middle-section">
-
-        <!--<div class="mdl-mega-footer__drop-down-section">
-            <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
-            <h1 class="mdl-mega-footer__heading">Features</h1>
-            <ul class="mdl-mega-footer__link-list">
-                <li><a href="#">About</a></li>
-                <li><a href="#">Terms</a></li>
-                <li><a href="#">Partners</a></li>
-                <li><a href="#">Updates</a></li>
-            </ul>
-        </div>
-
-        <div class="mdl-mega-footer__drop-down-section">
-            <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
-            <h1 class="mdl-mega-footer__heading">Details</h1>
-            <ul class="mdl-mega-footer__link-list">
-                <li><a href="#">Specs</a></li>
-                <li><a href="#">Tools</a></li>
-                <li><a href="#">Resources</a></li>
-            </ul>
-        </div>
-
-        <div class="mdl-mega-footer__drop-down-section">
-            <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
-            <h1 class="mdl-mega-footer__heading">Technology</h1>
-            <ul class="mdl-mega-footer__link-list">
-                <li><a href="#">How it works</a></li>
-                <li><a href="#">Patterns</a></li>
-                <li><a href="#">Usage</a></li>
-                <li><a href="#">Products</a></li>
-                <li><a href="#">Contracts</a></li>
-            </ul>
-        </div>
-
-        <div class="mdl-mega-footer__drop-down-section">
-            <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
-            <h1 class="mdl-mega-footer__heading">FAQ</h1>
-            <ul class="mdl-mega-footer__link-list">
-                <li><a href="#">Questions</a></li>
-                <li><a href="#">Answers</a></li>
-                <li><a href="#">Contact us</a></li>
-            </ul>
-        </div>
-
-    </div> -->
-
-    <div class="mdl-mega-footer__bottom-section">
+<footer style="margin-bottom: 0px" class="mdl-mini-footer">
+    <div class="mdl-mini-footer__left-section">
         <div class="mdl-logo">Administratives</div>
-        <ul class="mdl-mega-footer__link-list">
-            <li><a href="contact.php">Help / contact</a></li>
+        <ul class="mdl-mini-footer__link-list">
+            <li><a href="kontakt.php">Kontaktformular</a></li>
             <li><a href="impressum.php">Impressum</a></li>
-            <li><a href="">Datenschutzerklärung</a></li>
+            <li><a href="datenschutzerklarung.php">Datenschutzerklärung</a></li>
         </ul>
     </div>
 

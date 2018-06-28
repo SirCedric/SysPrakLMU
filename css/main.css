@@ -1,10 +1,32 @@
-.header_button {
+#footer {
+    position: fixed;
+    bottom: 0px;
+}
+
+.contactTextarea{
+    /* Breite und Höhe werden angepasst */
+    width:500px;
+    height:200px;
+}
+
+.header_button_list {
   text-decoration: none;
   color: rgb(202, 57, 43);
 }
+
+.header_button {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
 .headline {
     display: block;
     margin: 0 auto;
+}
+
+.indexImage {
+    background-image: url("https://lkao6q.ch.files.1drv.com/y4mSE3SKD_4XCVzDecoffVnzTyb9Pd6Mtelm5OH6jLgH3Hdg5YJaiPaRo19-nTSmRUjqMZUZ7h6oRYkiaEmkv_bWFUUTj1N0YXobtyaSp7vs8G-qjh2QlDqk4Z8Rcu-4K14D-C8Pze3WqzLzcYl5qDq3b2Tgm5ds66FdmUeAK3MscpMwIqAbjIzAAvAlJpU3QMXjFc6fWYyLWOo4DEvi71Y_g?width=6000&height=4000&cropmode=none");
+    color: #cccccc;
 }
 
 .login_button {
@@ -14,6 +36,7 @@
 
 .header_color{
   background-color: transparent;
+    color: black;
 }
 
 .header_login {
@@ -26,6 +49,7 @@
 .ImpressumHaftungshinweis{
   font-weight: bold;
   font-size: 20px;
+    color: white;
 }
 
 /*noinspection ALL*/
@@ -35,30 +59,37 @@
 }
 
 .CN_index_Main_Card{
-  display: flex;
-  flex-direction: column;
-  font-size: 16px;
+    flex-direction: column;
+  font-size: 14px;
   font-weight: 400;
-  min-height: 200px;
+  min-height: 150px;
   overflow: hidden;
-  width: 100%;
-  z-index: 1;
-  position: relative;
-  background: #fff;
-  border-radius: 2px;
-  box-sizing: border-box;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.85);
 }
 
 .news_Card_location {
     display: block;
     margin: 0 auto;
     margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.85);
+
+}
+
+.news_Card_location_Pfadis {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.85);
 
 }
 
 .CN_index_Main_Card-text{
+    background: transparent;
   color: rgba(0,0,0,.54);
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   line-height: 24px;
   overflow: hidden;
   padding: 16px;
@@ -66,29 +97,42 @@
   float: left;
 }
 
-.CN_index_Main_Card-logo{
-  max-width: 20%;
-  float: right;
-  overflow: hidden;
-  padding: 16px;
+.CN_index_Main_Card-logo {
+    max-width: 90%;
+    float: right;
+    overflow: hidden;
+    padding: 0px;
+    background: transparent;
 }
 
 .image_settings{
-    max-width: 50%;
+    max-width: 60%;
     display: block;
-    margin: 0 auto;
     overflow: hidden;
     padding: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.85);
 }
 
 div.CN_index_Main_Card-logo img{
-  width: 60%;
+  width: 80%;
+    height: 80%
 }
 
 .CN_full-size_card {
-  min-height: 100%;
-  min-width: 100%;
+    min-height: 100%;
+    min-width: 100%;
 }
+
+.CN_full-size_card_stammesinfo {
+    min-height: 100%;
+    min-width: 70%;
+    margin: 0 auto;
+    display: block;
+    background: rgba(255, 255, 255, 0.85);
+}
+
 
 .attention_message {
   color: white;
@@ -109,4 +153,33 @@ div.CN_index_Main_Card-logo img{
     border: 1px solid black;
     border-bottom: none;
     background: #fff;
+}
+
+.impressum_card{
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.center_ssi{
+    margin-top: 50px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.center_ssi_welcome{
+    margin-left: 20px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.center_ssi_logout {
+    margin: 0 auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.center_text {
+    margin: 0 auto;
+    display: block;
 }

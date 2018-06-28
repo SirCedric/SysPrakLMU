@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="css/main.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
+
     <!-- Start Cookie Plugin -->
     <script type="text/javascript">
         window.cookieconsent_options = {
@@ -28,31 +29,33 @@
     <!-- Ende Cookie Plugin -->
 
 </head>
-<body  style="background-image: url('https://lysq6w.ch.files.1drv.com/y4mektjTZA07TfNgwFbPXzecRz2k_sJXBlzm8aw52tZPsooBzsY4EKxti37qKcvSjLZ3EEDdult4py3roqo-uNvArz5G1jVghZhewQ8Hf6tXKEBuk2QDUGrccA0L5T_x-TcdeYjurN9wcyAKq6tqJ6CFfKS3Gfeal9UmMC0gMXU9btTUwADcvaXKjQ3hJbfF6H6MA8AW7_qcx7yXnkW28-IOw?width=1024&height=683&cropmode=none'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
+<body class="mainColor">
 <div class="mdl-layout mdl-js-layout">
     <?php
     include "php-helper/headerTest.php";
     ?>
     <main class="mdl-layout__content">
         <div class="page-content"><!-- Your content goes here -->
-            <!-- <div class="mdl-layout-spacer"></div> -->
             <div class="mdl-grid">
 
-                <div class="center_text mdl-cell mdl-cell--10-col mdl-cell--10-col-tablet mdl-cell--12-col-phone">
-                    <div class="mdl-card mdl-shadow--2dp CN_full-size_card_stammesinfo">
+                <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                    <div class="mdl-card mdl-shadow--2dp CN_full-size_card">
                         <div class="mdl-card__title">
-                            <h2 class="mdl-card__title-text center_text">Hier finden Sie eine Übersicht über unseren Stamm</h2>
+                            <h2 class="mdl-card__title-text">Zelt- & Bootsverleih</h2>
                         </div>
                         <div class="mdl-card__supporting-text">
                             <ul class="demo-list-two mdl-list">
 
                                 <li class="mdl-list__item mdl-list__item--two-line">
                             <span class="mdl-list__item-primary-content">
-                              <!-- <i class="material-icons mdl-list__item-avatar">person</i> -->
-                              <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="stufen.php">
-                                  Stufen
+                              <i class="material-icons mdl-list__item-avatar">person</i>
+                              <span>Zeltverleih</span>
+                              <span class="mdl-list__item-sub-title">Hier erhalten Sie mehr Informationen zu unserem Zeltverleih</span>
+                            </span>
+                                    <span class="mdl-list__item-secondary-content">
+                              <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="zelt.php">
+                                  zu den zelten
                               </a>
-                                <span class="mdl-list__item-sub-title"><center>Hier gelangen Sie zu unseren Stufen</center></span>
                             </span>
                                 </li>
                         </div>
@@ -62,29 +65,19 @@
 
                                 <li class="mdl-list__item mdl-list__item--two-line">
                             <span class="mdl-list__item-primary-content">
-                             <!-- <i class="material-icons mdl-list__item-avatar">person</i> -->
-                                <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="stammesplatz.php">
-                                  Der Stammesplatz
+                              <i class="material-icons mdl-list__item-avatar">person</i>
+                              <span>Bootsverleih</span>
+                              <span class="mdl-list__item-sub-title">Hier erhalten Sie mehr Informationen zu unserem Bootsverleih</span>
+                            </span>
+                                    <span class="mdl-list__item-secondary-content">
+                              <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="boot.php">
+                                  Zu den Booten
                               </a>
-                                <span class="center_text mdl-list__item-sub-title"><center>Ein beliebter Ort im Sommer</center></span>
                             </span>
                                 </li>
                         </div>
 
-                        <div class="mdl-card__supporting-text">
-                            <ul class="demo-list-two mdl-list">
-
-                                <li class="mdl-list__item mdl-list__item--two-line">
-                            <span class="mdl-list__item-primary-content">
-                             <!-- <i class="material-icons mdl-list__item-avatar">person</i> -->
-                              <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="pfadiheim.php">
-                                  Das Pfadiheim
-                              </a>
-                                <span class="center_text mdl-list__item-sub-title"><center>Das Pfadiheim musste leider 2013 abgegeben werden</center></span>
-                                </li>
-                        </div>
-
-        </div>
+                    </div>
                 </div>
             </div>
         </div>

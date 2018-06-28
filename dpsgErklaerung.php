@@ -31,7 +31,7 @@ require_once('/home/www/rover/forum/SSI.php');
     <!-- Ende Cookie Plugin -->
 
 </head>
-<body  style="background-image: url('https://k6ao6q.ch.files.1drv.com/y4mKkv2fmRXuxGa-8b0k4wbkhA56z32kgTC8uI6NeZ4FZuNRjvgCR-llTDGrxczXoNlJlhUBcq5LpBCxCE4_ll4_bWwtfqkYJjE8XOAgR8MDbntZKolCN8xVUIVGyzrxuLjKt0YHlut-2DJsQwX37bdhTTyuMGl6TdZhx9Hi1-4pML--8sZMA1QUTM8xJxy2X-gpTeU4lvZlVHBJa--F2FdNw?width=1024&height=683&cropmode=none'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
+<body  class="mainColor">
 <div class="mdl-layout mdl-js-layout">
     <?php
     include "php-helper/headerTest.php";
@@ -42,28 +42,20 @@ require_once('/home/www/rover/forum/SSI.php');
 
                 <?php include "wartungsnachricht.php" ?>
 
-                <div class="news_Card_location mdl-cell mdl-cell--10-col mdl-cell--10-col-tablet mdl-cell--12-col-phone">
-                        <div class="mdl-card__title headline">
-                            <h4>Herzlich Willkommen</h4>
+                <div class='CN_index_Main_Card mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col'>
+                    <div class='mdl-card__title'>
+                        <h4 class="mdl-card__title-text">Die <b>&nbsp;D</b>eutsche <b>&nbsp;P</b>fadfinderschaft <b>&nbsp;S</b>ankt <b>&nbsp;G</b>eorg</h4>
                         </div>
-                            <div class="CN_index_Main_Card-logo mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
-                                <img src="images/logo/stammeslogo_home.png" alt="stammeslogo_home">
-                            </div>
-
-                            <div class="CN_index_Main_Card-text mdl-cell mdl-cell--10-col mdl-cell--10-col-tablet mdl-cell--12-col-phone">
-                                bei den Pfadfindern des Stammes Windrose aus Anzing und Poing. </br>
-                                Unser Stamm hat ungefähr 80 Mitglieder im Alter von 7 bis ... Jahren.</br>
-                                Wir <b>Pfadfinder</b> treffen uns regelmäßig in den Stufen zu Gruppenstunden</br>
-                                und zu gemeinsamen Aktionen entweder im Pfarrheim in <b>Poing</b> oder auf unserem Stammesplatz in <b>Anzing</b>.
-                            </div>
-
+                    <div class='mdl-color-text--grey-700 mdl-card__supporting-text CN_index_Main_Card-text'>
+                        <p><b><i>Der Text muss noch geschrieben werden</i></b></p>
+                        <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="DPSG.php">
+                        Zurück zur Übersicht
+                        </a>
+                        </div>
+                    </div>
                 </div>
 
-                <?php
-                include 'aktuellsteNewsTest.php';
-                ?>
-
-            </div>
         </div>
             <?php
             include 'php-helper/footer.php';

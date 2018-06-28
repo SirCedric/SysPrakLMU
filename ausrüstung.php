@@ -28,31 +28,29 @@
     <!-- Ende Cookie Plugin -->
 
 </head>
-<body  style="background-image: url('https://lysq6w.ch.files.1drv.com/y4mektjTZA07TfNgwFbPXzecRz2k_sJXBlzm8aw52tZPsooBzsY4EKxti37qKcvSjLZ3EEDdult4py3roqo-uNvArz5G1jVghZhewQ8Hf6tXKEBuk2QDUGrccA0L5T_x-TcdeYjurN9wcyAKq6tqJ6CFfKS3Gfeal9UmMC0gMXU9btTUwADcvaXKjQ3hJbfF6H6MA8AW7_qcx7yXnkW28-IOw?width=1024&height=683&cropmode=none'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
+<body  style="background-image: url('https://kqbzda.ch.files.1drv.com/y4mSq4qRkxmWPtG9r-0sb8w5o8iSCh0G1MQXC5DxGAoi4LhCen1ew_2gJTDLAMj4StBp-rcGh2xabx6Uswyd_Pkp2Gy0zt84Djiilesh61ZzWdhc2r_ncRyRCG1X6gFZy_bepECLuDyyUf_WVfDdSoy7ByrZua3TskZ_8ckNmq1DK3LJhcYZgiqT0P6j4E0mKxSQp_7wfbKRS7uZ0IYOCDqHA?width=768&height=1024&cropmode=none'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
 <div class="mdl-layout mdl-js-layout">
     <?php
     include "php-helper/headerTest.php";
     ?>
     <main class="mdl-layout__content">
         <div class="page-content"><!-- Your content goes here -->
-            <!-- <div class="mdl-layout-spacer"></div> -->
             <div class="mdl-grid">
 
                 <div class="center_text mdl-cell mdl-cell--10-col mdl-cell--10-col-tablet mdl-cell--12-col-phone">
                     <div class="mdl-card mdl-shadow--2dp CN_full-size_card_stammesinfo">
                         <div class="mdl-card__title">
-                            <h2 class="mdl-card__title-text center_text">Hier finden Sie eine Übersicht über unseren Stamm</h2>
+                            <h2 class="center_text mdl-card__title-text">Alles was es über unsere Ausrüstung zu erwähnen gibt</h2>
                         </div>
                         <div class="mdl-card__supporting-text">
                             <ul class="demo-list-two mdl-list">
 
                                 <li class="mdl-list__item mdl-list__item--two-line">
                             <span class="mdl-list__item-primary-content">
-                              <!-- <i class="material-icons mdl-list__item-avatar">person</i> -->
-                              <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="stufen.php">
-                                  Stufen
+                              <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="kluft.php">
+                                  Zur Kluft
                               </a>
-                                <span class="mdl-list__item-sub-title"><center>Hier gelangen Sie zu unseren Stufen</center></span>
+                                <span class="mdl-list__item-sub-title"><center>Hier erfahren Sie alles wissenswerte über unsere Kluft</center></span>
                             </span>
                                 </li>
                         </div>
@@ -62,11 +60,10 @@
 
                                 <li class="mdl-list__item mdl-list__item--two-line">
                             <span class="mdl-list__item-primary-content">
-                             <!-- <i class="material-icons mdl-list__item-avatar">person</i> -->
-                                <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="stammesplatz.php">
-                                  Der Stammesplatz
+                              <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="abPäckchen.php">
+                                  Das Allzeit-Bereit-Päckchen
                               </a>
-                                <span class="center_text mdl-list__item-sub-title"><center>Ein beliebter Ort im Sommer</center></span>
+                                <span class="mdl-list__item-sub-title"><center>Das Allzeit-Bereit-Päckchen gehört zur Grundausrüstung</center></span>
                             </span>
                                 </li>
                         </div>
@@ -76,15 +73,15 @@
 
                                 <li class="mdl-list__item mdl-list__item--two-line">
                             <span class="mdl-list__item-primary-content">
-                             <!-- <i class="material-icons mdl-list__item-avatar">person</i> -->
-                              <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="pfadiheim.php">
-                                  Das Pfadiheim
+                              <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="packliste.php">
+                                  Zur Packliste
                               </a>
-                                <span class="center_text mdl-list__item-sub-title"><center>Das Pfadiheim musste leider 2013 abgegeben werden</center></span>
+                                <span class="mdl-list__item-sub-title"><center>Damit nichts daheim vergessen wird</center></span>
+                            </span>
                                 </li>
                         </div>
 
-        </div>
+                    </div>
                 </div>
             </div>
         </div>

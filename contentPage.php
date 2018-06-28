@@ -13,6 +13,20 @@
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     <link rel="stylesheet" href="css/main.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+    <!-- Start Cookie Plugin -->
+    <script type="text/javascript">
+        window.cookieconsent_options = {
+            message: 'Diese Website nutzt Cookies, um bestmögliche Funktionalität bieten zu können.',
+            dismiss: 'Ok, verstanden',
+            learnMore: 'Mehr Infos',
+            link: 'http://test.dpsg-windrose.de/datenschutzerklarung.php',
+            theme: 'light-floating'
+        };
+    </script>
+    <script type="text/javascript" src="//s3.amazonaws.com/valao-cloud/cookie-hinweis/script-v2.js"></script>
+    <!-- Ende Cookie Plugin -->
+
 </head>
 <body class="mainColor">
   <div class="mdl-layout mdl-js-layout">
@@ -70,10 +84,10 @@
                ?>
 
               </div>
+          </div>
               <?php
               include 'php-helper/footer.php';
               ?>
-          </div>
       </main>
     </div>
 </body>

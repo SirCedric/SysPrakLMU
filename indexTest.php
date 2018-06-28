@@ -19,9 +19,21 @@
     <link rel="stylesheet" href="css/main.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
+    <!-- Start Cookie Plugin -->
+    <script type="text/javascript">
+        window.cookieconsent_options = {
+            message: 'Diese Website nutzt Cookies, um bestmögliche Funktionalität bieten zu können.',
+            dismiss: 'Ok, verstanden',
+            learnMore: 'Mehr Infos',
+            link: 'http://test.dpsg-windrose.de/datenschutzerklarung.php',
+            theme: 'light-floating'
+        };
+    </script>
+    <script type="text/javascript" src="//s3.amazonaws.com/valao-cloud/cookie-hinweis/script-v2.js"></script>
+    <!-- Ende Cookie Plugin -->
 
 </head>
-<body class="mainColor">
+<body class="indexImage">
 <div class="mdl-layout mdl-js-layout">
     <?php
     include "php-helper/header.php";
@@ -83,7 +95,7 @@ $eu_cookie_set = $_COOKIE["fuckeu"];
 if ($eu_cookie_set != "set") {
     ?>
     <div id="eu_cookiebox">
-        Cookies erleichtern die Bereitstellung unserer Dienste. Mit der Nutzung unserer Dienste erklärst du dich damit einverstanden, dass wir Cookies verwenden <a href="datenschutserklärung.php">Mehr Infos</a> <button onclick='checkok()'>OK</button>
+        Cookies erleichtern die Bereitstellung unserer Dienste. Mit der Nutzung unserer Dienste erklärst du dich damit einverstanden, dass wir Cookies verwenden <a href="datenschutzerklarung.php">Mehr Infos</a> <button onclick='checkok()'>OK</button>
     </div>
 <?php  }; ?>
 </body>

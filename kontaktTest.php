@@ -1,8 +1,4 @@
-    <?php
-    require_once('/home/www/rover/forum/SSI.php');
-    ?>
-
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html class="mdl-js">
 <head>
     <meta charset="utf-8">
@@ -32,25 +28,47 @@
     <!-- Ende Cookie Plugin -->
 
 </head>
-<body id="body" style="background-image: url('https://mqcpxq.ch.files.1drv.com/y4mblKTqV6zMdykEhlm-WffJsz4qO1NUgJEl0wYpLBzrxr1rXC9lYObu9XcLajgRmCvvh1b59wRghoW-G4qQ3M-xqG3go4OJINC0MtN3lT8JZfpbw6W1PwADtLgTc1ZTFyeoz86mPxvTK0PL3ilQkKJ9Bm1wPePSqxb9CM7UJNttx3O6jRV3wpdFSg181cU_QWpg9HLmfXc607gJIggCfiMNA?width=1024&height=683&cropmode=none'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
-<div class="mdl-layout mdl-js-layout">
-    <?php
-    include "php-helper/headerTest.php";
-    ?>
 
-    <main class="mdl-layout__content">
-        <div class="page-content"><!-- Your content goes here -->
-            <div class="mdl-grid">
 <?php
-include 'aktuellesTest.php';
+session_start();
+if(isset($_SESSION['username'])){
+    include "php-helper/header_loggedIn.php";
+}else {
+    include "php-helper/header.php";
+}
+?>
+<?php
+// Ausführen wenn Formular gesendet
+if (isset($_POST["submit"]))
+{
+// Sammeln der Formulardaten
+$an = "meine@email.de";
+$name = $_POST['name'];
+$email = $_POST['email'];
+$betreff = $_POST['betreff'];
+$nachricht = $_POST['nachricht'];
+// Mailheader UTF-8 fähig machen
+$mail_header = 'From:' . $email . "n";
+$mail_header .= 'Content-type: text/plain; charset=UTF-8' . "rn";
+// Nachrichtenlayout erstellen
+$message = "
+Name:       $namen
+Email:      $emailn
+Nachricht:  $nachrichtn
+";
+// Verschicken der Mail
+mail($an, $betreff, $message, $mail_header );
+};
 ?>
 
-            </div>
-        </div>
-        <?php
-        include 'php-helper/footer.php';
-        ?>
-    </main>
-</div>
-</body>
-</html>
+<form id="form" action="form2email.php" method="post">
+    <label for="name">Name</label>
+    <input id="name" name="name" size="25" type="text" />
+    <label for="email">Email</label>
+    <input id="email" name="email" size="25" type="text" />
+    <label for="betreff">Betreff</label>
+    <input id="betreff" name="betreff" size="25" type="text" />
+    <label for="nachricht">Nachricht</label>
+    <textarea id="nachricht" cols="50" rows="6" name="nachricht"></textarea>
+    <input id="submit" name="submit" type="submit" value="Formular senden" />
+</form>

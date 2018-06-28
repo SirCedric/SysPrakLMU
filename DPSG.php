@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="css/main.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
+
     <!-- Start Cookie Plugin -->
     <script type="text/javascript">
         window.cookieconsent_options = {
@@ -28,31 +29,29 @@
     <!-- Ende Cookie Plugin -->
 
 </head>
-<body  style="background-image: url('https://lysq6w.ch.files.1drv.com/y4mektjTZA07TfNgwFbPXzecRz2k_sJXBlzm8aw52tZPsooBzsY4EKxti37qKcvSjLZ3EEDdult4py3roqo-uNvArz5G1jVghZhewQ8Hf6tXKEBuk2QDUGrccA0L5T_x-TcdeYjurN9wcyAKq6tqJ6CFfKS3Gfeal9UmMC0gMXU9btTUwADcvaXKjQ3hJbfF6H6MA8AW7_qcx7yXnkW28-IOw?width=1024&height=683&cropmode=none'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
+<body  style="background-image: url('https://iysq6w.ch.files.1drv.com/y4m7hvWJ5f53E1GbYW-J0EE6YyGJHOUt4OAng_Y_Q0368hv0mgaLM3tyuKFjertjBnVdTvRygZdEf9dcur9xlF8YI0pbbe-OgYTqoIWW7nlPxe7C5BMSN-M4c_Aj0rrXbqkNj_uXpWuZY-w29XVKbGnyZPCrrxO2FQugjjIMRbIWKLWlDmDsXK5tm0Rdmj5-mMvISVlzzU-1GBNBDXPKKbIhw?width=1024&height=683&cropmode=none'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
 <div class="mdl-layout mdl-js-layout">
     <?php
     include "php-helper/headerTest.php";
     ?>
     <main class="mdl-layout__content">
         <div class="page-content"><!-- Your content goes here -->
-            <!-- <div class="mdl-layout-spacer"></div> -->
             <div class="mdl-grid">
 
                 <div class="center_text mdl-cell mdl-cell--10-col mdl-cell--10-col-tablet mdl-cell--12-col-phone">
-                    <div class="mdl-card mdl-shadow--2dp CN_full-size_card_stammesinfo">
+                    <div class="CN_full-size_card_stammesinfo mdl-card mdl-shadow--2dp">
                         <div class="mdl-card__title">
-                            <h2 class="mdl-card__title-text center_text">Hier finden Sie eine Übersicht über unseren Stamm</h2>
+                            <h2 class="center_text mdl-card__title-text">Die Deutsche Pfadfinderschaft Sankt Georg</h2>
                         </div>
                         <div class="mdl-card__supporting-text">
                             <ul class="demo-list-two mdl-list">
 
                                 <li class="mdl-list__item mdl-list__item--two-line">
                             <span class="mdl-list__item-primary-content">
-                              <!-- <i class="material-icons mdl-list__item-avatar">person</i> -->
-                              <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="stufen.php">
-                                  Stufen
+                              <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="dpsgErklaerung.php">
+                                  Über die DPSG
                               </a>
-                                <span class="mdl-list__item-sub-title"><center>Hier gelangen Sie zu unseren Stufen</center></span>
+                                <span class="mdl-list__item-sub-title"><center>Was ist die DPSG?</center></span>
                             </span>
                                 </li>
                         </div>
@@ -62,11 +61,10 @@
 
                                 <li class="mdl-list__item mdl-list__item--two-line">
                             <span class="mdl-list__item-primary-content">
-                             <!-- <i class="material-icons mdl-list__item-avatar">person</i> -->
-                                <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="stammesplatz.php">
-                                  Der Stammesplatz
+                              <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="engagement.php">
+                                  Unser Engagement
                               </a>
-                                <span class="center_text mdl-list__item-sub-title"><center>Ein beliebter Ort im Sommer</center></span>
+                                <span class="mdl-list__item-sub-title"><center>Was wir eigentlich machen</center></span>
                             </span>
                                 </li>
                         </div>
@@ -76,15 +74,28 @@
 
                                 <li class="mdl-list__item mdl-list__item--two-line">
                             <span class="mdl-list__item-primary-content">
-                             <!-- <i class="material-icons mdl-list__item-avatar">person</i> -->
-                              <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="pfadiheim.php">
-                                  Das Pfadiheim
+                              <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://www.pfadfinder-ebersberg.de" onclick='window.open(this.href); return false;'>
+                                  Unser Bezirk Ebersberg
                               </a>
-                                <span class="center_text mdl-list__item-sub-title"><center>Das Pfadiheim musste leider 2013 abgegeben werden</center></span>
+                                <span class="mdl-list__item-sub-title"><center>Hier gehts zur Bezirkswebsite</center></span>
+                            </span>
                                 </li>
                         </div>
 
-        </div>
+                        <div class="mdl-card__supporting-text">
+                            <ul class="demo-list-two mdl-list">
+
+                                <li class="mdl-list__item mdl-list__item--two-line">
+                            <span class="mdl-list__item-primary-content">
+                              <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="http://www.dpsg1300.de/home/" onclick='window.open(this.href); return false;'>
+                                  Die Pfadfinder-Diözese München/Freising
+                              </a>
+                                <span class="mdl-list__item-sub-title"><center>Hier gehts zur Website der Pfadfinder-Diözese</center></span>
+                            </span>
+                                </li>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
