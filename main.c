@@ -8,7 +8,7 @@
 #define PORTNUMBER 1375
 #define HOSTNAME "sysprak.priv.lab.nm.ifi.lmu.de"
 
-int main(int argc, char** argv[]){
+int main(int argc, char* argv[]){
     
     int sock = socket(gethostbyname(HOSTNAME), AF_INET, 0);
     long gameID;
