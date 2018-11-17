@@ -15,8 +15,7 @@ int main(int argc, char** argv[]){
     int playercount;
 
 
-/* Verarbeitung der Kommandozeilenparameter
-*  By: David Galesic */
+// Verarbeitung der Kommandozeilenparameter
     
   if(argc != 5 || strcmp(argv[1], "-g") != 0 || strcmp(argv[3], "-p") != 0) {
     printf("Error: Arguments\n");
