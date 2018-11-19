@@ -1,0 +1,3 @@
+play: main.c performConnection.c
+    clang -o sysprak-client main.c performConnection.c -Wall -Wextra -Werror
+
