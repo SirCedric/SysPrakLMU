@@ -9,7 +9,7 @@
 
 
 #define GAMEKINDNAME "Checkers"
-#define PORTNUMBER 1375
+#define PORTNUMBER "1375"
 #define HOSTNAME "sysprak.priv.lab.nm.ifi.lmu.de"
 
 int main(int argc, char* argv[]){
@@ -87,6 +87,6 @@ int main(int argc, char* argv[]){
     }
 
     freeaddrinfo(res);
-    
+
     return 0;
 }
