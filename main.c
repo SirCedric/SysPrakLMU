@@ -7,6 +7,7 @@
 #include <errno.h>
 #include <arpa/inet.h>
 
+
 #define GAMEKINDNAME "Checkers"
 #define PORTNUMBER 1375
 #define HOSTNAME "sysprak.priv.lab.nm.ifi.lmu.de"
