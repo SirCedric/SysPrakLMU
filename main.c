@@ -16,32 +16,33 @@ int main(int argc, char* argv[]){
 
     long gameID;
     int playercount;
-    
-    
+    int sock;
+
+
     // Verarbeitung der Kommandozeilenparameter
-    
+
     if(argc != 5){
         errno = 22;
         perror("argc");
         return -1;
     }
-    
+
     if(strcmp(argv[1], "-g") != 0 || strcmp(argv[3], "-p") != 0){
         errno = 22;
         perror("Flags");
         return -1;
     }
-    
+
     gameID = atol(argv[2]);
     playercount = atoi(argv[4]);
-    
+
     // "Falls gameID keine 13-stellige Zahl"
     if((double)gameID/1000000000000 < 1 || (double)gameID/9999999999999 > 1){
         errno = 22;
         perror("GameID");
         return -1;
     }
-    
+
     if(playercount != 1 && playercount != 2){
         errno = 22;
         perror("Playercount");
@@ -84,6 +85,17 @@ int main(int argc, char* argv[]){
         // Konvertiere die IP in einen String und printe es
         inet_ntop(p->ai_family, addr, ipstr, sizeof ipstr);
         printf(" %s: %s\n", ipver, ipstr);
+    }
+
+    if((sock = Socket(res.ai_family, res.ai_socktype, 0)) < 0){
+        errno = 22;
+        perror("socket");
+        return -1;
+    }
+    if(connect(sock, (struct ai_addr*) &addr, res.ai_addrlen) < 0){
+        errno = 22;
+        perror("connect");
+        return -1;
     }
 
     freeaddrinfo(res);
