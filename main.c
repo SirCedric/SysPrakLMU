@@ -93,11 +93,13 @@ int main(int argc, char* argv[]){
         return -1;
     }
     if(connect(sock, (struct ai_addr*) &addr, res.ai_addrlen) < 0){
-        errno = 22;
+
+         errno = 22;
         perror("connect");
-        return -1;
+         return -1;
     }
 
+    
     freeaddrinfo(res);
 
     return 0;
