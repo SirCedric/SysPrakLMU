@@ -16,6 +16,7 @@ int main(int argc, char* argv[]){
 
     long gameID;
     int playercount;
+    int sock;
     
     
     // Verarbeitung der Kommandozeilenparameter
@@ -86,6 +87,13 @@ int main(int argc, char* argv[]){
         printf(" %s: %s\n", ipver, ipstr);
     }
 
+    sock = Socket(res.ai_family, res.ai_socktype, 0);
+    if(connect(sock, (struct ai_addr*) &addr, res.ai_addrlen) < 0){
+         errno = 22;
+        perror("connect");
+         return -1;
+    }
+    
     freeaddrinfo(res);
 
     return 0;
