@@ -87,7 +87,11 @@ int main(int argc, char* argv[]){
         printf(" %s: %s\n", ipver, ipstr);
     }
 
-    sock = Socket(res.ai_family, res.ai_socktype, 0);
+    if(sock = Socket(res.ai_family, res.ai_socktype, 0) < 0){
+        errno = 22;
+        perror("socket");
+        return -1;
+    }
     if(connect(sock, (struct ai_addr*) &addr, res.ai_addrlen) < 0){
          errno = 22;
         perror("connect");
