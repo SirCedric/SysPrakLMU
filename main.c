@@ -94,8 +94,7 @@ int main(int argc, char* argv[]){
     }
     if(connect(sock, (struct ai_addr*) &addr, res.ai_addrlen) < 0){
 
-         errno = 22;
-        perror("connect");
+        perror("connect", errno);
          return -1;
     }
 
