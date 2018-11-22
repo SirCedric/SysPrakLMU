@@ -6,7 +6,7 @@
 
 struct parameters{
 	char hostName[BUFFER];
-	int portNr;
+	char portNr;
 	char gameType[BUFFER];
 };
 
@@ -40,7 +40,7 @@ struct parameters getConfig(char filename[BUFFER]){
 //				printf("hostname: %s\n", result.hostName);
 			}
 			else if ((strcmp(paraName, "portnumber") == 0)) {
-				result.portNr = atoi(paraVal);
+				strcpy(result.portNr, paraVal);
 //				printf("portnumber: %i\n", result.portNr);
 			}
 			else if ((strcmp(paraName, "gametype") == 0)) {
