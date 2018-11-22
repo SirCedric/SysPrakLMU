@@ -6,10 +6,10 @@
 #include <netdb.h>
 #include <errno.h>
 #include <arpa/inet.h>
-//#include "performConnection.c"
+#include "config.h"
 
 
-
+#define GAMEKINDNAME "Checkers"
 #define PORTNUMBER "1357"
 #define HOSTNAME "sysprak.priv.lab.nm.ifi.lmu.de"
 
@@ -18,6 +18,8 @@ int main(int argc, char* argv[]){
     long gameID;
     int playercount;
     int sock;
+    void *ptr;
+    char addrstr[100];
 
 
     // Verarbeitung der Kommandozeilenparameter
@@ -61,6 +63,7 @@ int main(int argc, char* argv[]){
     }
 
 
+    // connect to server with getaddrinfo
     struct addrinfo hints;
     memset(&hints,0,sizeof(hints));
     hints.ai_family=AF_INET;
@@ -79,6 +82,17 @@ int main(int argc, char* argv[]){
         perror("connect");
         return -1;
     }
+    ptr = &((struct sockaddr_in *) res->ai_addr)->sin_addr;
+    inet_ntop (res->ai_family, ptr, addrstr, 100);
+    printf ("IPv%d address: %s\n", res->ai_family,
+            addrstr);
+
+    if(performConnection(sock) != 0){
+        perror("performConnection");
+        return -1;
+    }
+    printf("Prolog worked!");
+
     freeaddrinfo(res);
 
 
