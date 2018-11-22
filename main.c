@@ -52,12 +52,14 @@ int main(int argc, char* argv[]){
 
 
 
+    // Creates Socket IPv4
     sock = socket(AF_INET, SOCK_STREAM, 0);
     if(sock < 0) {
         errno = 1;
         perror("socket");
         return -1;
     }
+
 
     struct addrinfo hints;
     memset(&hints,0,sizeof(hints));
@@ -69,6 +71,7 @@ int main(int argc, char* argv[]){
     int err=getaddrinfo(HOSTNAME,PORTNUMBER,&hints,&res);
     if (err!=0) {
         perror("getadrrinfo");
+        return -1;
     }
 
 
