@@ -6,10 +6,11 @@
 #include <netdb.h>
 #include <errno.h>
 #include <arpa/inet.h>
+//#include "performConnection.c"
 
 
-#define GAMEKINDNAME "Checkers"
-#define PORTNUMBER "1375"
+
+#define PORTNUMBER 1375
 #define HOSTNAME "sysprak.priv.lab.nm.ifi.lmu.de"
 
 int main(int argc, char* argv[]){
@@ -49,6 +50,39 @@ int main(int argc, char* argv[]){
         return -1;
     }
 
+    struct sockaddr_in serv_addr;
+    struct hostent *server;
+
+    sock = socket(AF_INET, SOCK_STREAM, 0);
+    if(sock < 0) {
+        errno = 1;
+        perror("socket");
+        return -1;
+    }
+
+    server = gethostbyname(HOSTNAME);
+    if(server <0) {
+        errno = 1;
+        perror("gethostbyname");
+        return -1;
+    }
+
+
+    bzero((char*) &serv_addr, sizeof(serv_addr));
+    serv_addr.sin_family = AF_INET;
+    bcopy((char*) server->h_addr, (char *)&serv_addr.sin_addr.s_addr, server->h_length);
+    serv_addr.sin_port = htons(PORTNUMBER);
+
+    if(connect(sock, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0) {
+        errno = 1;
+        perror("connect");
+        return -1;
+    }
+
+
+    //while(performConnection(sock) != -1);
+
+    /*
     struct addrinfo hints, *res, *p;
     int errcode;
     char ipstr[INET6_ADDRSTRLEN];
@@ -85,21 +119,22 @@ int main(int argc, char* argv[]){
         // Konvertiere die IP in einen String und printe es
         inet_ntop(p->ai_family, addr, ipstr, sizeof ipstr);
         printf(" %s: %s\n", ipver, ipstr);
-    }
 
-    if((sock = Socket(res.ai_family, res.ai_socktype, 0)) < 0){
-        errno = 22;
-        perror("socket");
-        return -1;
+        if((sock = socket(p->ai_family, p->ai_socktype, p->ai_protocol)) < 0){
+            errno = 1;
+            perror("socket");
+            return -1;
+        }
+        if(connect(sock, p->ai_addr, p->ai_addrlen) < 0){
+            close(sock);
+            errno = 1;
+            perror("connect");
+            return -1;
+        }
     }
-    if(connect(sock, (struct ai_addr*) &addr, res.ai_addrlen) < 0){
+        */
 
-        perror("connect", errno);
-         return -1;
-    }
 
-    close(sock);
-    freeaddrinfo(res);
 
     return 0;
 }
