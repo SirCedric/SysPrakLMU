@@ -6,10 +6,11 @@
 #include <netdb.h>
 #include <errno.h>
 #include <arpa/inet.h>
+//#include "performConnection.c"
 
 
-#define GAMEKINDNAME "Checkers"
-#define PORTNUMBER "1375"
+
+#define PORTNUMBER "1357"
 #define HOSTNAME "sysprak.priv.lab.nm.ifi.lmu.de"
 
 int main(int argc, char* argv[]){
@@ -49,57 +50,35 @@ int main(int argc, char* argv[]){
         return -1;
     }
 
-    struct addrinfo hints, *res, *p;
-    int errcode;
-    char ipstr[INET6_ADDRSTRLEN];
 
-    memset (&hints, 0, sizeof (hints));
-    hints.ai_family = AF_UNSPEC;
-    hints.ai_socktype = SOCK_STREAM;
 
-    errcode = getaddrinfo (HOSTNAME, PORTNUMBER, &hints, &res);
-    if (errcode != 0)
-    {
-        perror ("getaddrinfo");
-        return -1;
-    }
-
-    printf ("Host: %s\n", HOSTNAME);
-
-    for(p = res; p != NULL; p = p->ai_next) {
-        void *addr;
-        char *ipver;
-
-        // Hole den Pointer zu der Adresse
-        // Verschiedene Felder für IPv4 und IPv6
-        if (p->ai_family == AF_INET) { //IPv4
-            struct sockaddr_in *ipv4 = (struct sockaddr_in *)p->ai_addr;
-            addr = &(ipv4->sin_addr);
-            ipver = "IPv4";
-        } else { //IPv6
-            struct sockaddr_in6 *ipv6 = (struct sockaddr_in6 *)p->ai_addr;
-            addr = &(ipv6->sin6_addr);
-            ipver = "IPv6";
-        }
-
-        // Konvertiere die IP in einen String und printe es
-        inet_ntop(p->ai_family, addr, ipstr, sizeof ipstr);
-        printf(" %s: %s\n", ipver, ipstr);
-    }
-
-    if((sock = Socket(res.ai_family, res.ai_socktype, 0)) < 0){
-        errno = 22;
+    sock = socket(AF_INET, SOCK_STREAM, 0);
+    if(sock < 0) {
+        errno = 1;
         perror("socket");
         return -1;
     }
-    if(connect(sock, (struct ai_addr*) &addr, res.ai_addrlen) < 0){
 
-        perror("connect", errno);
-         return -1;
+    struct addrinfo hints;
+    memset(&hints,0,sizeof(hints));
+    hints.ai_family=AF_INET;
+    hints.ai_socktype=SOCK_STREAM;
+    hints.ai_protocol=0;
+    hints.ai_flags=AI_ADDRCONFIG;
+    struct addrinfo* res=0;
+    int err=getaddrinfo(HOSTNAME,PORTNUMBER,&hints,&res);
+    if (err!=0) {
+        perror("getadrrinfo");
     }
 
-    close(sock);
+
+    if(connect(sock, res->ai_addr, res->ai_addrlen) < 0){
+        perror("connect");
+        return -1;
+    }
     freeaddrinfo(res);
+
+
 
     return 0;
 }
