@@ -6,7 +6,7 @@
 
 struct parameters{
 	char hostName[BUFFER];
-	char portNr;
+	char portNr[BUFFER];
 	char gameType[BUFFER];
 };
 
@@ -58,7 +58,6 @@ struct parameters getConfig(char filename[BUFFER]){
 }
 
 
-
 /*
 // main function for testing
 int main() {
@@ -66,7 +65,7 @@ int main() {
 	
 	struct parameters config = getConfig("client.conf");
 	
-	printf("hostname: %s\nport number: %i\ngame type: %s", config.hostName, config.portNr, config.gameType);
+	printf("hostname: %s\nport number: %s\ngame type: %s", config.hostName, config.portNr, config.gameType);
 	
 	
 }
