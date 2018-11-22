@@ -13,18 +13,22 @@ int performConnection(int socket){
     ssize_t size;
     printf("Methode aufgerufen\n");
     if((size = recv(socket, buf, BUF_SIZE, 0)) < 0){
-        perror("ERROR recieving message!");
+        perror("ERROR recieving message!\n");
         return -1;
     }
     printf("%s\n", buf);
 
-    if(strcmp(buf, "+ MNM Gameserver 2.3 accepting connections") == 0) {
-        printf("Send Client Version")
-        if (send(socket, "VERSION 2.0", BUF_SIZE, 0) < 0){
-            perror("ERROR writing to socket");
-            return -1;
+
+    if (send(socket, "VERSION 2.3\n", BUF_SIZE, 0) < 0){
+        perror("ERROR writing to socket");
+        return -1;
         }
+
+    if((size = recv(socket, buf, BUF_SIZE, 0)) < 0){
+        perror("ERROR recieving message!\n");
+        return -1;
     }
+    printf("%s\n", buf);
 
 
     return 0;
