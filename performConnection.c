@@ -12,52 +12,59 @@ int performConnection(int socket, char* gameID){
     char buf[BUF_SIZE];
 
     ssize_t size;
-    printf("Methode aufgerufen\n");
-
 
     if((size = recv(socket, buf, BUF_SIZE, 0)) < 0){
         perror("ERROR recieving message!\n");
         return -1;
     }
-    printf("%s\n", buf);
+    printf("Server: %s\n", buf);
 
 
-    if (send(socket, "VERSION 2.0\n", BUF_SIZE, 0) < 0){
+    // buffer leeren und mit Version vorbereiten
+    strncpy(buf, "", sizeof(buf));
+    strcpy(buf, "VERSION 2.0\n");
+
+    if (send(socket, buf, BUF_SIZE, 0) < 0){
         perror("ERROR writing to socket");
         return -1;
-        }
+    } else {
+        printf("Client: %s\n", buf);
+    }
+
 
     // buffer leeren
     strncpy(buf, "", sizeof(buf));
     if((size = recv(socket, buf, BUF_SIZE, 0)) < 0){
         perror("ERROR recieving message!\n");
         return -1;
+    } else {
+        printf("Server: %s\n", buf);
     }
-    printf("%s\n", buf);
-
+    
 
     // buffer leeren und mit Game ID vorbereiten
     strncpy(buf, "", sizeof(buf));
     strcpy(buf, "ID ");
     strcat(buf, gameID);
     strcat(buf, "\n");
-    printf("Client: %s", buf);
     
     if(send(socket, buf, BUF_SIZE, 0) < 0){
         perror("ERROR sending message!\n");
         return -1;
+    } else {
+        printf("Client: %s\n", buf);
     }
+    
     
     // buffer leeren
     strncpy(buf, "", sizeof(buf));
     if((size = recv(socket, buf, BUF_SIZE, 0)) < 0 ){
         perror("ERROR recieving message!\n");
         return -1;
+    } else {
+        printf("Server: %s\n", buf);
     }
-    printf("%s\n", buf);
-
     
-
 
 
 
