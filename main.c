@@ -15,7 +15,7 @@
 
 int main(int argc, char* argv[]){
 
-    long gameID;
+    char* gameID;
     int playercount;
     int sock;
     void *ptr;
@@ -23,7 +23,7 @@ int main(int argc, char* argv[]){
 
 
     // Verarbeitung der Kommandozeilenparameter
-
+    
     if(argc != 5){
         errno = 22;
         perror("argc");
@@ -36,14 +36,15 @@ int main(int argc, char* argv[]){
         return -1;
     }
 
-    gameID = atol(argv[2]);
+    gameID = argv[2];
     playercount = atoi(argv[4]);
-
-    // "Falls gameID keine 13-stellige Zahl"
-    if((double)gameID/1000000000000 < 1 || (double)gameID/9999999999999 > 1){
-        errno = 22;
-        perror("GameID");
-        return -1;
+    
+    int i = 0;
+    for(i; *(argv[2] + i) != '\0'; i++){}
+    if(i != 14){
+      errno = 22;
+      perror("GameID");
+      return -1;
     }
 
     if(playercount != 1 && playercount != 2){
