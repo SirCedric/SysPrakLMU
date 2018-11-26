@@ -20,8 +20,8 @@ int main(int argc, char* argv[]){
     // auslesen von client.conf
     struct parameters config = getConfig("client.conf");
 
+
     // Verarbeitung der Kommandozeilenparameter
-    
     if(argc != 5){
         errno = 22;
         perror("argc");
@@ -84,7 +84,7 @@ int main(int argc, char* argv[]){
     printf ("IPv%d address: %s\n", res->ai_family,
             addrstr);
 
-    if(performConnection(sock) != 0){
+    if(performConnection(sock, gameID) != 0){
         perror("performConnection");
         return -1;
     }

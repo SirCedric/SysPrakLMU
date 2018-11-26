@@ -5,16 +5,16 @@
 #include <errno.h>
 #include <string.h>
 
-#define BUF_SIZE 500
+#include "config.h"
 
-int performConnection(int socket){
+int performConnection(int socket, char* gameID){
+    
     char buf[BUF_SIZE];
-
 
     ssize_t size;
     printf("Methode aufgerufen\n");
 
-    do{
+
     if((size = recv(socket, buf, BUF_SIZE, 0)) < 0){
         perror("ERROR recieving message!\n");
         return -1;
@@ -27,24 +27,36 @@ int performConnection(int socket){
         return -1;
         }
 
+    // buffer leeren
+    strncpy(buf, "", sizeof(buf));
     if((size = recv(socket, buf, BUF_SIZE, 0)) < 0){
         perror("ERROR recieving message!\n");
         return -1;
     }
     printf("%s\n", buf);
 
-    if(send(socket, "ID 3n4hroe2iqxdx\n", BUF_SIZE, 0) < 0){
+
+    // buffer leeren und mit Game ID vorbereiten
+    strncpy(buf, "", sizeof(buf));
+    strcpy(buf, "ID ");
+    strcat(buf, gameID);
+    strcat(buf, "\n");
+    printf("Client: %s", buf);
+    
+    if(send(socket, buf, BUF_SIZE, 0) < 0){
         perror("ERROR sending message!\n");
         return -1;
     }
-
+    
+    // buffer leeren
+    strncpy(buf, "", sizeof(buf));
     if((size = recv(socket, buf, BUF_SIZE, 0)) < 0 ){
         perror("ERROR recieving message!\n");
         return -1;
     }
     printf("%s\n", buf);
 
-    }while(strcmp(buf, "+ ENDPLAYERS") != 0);
+    
 
 
 
