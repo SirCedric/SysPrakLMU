@@ -24,7 +24,6 @@ struct parameters getConfig(char filename[BUF_SIZE]){
 		
 		if (lineBUF_SIZE[0] == '#'||(lineBUF_SIZE[0] == '/' && lineBUF_SIZE[1] == '/')) {
 			strcpy(paraName, "null");
-			printf("test\n");
 		}
 		
 		// reminder:
