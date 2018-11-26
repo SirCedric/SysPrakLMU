@@ -6,12 +6,8 @@
 #include <netdb.h>
 #include <errno.h>
 #include <arpa/inet.h>
+
 #include "config.h"
-
-
-#define GAMEKINDNAME "Checkers"
-#define PORTNUMBER "1357"
-#define HOSTNAME "sysprak.priv.lab.nm.ifi.lmu.de"
 
 int main(int argc, char* argv[]){
 
@@ -20,7 +16,9 @@ int main(int argc, char* argv[]){
     int sock;
     void *ptr;
     char addrstr[100];
-
+    
+    // auslesen von client.conf
+    struct parameters config = getConfig("client.conf");
 
     // Verarbeitung der Kommandozeilenparameter
     
@@ -70,7 +68,7 @@ int main(int argc, char* argv[]){
     hints.ai_protocol=0;
     hints.ai_flags=AI_ADDRCONFIG;
     struct addrinfo* res=0;
-    int err=getaddrinfo(HOSTNAME,PORTNUMBER,&hints,&res);
+    int err=getaddrinfo(config.hostName,config.portNr,&hints,&res);
     if (err!=0) {
         perror("getadrrinfo");
         return -1;
