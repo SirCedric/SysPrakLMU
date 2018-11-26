@@ -39,9 +39,7 @@ int main(int argc, char* argv[]){
     gameID = argv[2];
     playercount = atoi(argv[4]);
     
-    int i = 0;
-    for(i; *(argv[2] + i) != '\0'; i++){}
-    if(i != 14){
+    if(strlen(gameID) != 13){
       errno = 22;
       perror("GameID");
       return -1;
