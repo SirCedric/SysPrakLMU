@@ -5,66 +5,74 @@
 #include <errno.h>
 #include <string.h>
 
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <unistd.h>
+#include <signal.h>
+
 #include "config.h"
+
+void sendToServer(int socket, char* message){
+
+    strncpy(buf, "", sizeof(buf));
+    strcpy(buf, message);
+    
+    if (write(socket, buf, BUF_SIZE) < 0) {
+        perror("Fehler beim senden!");
+    }
+}
+
+char *readfromServer(int socket){
+    
+    
+    strncpy(buf, "", sizeof(buf));
+    
+    if (read(socket, buf, BUF_SIZE) < 0) {
+        perror("Fehler beim empfangen!");
+    }
+    strcpy(message, buf);
+    return message;
+}
+
 
 int performConnection(int socket, char* gameID){
     
-    char buf[BUF_SIZE];
-
-    ssize_t size;
-
-    if((size = recv(socket, buf, BUF_SIZE, 0)) < 0){
-        perror("ERROR recieving message!\n");
-        return -1;
-    }
-    printf("Server: %s\n", buf);
-
-
-    // buffer leeren und mit Version vorbereiten
-    strncpy(buf, "", sizeof(buf));
-    strcpy(buf, "VERSION 2.0\n");
-
-    if (send(socket, buf, BUF_SIZE, 0) < 0){
-        perror("ERROR writing to socket");
-        return -1;
+    // Wenn eine Verbindung zustande kommt wird die Version gesendet.
+    if(strncmp(readfromServer(socket), "+", 1) == 0){
+        
+        printf("Verbindung zum Server hergestellt\n");
+        sendToServer(socket, "VERSION 2.0\n");
     } else {
-        printf("Client: %s\n", buf);
+        perror("Fehler bei der Verbindung!");
+        return -1;
+    }
+
+    // Wenn die Version stimmt wird die Game ID gesendet.
+    if(strncmp(readfromServer(socket), "+", 1) == 0){
+        
+        printf("Version wurde akzeptiert.\n");
+        
+        // buffer leeren und mit Game ID vorbereiten
+        char id[BUF_SIZE];
+        strncpy(id, "", sizeof(buf));
+        strcpy(id, "ID ");
+        strcat(id, gameID);
+        strcat(id, "\n");
+        
+        sendToServer(socket, id);
+    } else {
+        perror("Fehler bei der Versionsnummer!");
+        return -1;
     }
 
 
-    // buffer leeren
-    strncpy(buf, "", sizeof(buf));
-    if((size = recv(socket, buf, BUF_SIZE, 0)) < 0){
-        perror("ERROR recieving message!\n");
-        return -1;
+    if(strncmp(readfromServer(socket), "+", 1) == 0){
+        printf("Game ID wurde akzepiert.\n");
     } else {
-        printf("Server: %s\n", buf);
-    }
-    
-
-    // buffer leeren und mit Game ID vorbereiten
-    strncpy(buf, "", sizeof(buf));
-    strcpy(buf, "ID ");
-    strcat(buf, gameID);
-    strcat(buf, "\n");
-    
-    if(send(socket, buf, BUF_SIZE, 0) < 0){
-        perror("ERROR sending message!\n");
+        perror("Game ID wurde nicht akzepiert!");
         return -1;
-    } else {
-        printf("Client: %s\n", buf);
     }
-    
-    
-    // buffer leeren
-    strncpy(buf, "", sizeof(buf));
-    if((size = recv(socket, buf, BUF_SIZE, 0)) < 0 ){
-        perror("ERROR recieving message!\n");
-        return -1;
-    } else {
-        printf("Server: %s\n", buf);
-    }
-    
 
 
 
