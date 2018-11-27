@@ -1,3 +1,6 @@
+#ifndef CONFIG
+#define CONFIG config
+#endif
 
 #define BUF_SIZE 500
 
