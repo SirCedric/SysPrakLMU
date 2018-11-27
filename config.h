@@ -1,6 +1,9 @@
 
 #define BUF_SIZE 500
 
+char buf[BUF_SIZE];
+char message[BUF_SIZE];
+
 struct parameters{
 	char hostName[BUF_SIZE];
 	char portNr[BUF_SIZE];
