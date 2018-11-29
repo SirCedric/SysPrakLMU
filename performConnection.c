@@ -13,9 +13,9 @@
 
 #include "config.h"
 
-void sendToServer(int socket, char* message){
+void sendToServer(int socket, char message[BUF_SIZE]){
 
-    strncpy(buf, "", sizeof(buf));
+    memset(buf, 0, BUF_SIZE);
     strcpy(buf, message);
     
     if (write(socket, buf, BUF_SIZE) < 0) {
@@ -25,8 +25,7 @@ void sendToServer(int socket, char* message){
 
 char *readfromServer(int socket){
     
-    
-    strncpy(buf, "", sizeof(buf));
+    memset(buf,0,BUF_SIZE);
     
     if (read(socket, buf, BUF_SIZE) < 0) {
         perror("Fehler beim empfangen!");
@@ -36,7 +35,9 @@ char *readfromServer(int socket){
 }
 
 
-int performConnection(int socket, char* gameID){
+int performConnection(int socket, char gameID[BUF_SIZE]){
+    
+    printf("GameID: %s", gameID);
     
     // Wenn eine Verbindung zustande kommt wird die Version gesendet.
     if(strncmp(readfromServer(socket), "+", 1) == 0){
@@ -53,14 +54,7 @@ int performConnection(int socket, char* gameID){
         
         printf("Version wurde akzeptiert.\n");
         
-        // buffer leeren und mit Game ID vorbereiten
-        char id[BUF_SIZE];
-        strncpy(id, "", sizeof(buf));
-        strcpy(id, "ID ");
-        strcat(id, gameID);
-        strcat(id, "\n");
-        
-        sendToServer(socket, id);
+        sendToServer(socket, gameID);
     } else {
         perror("Fehler bei der Versionsnummer!");
         return -1;

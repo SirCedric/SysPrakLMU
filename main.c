@@ -11,6 +11,8 @@
 
 int main(int argc, char* argv[]){
 
+    char gameID[BUF_SIZE];
+    
     int playercount;
     int sock;
     void *ptr;
@@ -39,9 +41,13 @@ int main(int argc, char* argv[]){
       perror("GameID");
       return -1;
     }
-
-    gameID = strcat(strcat("ID ", argv[2]), "\n");
     
+
+    strncpy(gameID, "", sizeof(buf));
+    strcpy(gameID, "ID ");
+    strcat(gameID, argv[2]);
+    strcat(gameID, "\n");
+        
     if(atoi(argv[4]) != 1 && atoi(argv[4]) != 2){
         errno = 22;
         perror("Playercount");
