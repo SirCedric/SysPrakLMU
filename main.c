@@ -34,21 +34,22 @@ int main(int argc, char* argv[]){
         return -1;
     }
 
-    gameID = argv[2];
-    playercount = atoi(argv[4]);
     
-    if(strlen(gameID) != 13){
+    if(strlen(argv[2]) != 13){
       errno = 22;
       perror("GameID");
       return -1;
     }
 
-    if(playercount != 1 && playercount != 2){
+    gameID = argv[2];
+    
+    if(argv[4] != 1 && argv[4] != 2){
         errno = 22;
         perror("Playercount");
         return -1;
     }
-
+    
+    playercount = argv[4];
 
 
     // Creates Socket IPv4
