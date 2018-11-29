@@ -41,7 +41,7 @@ int main(int argc, char* argv[]){
       return -1;
     }
 
-    gameID = argv[2];
+    gameID = strcat(strcat("ID ", argv[2]), "\n");
     
     if(argv[4] != 1 && argv[4] != 2){
         errno = 22;
