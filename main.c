@@ -49,7 +49,7 @@ int main(int argc, char* argv[]){
         return -1;
     }
     
-    playercount = argv[4];
+    playercount = atoi(argv[4]);
 
 
     // Creates Socket IPv4
