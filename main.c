@@ -94,7 +94,6 @@ int main(int argc, char* argv[]){
         perror("performConnection");
         return -1;
     }
-    printf("Prolog worked!\n");
 
     freeaddrinfo(res);
 
