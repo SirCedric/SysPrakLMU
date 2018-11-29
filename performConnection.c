@@ -85,6 +85,7 @@ int performConnection(int socket, char gameID[BUF_SIZE]){
     send(socket, gameID, 17, 0);
 
     // Antwort empfangen
+    memset(buf, 0, BUF_SIZE);
     recv(socket, buf, BUF_SIZE, 0);
     printf("%s", buf);
 
