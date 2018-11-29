@@ -13,21 +13,21 @@
 
 #include "config.h"
 
-void sendToServer(int socket, char message[BUF_SIZE]){
+void sendToServer(int *socket, char message[BUF_SIZE]){
 
     memset(buf, 0, BUF_SIZE);
     strcpy(buf, message);
     
-    if (write(socket, buf, BUF_SIZE) < 0) {
+    if (write(*socket, buf, BUF_SIZE) < 0) {
         perror("Fehler beim senden!");
     }
 }
 
-char *readfromServer(int socket){
+char *readfromServer(int *socket){
     
     memset(buf,0,BUF_SIZE);
     
-    if (read(socket, buf, BUF_SIZE) < 0) {
+    if (read(*socket, buf, BUF_SIZE) < 0) {
         perror("Fehler beim empfangen!");
     }
     printf("!!Server: %s\n", message);
@@ -36,7 +36,7 @@ char *readfromServer(int socket){
 }
 
 
-int performConnection(int socket, char gameID[BUF_SIZE]){
+int performConnection(int *socket, char gameID[BUF_SIZE]){
     
     printf("%s", gameID);
     
@@ -70,23 +70,23 @@ int performConnection(int socket, char gameID[BUF_SIZE]){
 //    }
     
     // erste Nachricht empfangen
-    recv(socket, buf, BUF_SIZE, 0);
+    recv(*socket, buf, BUF_SIZE, 0);
     printf("%s", buf);
     
     // Versionsnummer schicken
     char version[BUF_SIZE] = "VERSION 2.0\n";
-    send(socket, version, BUF_SIZE, 0);
+    send(*socket, version, BUF_SIZE, 0);
     
     // Antwort empfangen
-    recv(socket, buf, BUF_SIZE, 0);
+    recv(*socket, buf, BUF_SIZE, 0);
     printf("%s", buf);
 
     // Game ID senden
-    send(socket, gameID, 17, 0);
+    send(*socket, gameID, 17, 0);
 
     // Antwort empfangen
     memset(buf, 0, BUF_SIZE);
-    recv(socket, buf, BUF_SIZE, 0);
+    recv(*socket, buf, BUF_SIZE, 0);
     printf("%s", buf);
 
     return 0;
