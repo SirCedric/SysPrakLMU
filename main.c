@@ -11,7 +11,6 @@
 
 int main(int argc, char* argv[]){
 
-    char* gameID;
     int playercount;
     int sock;
     void *ptr;
