@@ -4,10 +4,14 @@
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
-
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <unistd.h>
+#include <signal.h>
+
+
+#include <netinet/in.h>
 #include <unistd.h>
 #include <signal.h>
 
@@ -74,16 +78,31 @@ int performConnection(int *socket, char gameID[BUF_SIZE]){
     printf("%s", buf);
     
     // Versionsnummer schicken
-    char version[BUF_SIZE] = "VERSION 2.0\n";
-    send(*socket, version, BUF_SIZE, 0);
+    send(*socket, "VERSION 2.0\n", 12, 0);
     
     // Antwort empfangen
     recv(*socket, buf, BUF_SIZE, 0);
     printf("%s", buf);
 
     // Game ID senden
-    send(*socket, gameID, 17, 0);
+    send(*socket, gameID, strlen(gameID), 0);
 
+    // Antwort empfangen
+    memset(buf, 0, BUF_SIZE);
+    recv(*socket, buf, BUF_SIZE, 0);
+    printf("%s", buf);
+    
+    
+    // Antwort empfangen
+    memset(buf, 0, BUF_SIZE);
+    recv(*socket, buf, BUF_SIZE, 0);
+    printf("%s", buf);
+    
+    // Spieler senden
+    memset(buf, 0, BUF_SIZE);
+    strcpy(buf, "PLAYER 1\n");
+    send(*socket, buf, strlen(buf), 0);
+    
     // Antwort empfangen
     memset(buf, 0, BUF_SIZE);
     recv(*socket, buf, BUF_SIZE, 0);

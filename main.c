@@ -6,6 +6,7 @@
 #include <netdb.h>
 #include <errno.h>
 #include <arpa/inet.h>
+#include <unistd.h>
 
 #include "config.h"
 
@@ -93,10 +94,9 @@ int main(int argc, char* argv[]){
         perror("performConnection");
         return -1;
     }
-    printf("Prolog worked!\n");
 
     freeaddrinfo(res);
-
+    close(sock);
 
 
     return 0;
