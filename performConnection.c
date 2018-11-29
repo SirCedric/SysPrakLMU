@@ -22,9 +22,10 @@ void sendToServer(int *socket, char message[BUF_SIZE]){
     memset(buf, 0, BUF_SIZE);
     strcpy(buf, message);
     
-    if (write(*socket, buf, BUF_SIZE) < 0) {
+    if (write(*socket, buf, strlen(buf)) < 0) {
         perror("Fehler beim senden!");
     }
+    printf("Client: %s", buf);
 }
 
 char *readfromServer(int *socket){
@@ -34,15 +35,13 @@ char *readfromServer(int *socket){
     if (read(*socket, buf, BUF_SIZE) < 0) {
         perror("Fehler beim empfangen!");
     }
-    printf("!!Server: %s\n", message);
+    printf("Server: %s", buf);
     strcpy(message, buf);
     return message;
 }
 
 
 int performConnection(int *socket, char gameID[BUF_SIZE]){
-    
-    printf("%s", gameID);
     
 //    // Wenn eine Verbindung zustande kommt wird die Version gesendet.
 //    if(strncmp(readfromServer(socket), "+", 1) == 0){
@@ -74,39 +73,31 @@ int performConnection(int *socket, char gameID[BUF_SIZE]){
 //    }
     
     // erste Nachricht empfangen
-    recv(*socket, buf, BUF_SIZE, 0);
-    printf("%s", buf);
+    readfromServer(socket);
     
     // Versionsnummer schicken
-    send(*socket, "VERSION 2.0\n", 12, 0);
+    sendToServer(socket, "VERSION 2.0\n");
     
     // Antwort empfangen
-    recv(*socket, buf, BUF_SIZE, 0);
-    printf("%s", buf);
+    readfromServer(socket);
 
     // Game ID senden
-    send(*socket, gameID, strlen(gameID), 0);
+    sendToServer(socket, gameID);
 
     // Antwort empfangen
-    memset(buf, 0, BUF_SIZE);
-    recv(*socket, buf, BUF_SIZE, 0);
-    printf("%s", buf);
-    
+    readfromServer(socket);
     
     // Antwort empfangen
-    memset(buf, 0, BUF_SIZE);
-    recv(*socket, buf, BUF_SIZE, 0);
-    printf("%s", buf);
+    readfromServer(socket);
     
     // Spieler senden
-    memset(buf, 0, BUF_SIZE);
-    strcpy(buf, "PLAYER 1\n");
-    send(*socket, buf, strlen(buf), 0);
+    sendToServer(socket, "PLAYER 0\n");
     
     // Antwort empfangen
-    memset(buf, 0, BUF_SIZE);
-    recv(*socket, buf, BUF_SIZE, 0);
-    printf("%s", buf);
+    readfromServer(socket);
+    
+    // Antwort empfangen
+    readfromServer(socket);
 
     return 0;
 }

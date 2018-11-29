@@ -2,7 +2,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 CC = clang
 
-GAME_ID?=0iu4bs2uyir1e
+GAME_ID?=1gazil12ewumo
 
 PLAYER?=1
 
