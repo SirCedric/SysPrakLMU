@@ -7,6 +7,7 @@
 #include <errno.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+#include <sys/wait.h>
 
 #include "config.h"
 
@@ -17,6 +18,8 @@ int main(int argc, char* argv[]){
     int sock;
     void *ptr;
     char addrstr[100];
+    int status;
+    pid_t pid;
     
     // auslesen von client.conf
     struct parameters config = getConfig("client.conf");
@@ -90,10 +93,34 @@ int main(int argc, char* argv[]){
     printf ("IPv%d address: %s\n", res->ai_family,
             addrstr);
 
-    if(performConnection(&sock, gameID) != 0){
-        perror("performConnection");
+
+    if((pid = fork()) < 0){
+        perror("Fehler bei fork()\n");
         return -1;
     }
+    else if (pid == 0){
+        printf("Connector: performConnection()\n");
+        if(performConnection(&sock, gameID) != 0){
+            perror("performConnection");
+            return -1;
+        }
+
+    }
+    else{
+        if (wait(&status) != pid){
+            perror("wait()\n");
+            return -1;
+        }
+        printf("Thinker!\nNothing to do here so far!\n");
+    }
+
+
+//
+//    if(performConnection(&sock, gameID) != 0){
+//        perror("performConnection");
+//        return -1;
+//    }
+
 
     freeaddrinfo(res);
     close(sock);
