@@ -8,19 +8,23 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <sys/shm.h>
+#include <sys/ipc.h>
+
 
 #include "config.h"
 
 int main(int argc, char* argv[]){
 
     char gameID[BUF_SIZE];
-    int playercount;
+    int playerCount;
     int sock;
     void *ptr;
     char addrstr[100];
     int status;
     pid_t pid;
-    
+    key_t key = IPC_PRIVATE;
+        
     // auslesen von client.conf
     struct parameters config = getConfig("client.conf");
 
@@ -53,11 +57,11 @@ int main(int argc, char* argv[]){
         
     if(atoi(argv[4]) != 1 && atoi(argv[4]) != 2){
         errno = 22;
-        perror("Playercount");
+        perror("playerCount");
         return -1;
     }
     
-    playercount = atoi(argv[4]);
+    playerCount = atoi(argv[4]);
 
 
     // Creates Socket IPv4
@@ -104,17 +108,66 @@ int main(int argc, char* argv[]){
             perror("performConnection");
             return -1;
         }
+        
+        struct shmData connectorData;
+        struct shmData *shmptr = malloc(sizeof(struct shmData));
+        
+        // bitte noch ändern!
+        strcpy(connectorData.gameName, "Checkers");
+        strcpy(connectorData.shmGameID, gameID);
+        connectorData.shmPlayerCount = playerCount;
 
+        int shmConnector;
+        
+        if((shmConnector = shmget(key, sizeof(struct shmData), IPC_CREAT | IPC_EXCL)) < 0){
+          perror("shmConnector");
+          return -1;
+        }
+        if((shmptr = (struct shmData*) shmat(key, 0, 0)) < 0){
+          perror("shmat");
+          return -1;
+        }
+        
+        // copy struct connectorData into shared memory
+        strcpy(shmptr->gameName, connectorData.gameName);
+        strcpy(shmptr->shmGameID, connectorData.shmGameID);
+        shmptr->shmPlayerCount = connectorData.shmPlayerCount;
+      
+        printf("Connector done!\n");
+        
+        
     }
     else{
         if (wait(&status) != pid){
             perror("wait()\n");
             return -1;
         }
-        printf("Thinker!\nNothing to do here so far!\n");
+        
+        struct shmData thinkerData;
+        struct shmData *shmptr = malloc(sizeof(struct shmData));
+        
+        int shmThinker;
+        
+        if((shmThinker = shmget(key, sizeof(struct shmData), 0)) < 0){
+          perror("shmThinker");
+          return -1;
+        }
+        if((shmptr = (struct shmData*) shmat(key, 0, 0)) < 0){
+          perror("shmat");
+          return -1;
+        }
+        
+        sleep(5);
+        printf("Thinker tries to get struct:\n");
+        // copy struct connectorData into shared memory
+        strcpy(thinkerData.gameName, shmptr->gameName);
+        strcpy(thinkerData.shmGameID, shmptr->gameName);
+        thinkerData.shmPlayerCount = shmptr->shmPlayerCount ;
+                
+        printf("Playercount: %i", thinkerData.shmPlayerCount);
     }
-
-
+    
+    
 //
 //    if(performConnection(&sock, gameID) != 0){
 //        perror("performConnection");
