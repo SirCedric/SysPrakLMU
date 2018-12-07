@@ -10,6 +10,7 @@
 #include <sys/wait.h>
 #include <sys/shm.h>
 #include <sys/ipc.h>
+#include <time.h>
 
 
 #include "config.h"
@@ -23,8 +24,10 @@ int main(int argc, char* argv[]){
     char addrstr[100];
     int status;
     pid_t pid;
-    key_t key = IPC_PRIVATE;
-        
+
+    srand(time(NULL));
+    key_t key = rand();
+
     // auslesen von client.conf
     struct parameters config = getConfig("client.conf");
 
@@ -42,25 +45,25 @@ int main(int argc, char* argv[]){
         return -1;
     }
 
-    
+
     if(strlen(argv[2]) != 13){
       errno = 22;
       perror("GameID");
       return -1;
     }
-    
+
 
     strncpy(gameID, "", sizeof(buf));
     strcpy(gameID, "ID ");
     strcat(gameID, argv[2]);
     strcat(gameID, "\n");
-        
+
     if(atoi(argv[4]) != 1 && atoi(argv[4]) != 2){
         errno = 22;
         perror("playerCount");
         return -1;
     }
-    
+
     playerCount = atoi(argv[4]);
 
 
@@ -108,66 +111,70 @@ int main(int argc, char* argv[]){
             perror("performConnection");
             return -1;
         }
-        
-        struct shmData connectorData;
-        struct shmData *shmptr = malloc(sizeof(struct shmData));
-        
-        // bitte noch ändern!
-        strcpy(connectorData.gameName, "Checkers");
-        strcpy(connectorData.shmGameID, gameID);
-        connectorData.shmPlayerCount = playerCount;
 
-        int shmConnector;
-        
-        if((shmConnector = shmget(key, sizeof(struct shmData), IPC_CREAT | IPC_EXCL)) < 0){
-          perror("shmConnector");
+        struct shmData *ptr, *gameData;
+        int shmID;
+
+
+        if((shmID = shmget(key, sizeof(struct shmData), IPC_CREAT | 0666)) < 0){
+          perror("child shmget");
           return -1;
         }
-        if((shmptr = (struct shmData*) shmat(key, 0, 0)) < 0){
-          perror("shmat");
+
+        if((ptr = (struct shmData*) shmat(shmID, NULL, 0)) == (struct shmData*) -1){
+          perror("child shmat");
           return -1;
         }
-        
-        // copy struct connectorData into shared memory
-        strcpy(shmptr->gameName, connectorData.gameName);
-        strcpy(shmptr->shmGameID, connectorData.shmGameID);
-        shmptr->shmPlayerCount = connectorData.shmPlayerCount;
-      
-        printf("Connector done!\n");
-        
-        
+
+        gameData = ptr;
+
+
+        gameData->childID = getpid();
+        gameData->parentID = getppid();
+        strcpy(gameData->gameName, "Checkers");
+        strcpy(gameData->gameID, "Hoi");
+        gameData -> playerCount = 0;
+
+
+
+        printf("Connector: Process ID = %i. Parent ID = %i\n", gameData -> childID, gameData -> parentID);
+        printf("Connector: GameName = %s. GameID = %s. Playercount = %i.\n", gameData -> gameName, gameData -> gameID, gameData -> playerCount);
+
+
     }
     else{
         if (wait(&status) != pid){
             perror("wait()\n");
             return -1;
         }
-        
-        struct shmData thinkerData;
-        struct shmData *shmptr = malloc(sizeof(struct shmData));
-        
-        int shmThinker;
-        
-        if((shmThinker = shmget(key, sizeof(struct shmData), 0)) < 0){
-          perror("shmThinker");
+
+        struct shmData *ptr, *gameData;
+        int shmID;
+
+
+        int count = 0;
+        while((shmID = shmget(key, sizeof(struct shmData), 0)) < 0){
+          if(count > 5){
+            perror("parent shmget");
+            return -1;
+          }
+          count++;
+          usleep(10);
+        }
+
+        if((ptr = (struct shmData*) shmat(shmID, NULL, 0)) == (struct shmData*) -1){
+          perror("parent shmat");
           return -1;
         }
-        if((shmptr = (struct shmData*) shmat(key, 0, 0)) < 0){
-          perror("shmat");
-          return -1;
-        }
-        
-        sleep(5);
-        printf("Thinker tries to get struct:\n");
-        // copy struct connectorData into shared memory
-        strcpy(thinkerData.gameName, shmptr->gameName);
-        strcpy(thinkerData.shmGameID, shmptr->gameName);
-        thinkerData.shmPlayerCount = shmptr->shmPlayerCount ;
-                
-        printf("Playercount: %i", thinkerData.shmPlayerCount);
+
+        gameData = ptr;
+
+
+        printf("Thinker: Process ID = %i. Parent ID = %i\n", gameData -> parentID, gameData -> childID);
+        printf("Thinker: GameName = %s. GameID = %s. Playercount = %i.\n", gameData -> gameName, gameData -> gameID, gameData -> playerCount);
     }
-    
-    
+
+
 //
 //    if(performConnection(&sock, gameID) != 0){
 //        perror("performConnection");

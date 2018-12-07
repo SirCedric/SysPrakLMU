@@ -13,21 +13,24 @@ struct parameters{
 	char gameType[BUF_SIZE];
 };
 
-struct shmData{
-	char gameName[BUF_SIZE];
-	char shmGameID[BUF_SIZE];
-	int shmPlayerCount;
-	pid_t thinkerID;
-	pid_t connectorID;
-//	struct player spieler;
-};
-
-struct player {
+struct player{
 		char name[BUF_SIZE];
 		int num;
 		int ready;
 		int registered;
 };
+
+
+struct shmData{
+	char gameName[BUF_SIZE];
+	char gameID[BUF_SIZE];
+	int playerCount;
+	pid_t childID;
+	pid_t parentID;
+	struct player playerData;
+};
+
+
 
 struct parameters getConfig(char filename[BUF_SIZE]);
 
