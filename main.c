@@ -24,6 +24,9 @@ int main(int argc, char* argv[]){
     char addrstr[100];
     int status;
     pid_t pid;
+    
+    int fd[2];
+    pipe(fd);
 
     srand(time(NULL));
     key_t key = rand();
@@ -105,7 +108,11 @@ int main(int argc, char* argv[]){
         perror("Fehler bei fork()\n");
         return -1;
     }
-    else if (pid == 0){
+    else if (pid == 0){ //Kindprozess
+
+        // Schreibseite der pipe schließen
+        close(fd[1]);        
+
         printf("Connector: performConnection()\n");
         if(performConnection(&sock, gameID) != 0){
             perror("performConnection");
@@ -142,7 +149,11 @@ int main(int argc, char* argv[]){
 
 
     }
-    else{
+    else{ // Elterprozess
+
+        // Leseseite der pipe schließen
+        close(fd[1]);        
+
         if (wait(&status) != pid){
             perror("wait()\n");
             return -1;
