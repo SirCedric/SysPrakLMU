@@ -132,8 +132,8 @@ int main(int argc, char* argv[]){
         gameData->childID = getpid();
         gameData->parentID = getppid();
         strcpy(gameData->gameName, "Checkers");
-        strcpy(gameData->gameID, "Hoi");
-        gameData -> playerCount = 0;
+        strcpy(gameData->gameID, gameID);
+        gameData -> playerCount = playerCount;
 
 
 
