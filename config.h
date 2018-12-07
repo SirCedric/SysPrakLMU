@@ -35,3 +35,4 @@ struct shmData{
 struct parameters getConfig(char filename[BUF_SIZE]);
 
 int performConnection(int *socket, char gameID[BUF_SIZE]);
+
