@@ -146,7 +146,9 @@ int main(int argc, char* argv[]){
 
         printf("Connector: Process ID = %i. Parent ID = %i\n", gameData -> childID, gameData -> parentID);
         printf("Connector: GameName = %s. GameID = %s. Playercount = %i.\n", gameData -> gameName, gameData -> gameID, gameData -> playerCount);
-
+        
+        // conection method to react to server commands
+        connector(&sock);
 
     }
     else{ // Elterprozess

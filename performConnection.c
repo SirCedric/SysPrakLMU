@@ -18,14 +18,14 @@
 
 #include "config.h"
 
-void sendToServer(int *socket, char message[BUF_SIZE]){
+void sendToServer(int *socket, char message[BUF_SIZE], bool print){
 
     memset(buf, 0, BUF_SIZE);
     strcpy(buf, message);
     
     if (write(*socket, buf, strlen(buf)) < 0) {
         perror("Fehler beim senden!");
-    } else {
+    } else if (print == true){
         printf("Client: %s", buf);
     }
     
@@ -84,64 +84,68 @@ void printBoard(char *board){
     printf("   A B C D E F G H\n");
 }
 
+void connector(int *socket){
+    readfromServer(socket, false);
+
+    if(strncmp(message, "+ WAIT", 6) == 0){
+
+        sendToServer(socket, "OKWAIT\n", false);
+
+        printf("Server sent WAIT message\n");
+    }
+
+    if(strncmp(message, "+ GAMEOVER", 10) == 0){
+        
+        printf("Server sent GAMEOVER message\n");
+
+    } else {
+        connector(socket);
+    }
+}
 
 int performConnection(int *socket, char gameID[BUF_SIZE]){
     
-//    // Wenn eine Verbindung zustande kommt wird die Version gesendet.
-//    if(strncmp(readfromServer(socket), "+", 1) == 0){
-//        
-//        printf("Verbindung zum Server hergestellt\n");
-//        sendToServer(socket, "VERSION 2.0\n");
-//    } else {
-//        perror("Fehler bei der Verbindung!");
-//        return -1;
-//    }
-//
-//    // Wenn die Version stimmt wird die Game ID gesendet.
-//    if(strncmp(readfromServer(socket), "+", 1) == 0){
-//        
-//        printf("Version wurde akzeptiert.\n");
-//        
-//        sendToServer(socket, gameID);
-//    } else {
-//        perror("Fehler bei der Versionsnummer!");
-//        return -1;
-//    }
-//
-//    
-//    if(strncmp(readfromServer(socket), "+", 1) == 0){
-//        printf("Game ID wurde akzepiert.\n");
-//    } else {
-//        perror("Game ID wurde nicht akzepiert!");
-//        return -1;
-//    }
-    
-    // erste Nachricht empfangen
-    readfromServer(socket, true);
-    
-    // Versionsnummer schicken
-    sendToServer(socket, "VERSION 2.0\n");
-    
-    // Antwort empfangen
-    readfromServer(socket, true);
-    // Game ID senden
-    sendToServer(socket, gameID);
+    // Wenn eine Verbindung zustande kommt wird die Version gesendet.
+    if(strncmp(readfromServer(socket, false), "+", 1) == 0){
+        
+        printf("Verbindung zum Server hergestellt\n");
+        sendToServer(socket, "VERSION 2.0\n", false);
+    } else {
+        perror("Fehler bei der Verbindung!");
+        return -1;
+    }
 
-    // Antwort empfangen
-    readfromServer(socket, true);
+    // Wenn die Version stimmt wird die Game ID gesendet.
+    if(strncmp(readfromServer(socket, false), "+", 1) == 0){
+        
+        printf("Version wurde akzeptiert.\n");
+        
+        sendToServer(socket, gameID, false);
+    } else {
+        perror("Fehler bei der Versionsnummer!");
+        return -1;
+    }
+
+    // Wenn die Game ID akzeptiert wird Spieleranzahl schicken.
+    if(strncmp(readfromServer(socket, false), "+", 1) == 0){
+        printf("Game ID wurde akzepiert.\n");
+
+        sendToServer(socket, "PLAYER 0\n", false);
+
+    } else {
+        perror("Game ID wurde nicht akzepiert!");
+        return -1;
+    }
     
-    // Antwort empfangen
-    readfromServer(socket, true);
     
-    // Spieler senden
-    sendToServer(socket, "PLAYER 0\n");
+    // Wenn die Spieleranzahl korrekt ist Board ausgeben.
+
+    if(strncmp(readfromServer(socket, false), "+", 1) == 0){
+        char *board = readfromServer(socket, false);
+        printBoard(board);
+    }
     
-    // Antwort empfangen
-    readfromServer(socket, true);
     
-    
-    char *board = readfromServer(socket, false);
-    printBoard(board);
 
     return 0;
 }
