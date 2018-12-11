@@ -76,7 +76,15 @@ void printBoard(char *board){
     for (int i = 0; i < 8; i++) {
         printf("%i| ", (8-i));
         for (int j = 0; j < 8; j++) {
-            printf("%c ", boardArray[i][j]);
+            if (boardArray[i][j] == 'b'){
+                printf("%lc", 9899);
+            }
+            else if (boardArray[i][j] == 'w'){
+                printf("%lc",9898); 
+            }
+            else {
+                printf("  ");
+            }
         }
         printf("|\n");
     }

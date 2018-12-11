@@ -11,7 +11,7 @@
 #include <sys/shm.h>
 #include <sys/ipc.h>
 #include <time.h>
-
+#include <locale.h>
 
 #include "config.h"
 
@@ -30,6 +30,10 @@ int main(int argc, char* argv[]){
 
     srand(time(NULL));
     key_t key = rand();
+
+    // setzt, die Formatausgabe so, dass wir nachher 
+    // Unicode Symbole verwednen können.
+    setlocale(LC_ALL, "en_US.UTF-8");	
 
     // auslesen von client.conf
     struct parameters config = getConfig("client.conf");
