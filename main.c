@@ -154,6 +154,9 @@ int main(int argc, char* argv[]){
         // conection method to react to server commands
         connector(&sock);
 
+        // remove shm segment
+        shmctl(gameData -> childID, IPC_RMID , 0);
+
     }
     else{ // Elterprozess
 
