@@ -154,11 +154,10 @@ int main(int argc, char* argv[]){
         // conection method to react to server commands
         connector(&sock);
 
-        // remove shm segment
-        shmctl(gameData -> childID, IPC_RMID , 0);
 
     }
     else{ // Elterprozess
+        
 
         // Leseseite der pipe schließen
         close(fd[1]);        
@@ -192,6 +191,10 @@ int main(int argc, char* argv[]){
 
         printf("Thinker: Process ID = %i. Parent ID = %i\n", gameData -> parentID, gameData -> childID);
         printf("Thinker: GameName = %s. GameID = %s. Playercount = %i.\n", gameData -> gameName, gameData -> gameID, gameData -> playerCount);
+
+        // remove shm segment
+        shmctl(shmID, IPC_RMID , 0);
+
     }
 
 
