@@ -77,16 +77,16 @@ void printBoard(char *board){
         printf("%i|", (8-i));
         for (int j = 0; j < 8; j++) {
             if (boardArray[i][j] == 'b'){ // black man
-                printf("%lc", 9899);
+                printf("\u26c0 ");
             }
             else if (boardArray[i][j] == 'B'){ // black king
-                printf("%lc", 9899);
+                printf("\u26c1 ");
             }
             else if (boardArray[i][j] == 'w'){ // white man
-                printf("%lc", 9898); 
+                printf("\u26c2 ");
             }
-            else if (boardArray[i][j] == 'w'){ // white king
-                printf("%lc", 9898); 
+            else if (boardArray[i][j] == 'W'){ // white king
+                printf("\u26c3 ");
             }
             else {
                 if(i % 2 == 0){
