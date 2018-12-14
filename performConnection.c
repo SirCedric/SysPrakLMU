@@ -72,37 +72,66 @@ void printBoard(char *board){
     }
     
     // print board array
-    printf(" +-----------------+\n");
+    printf(" +----------------+\n");
     for (int i = 0; i < 8; i++) {
-        printf("%i| ", (8-i));
+        printf("%i|", (8-i));
         for (int j = 0; j < 8; j++) {
-            if (boardArray[i][j] == 'b'){
+            if (boardArray[i][j] == 'b'){ // black man
                 printf("%lc", 9899);
             }
-            else if (boardArray[i][j] == 'w'){
-                printf("%lc",9898); 
+            else if (boardArray[i][j] == 'B'){ // black king
+                printf("%lc", 9899);
+            }
+            else if (boardArray[i][j] == 'w'){ // white man
+                printf("%lc", 9898); 
+            }
+            else if (boardArray[i][j] == 'w'){ // white king
+                printf("%lc", 9898); 
             }
             else {
-                printf("  ");
+                if(i % 2 == 0){
+                    if (j % 2 == 0){
+                        // white field
+                        printf("--");
+                    }
+                    else {
+                        // black field
+                        printf("**");
+                    }
+                }
+                else {
+                    if (j % 2 == 0){
+                        // black field
+                        printf("**");
+                    }
+                    else {
+                        // white field
+                        printf("--");
+                    }
+                }   
             }
         }
         printf("|\n");
     }
-    printf(" +-----------------+\n");
-    printf("   A B C D E F G H\n");
+    printf(" +----------------+\n");
+    printf("  A B C D E F G H\n");
 }
 
 void connector(int *socket){
-    readfromServer(socket, false);
 
-    if(strncmp(message, "+ WAIT", 6) == 0){
+
+    if(strncmp(readfromServer(socket, false), "+ WAIT", 6) == 0){
 
         sendToServer(socket, "OKWAIT\n", false);
-
         printf("Server sent WAIT message\n");
-    }
 
-    if(strncmp(message, "+ GAMEOVER", 10) == 0){
+    }
+    else if(strncmp(message, "-", 1) == 0){
+
+        printf("!Server: %s", message);
+
+    }
+    else if(strncmp(message, "+ GAMEOVER", 10) == 0){
         
         printf("Server sent GAMEOVER message\n");
 
@@ -118,7 +147,9 @@ int performConnection(int *socket, char gameID[BUF_SIZE]){
         
         printf("Verbindung zum Server hergestellt\n");
         sendToServer(socket, "VERSION 2.0\n", false);
+
     } else {
+    
         perror("Fehler bei der Verbindung!");
         return -1;
     }
@@ -127,17 +158,17 @@ int performConnection(int *socket, char gameID[BUF_SIZE]){
     if(strncmp(readfromServer(socket, false), "+", 1) == 0){
         
         printf("Version wurde akzeptiert.\n");
-        
         sendToServer(socket, gameID, false);
     } else {
+
         perror("Fehler bei der Versionsnummer!");
         return -1;
     }
 
     // Wenn die Game ID akzeptiert wird Spieleranzahl schicken.
     if(strncmp(readfromServer(socket, false), "+", 1) == 0){
-        printf("Game ID wurde akzepiert.\n");
 
+        printf("Game ID wurde akzepiert.\n");
         sendToServer(socket, "PLAYER 0\n", false);
 
     } else {
@@ -153,7 +184,9 @@ int performConnection(int *socket, char gameID[BUF_SIZE]){
         printBoard(board);
     }
     
-    
 
-    return 0;
+   sendToServer(socket, "THINKING\n", true);
+   readfromServer(socket, true);
+
+   return 0;
 }
