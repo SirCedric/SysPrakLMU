@@ -30,6 +30,7 @@ struct shmData{
 	pid_t childID;
 	pid_t parentID;
 	struct player playerData;
+	int sem;
 };
 
 
