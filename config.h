@@ -24,13 +24,13 @@ struct player{
 
 
 struct shmData{
+	int sem;
 	char gameName[BUF_SIZE];
 	char gameID[BUF_SIZE];
 	int playerCount;
 	pid_t childID;
 	pid_t parentID;
 	struct player playerData;
-	int sem;
 };
 
 
