@@ -153,7 +153,7 @@ int main(int argc, char* argv[]){
 
         // conection method to react to server commands
         connector(&sock);
-
+        shmdt(ptr);
 
     }
     else{ // Elterprozess
@@ -184,7 +184,8 @@ int main(int argc, char* argv[]){
             return -1;
         }
 
-        printf("%i", playerCount);
+        shmdt(ptr);
+        shmctl(shmID, IPC_RMID, 0);
 
     }
 
