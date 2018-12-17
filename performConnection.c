@@ -18,14 +18,14 @@
 
 #include "config.h"
 
-void sendToServer(int *socket, char message[BUF_SIZE]){
+void sendToServer(int *socket, char message[BUF_SIZE], bool print){
 
     memset(buf, 0, BUF_SIZE);
     strcpy(buf, message);
     
     if (write(*socket, buf, strlen(buf)) < 0) {
         perror("Fehler beim senden!");
-    } else {
+    } else if (print == true){
         printf("Client: %s", buf);
     }
     
@@ -72,18 +72,73 @@ void printBoard(char *board){
     }
     
     // print board array
-    printf(" +-----------------+\n");
+    printf(" +----------------+\n");
     for (int i = 0; i < 8; i++) {
-        printf("%i| ", (8-i));
+        printf("%i|", (8-i));
         for (int j = 0; j < 8; j++) {
-            printf("%c ", boardArray[i][j]);
+            if (boardArray[i][j] == 'b'){ // black man
+                printf("\u26c0 ");
+            }
+            else if (boardArray[i][j] == 'B'){ // black king
+                printf("\u26c1 ");
+            }
+            else if (boardArray[i][j] == 'w'){ // white man
+                printf("\u26c2 ");
+            }
+            else if (boardArray[i][j] == 'W'){ // white king
+                printf("\u26c3 ");
+            }
+            else {
+                if(i % 2 == 0){
+                    if (j % 2 == 0){
+                        // white field
+                        printf("--");
+                    }
+                    else {
+                        // black field
+                        printf("**");
+                    }
+                }
+                else {
+                    if (j % 2 == 0){
+                        // black field
+                        printf("**");
+                    }
+                    else {
+                        // white field
+                        printf("--");
+                    }
+                }   
+            }
         }
         printf("|\n");
     }
-    printf(" +-----------------+\n");
-    printf("   A B C D E F G H\n");
+    printf(" +----------------+\n");
+    printf("  A B C D E F G H\n");
 }
 
+void connector(int *socket){
+
+
+    if(strncmp(readfromServer(socket, false), "+ WAIT", 6) == 0){
+
+        sendToServer(socket, "OKWAIT\n", false);
+        printf("Server sent WAIT message\n");
+
+    }
+    else if(strncmp(message, "-", 1) == 0){
+
+        printf("!Server: %s", message);
+
+    }
+    else if(strncmp(message, "+ GAMEOVER", 10) == 0){
+        
+        printf("Server sent GAMEOVER message\n");
+
+    } else {
+        connector(socket);
+    }
+}
 
 int performConnection(int *socket, char gameID[BUF_SIZE]){
 
@@ -143,9 +198,6 @@ do{
         if (strncmp(word, "+ ENDBOARD", 10) == 0 && gameover) {
 
         }
-        //if(strncmp(token, ) == 0){
-        //
-        //}
         if (strncmp(word, "- No free player", 16) == 0) {
             printf("Es ist ein Fehler aufgetreten: Kein freier Spieler!\n");
         }
@@ -157,5 +209,5 @@ do{
 }while(strncmp(word, "+ QUIT", 6) != 0);
 printf("Exit while()\n");
 
-    return 0;
+   return 0;
 }

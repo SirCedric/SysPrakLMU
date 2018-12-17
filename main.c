@@ -11,7 +11,7 @@
 #include <sys/shm.h>
 #include <sys/ipc.h>
 #include <time.h>
-
+#include <locale.h>
 
 #include "config.h"
 
@@ -24,12 +24,20 @@ int main(int argc, char* argv[]){
     char addrstr[100];
     int status;
     pid_t pid;
-    
+
     int fd[2];
     pipe(fd);
 
     srand(time(NULL));
-    //key_t key = rand();
+    key_t key = rand();
+
+    int shmID;
+    key_t key = IPC_PRIVATE;
+
+
+    // setzt, die Formatausgabe so, dass wir nachher
+    // Unicode Symbole verwednen können.
+    setlocale(LC_ALL, "en_US.UTF-8");
 
     // auslesen von client.conf
     struct parameters config = getConfig("client.conf");
@@ -108,108 +116,66 @@ int main(int argc, char* argv[]){
             addrstr);
 
 
+
+    if((shmID = shmget(key, sizeof(struct shmData), IPC_CREAT | 0666)) < 0){
+        perror("shmget");
+        return -1;
+    }
+
     if((pid = fork()) < 0){
         perror("Fehler bei fork()\n");
         return -1;
     }
     else if (pid == 0){ //Kindprozess
 
+        struct shmData *gameData, *ptr;
+
+        if((ptr = (struct shmData*) shmat(shmID, 0, 0)) == (struct shmData*) -1){
+          perror("shmat child");
+          return -1;
+        }
+
+        gameData = ptr;
+
+        strcpy(gameData->gameID, gameID);
+        strcpy(gameData->gameName, "Checkers");
+        gameData->playerCount = playerCount;
+        gameData->childID = getpid();
+        gameData->parentID = getppid();
+
+        // Nun dürfen die Daten vom Elternprozess gelesen werden.
+        gameData->sem = 1;
+
         // Schreibseite der pipe schließen
         close(fd[1]);
-
-
 
         printf("Connector: performConnection()\n");
         if(performConnection(&sock, gameID) != 0){
             perror("performConnection(): ");
         }
 
-        /*
-        struct shmData *ptr, *gameData;
-        int shmID;
-
-
-        if((shmID = shmget(key, sizeof(struct shmData), IPC_CREAT | 0666)) < 0){
-          perror("child shmget");
-          return -1;
-        }
-
-        if((ptr = (struct shmData*) shmat(shmID, NULL, 0)) == (struct shmData*) -1){
-          perror("child shmat");
-          return -1;
-        }
-
-        gameData = ptr;
-
-
-        gameData->childID = getpid();
-        gameData->parentID = getppid();
-        strcpy(gameData->gameName, "Checkers");
-        strcpy(gameData->gameID, gameID);
-        strcpy(gameData->playerCount, playerCount);
-
-
-
-        printf("Connector: Process ID = %i. Parent ID = %i\n", gameData -> childID, gameData -> parentID);
-        printf("Connector: GameName = %s. GameID = %s. Playercount = %s.\n", gameData -> gameName, gameData -> gameID, gameData -> playerCount);
-
-        //printf("Connector: protocol()\n");
-        //if(protocol(&sock) != 0){
-        //    perror("protocol()");
-        //    return -1;
-        //}
-
-
-        shmdt(ptr);
-         */
 
     }
     else{ // Elterprozess
+      printf("Parent process reading shmData.\n");
+      printf("ParentID: %i, ChildID: %i\n", gameData->parentID, gameData->childID);
+      printf("GameName: %s, gameID: %s, playerCount: %i", gameData -> gameName, gameData -> gameID, gameData->playerCount);
+
+      gameData->sem = 0;
+
 
         // Leseseite der pipe schließen
-        close(fd[1]);        
+        close(fd[1]);
 
         if (wait(&status) != pid){
             perror("wait()");
             return -1;
         }
 
-        /*
-        struct shmData *ptr, *gameData;
-        int shmID;
-
-
-        int count = 0;
-        while((shmID = shmget(key, sizeof(struct shmData), 0)) < 0){
-          if(count > 5){
-            perror("parent shmget");
-            return -1;
-          }
-          count++;
-          usleep(10);
-        }
-
-        if((ptr = (struct shmData*) shmat(shmID, NULL, 0)) == (struct shmData*) -1){
-          perror("parent shmat");
-          return -1;
-        }
-
-        gameData = ptr;
-
-
-        printf("Thinker: Process ID = %i. Parent ID = %i\n", gameData -> parentID, gameData -> childID);
-        printf("Thinker: GameName = %s. GameID = %s. Playercount = %s.\n", gameData -> gameName, gameData -> gameID, gameData -> playerCount);
-
         shmdt(ptr);
-         */
+        shmctl(shmID, IPC_RMID, 0);
+
     }
-
-
-//
-//    if(performConnection(&sock, gameID) != 0){
-//        perror("performConnection");
-//        return -1;
-//    }
 
 
     freeaddrinfo(res);
