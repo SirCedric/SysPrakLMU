@@ -34,83 +34,8 @@ int main(int argc, char* argv[]){
 
     // setzt, die Formatausgabe so, dass wir nachher
     // Unicode Symbole verwednen können.
+    // (möglicherweise unnötig, muss nochmal testen -max)
     setlocale(LC_ALL, "en_US.UTF-8");
-
-    // auslesen von client.conf
-    struct parameters config = getConfig("client.conf");
-
-
-    // Verarbeitung der Kommandozeilenparameter
-    if(argc != 5){
-        errno = 22;
-        perror("argc");
-        return -1;
-    }
-
-    if(strcmp(argv[1], "-g") != 0 || strcmp(argv[3], "-p") != 0){
-        errno = 22;
-        perror("Flags");
-        return -1;
-    }
-
-
-    if(strlen(argv[2]) != 13){
-      errno = 22;
-      perror("GameID");
-      return -1;
-    }
-
-
-    strncpy(gameID, "", sizeof(buf));
-    strcpy(gameID, "ID ");
-    strcat(gameID, argv[2]);
-    strcat(gameID, "\n");
-
-    if(atoi(argv[4]) != 1 && atoi(argv[4]) != 2){
-        errno = 22;
-        perror("playerCount");
-        return -1;
-    }
-
-    strncpy(playerCount, "", sizeof(buf));
-    strcpy(playerCount, "PLAYER ");
-    strcat(playerCount, argv[4]);
-    strcat(playerCount, "\n");
-
-
-
-    // Creates Socket IPv4
-    sock = socket(AF_INET, SOCK_STREAM, 0);
-    if(sock < 0) {
-        errno = 1;
-        perror("socket");
-        return -1;
-    }
-
-
-    // connect to server with getaddrinfo
-    struct addrinfo hints;
-    memset(&hints,0,sizeof(hints));
-    hints.ai_family=AF_INET;
-    hints.ai_socktype=SOCK_STREAM;
-    hints.ai_protocol=0;
-    hints.ai_flags=AI_ADDRCONFIG;
-    struct addrinfo* res=0;
-    int err=getaddrinfo(config.hostName,config.portNr,&hints,&res);
-    if (err!=0) {
-        perror("getadrrinfo");
-        return -1;
-    }
-
-
-    if(connect(sock, res->ai_addr, res->ai_addrlen) < 0){
-        perror("connect");
-        return -1;
-    }
-    ptr = &((struct sockaddr_in *) res->ai_addr)->sin_addr;
-    inet_ntop (res->ai_family, ptr, addrstr, 100);
-    printf ("IPv%d address: %s\n", res->ai_family,
-            addrstr);
 
 
 
@@ -119,11 +44,94 @@ int main(int argc, char* argv[]){
         return -1;
     }
 
+    
+
+////////// Split into Connector and Thinker Process ///////////
     if((pid = fork()) < 0){
         perror("Fehler bei fork()\n");
         return -1;
     }
     else if (pid == 0){ //Kindprozess
+
+////////// auslesen von client.conf /////////
+        struct parameters config = getConfig("client.conf");
+
+
+////////// Verarbeitung der Kommandozeilenparameter /////////
+        if(argc != 5){
+            errno = 22;
+            perror("argc");
+            return -1;
+        }
+
+        if(strcmp(argv[1], "-g") != 0 || strcmp(argv[3], "-p") != 0){
+            errno = 22;
+            perror("Flags");
+            return -1;
+        }
+
+
+        if(strlen(argv[2]) != 13){
+          errno = 22;
+          perror("GameID");
+          return -1;
+        }
+
+
+        strncpy(gameID, "", sizeof(buf));
+        strcpy(gameID, "ID ");
+        strcat(gameID, argv[2]);
+        strcat(gameID, "\n");
+
+        if(atoi(argv[4]) != 1 && atoi(argv[4]) != 2){
+            errno = 22;
+            perror("playerCount");
+            return -1;
+        }
+
+        strncpy(playerCount, "", sizeof(buf));
+        strcpy(playerCount, "PLAYER ");
+        strcat(playerCount, argv[4]);
+        strcat(playerCount, "\n");
+
+
+////////// Connect to server ////////// 
+
+        // Creates Socket IPv4
+        sock = socket(AF_INET, SOCK_STREAM, 0);
+        if(sock < 0) {
+            errno = 1;
+            perror("socket");
+            return -1;
+        }
+
+
+        // connect to server with getaddrinfo
+        struct addrinfo hints;
+        memset(&hints,0,sizeof(hints));
+        hints.ai_family=AF_INET;
+        hints.ai_socktype=SOCK_STREAM;
+        hints.ai_protocol=0;
+        hints.ai_flags=AI_ADDRCONFIG;
+        struct addrinfo* res=0;
+        int err=getaddrinfo(config.hostName,config.portNr,&hints,&res);
+        if (err!=0) {
+            perror("getadrrinfo");
+            return -1;
+        }
+
+
+        if(connect(sock, res->ai_addr, res->ai_addrlen) < 0){
+            perror("connect");
+            return -1;
+        }
+        ptr = &((struct sockaddr_in *) res->ai_addr)->sin_addr;
+        inet_ntop (res->ai_family, ptr, addrstr, 100);
+        printf ("IPv%d address: %s\n", res->ai_family,
+            addrstr);
+
+
+////////// Create shared memory //////////
 
         struct shmData *gameData, *ptr;
 
@@ -151,6 +159,8 @@ int main(int argc, char* argv[]){
             perror("performConnection(): ");
         }
 
+        freeaddrinfo(res);
+        close(sock);
 
     }
     else{ // Elterprozess
@@ -166,12 +176,12 @@ int main(int argc, char* argv[]){
 
         while(!gameData->sem) usleep(100);
 
-      printf("Parent process reading shmData.\n");
-      printf("ParentID: %i, ChildID: %i\n", gameData->parentID, gameData->childID);
-      printf("GameName: %s, gameID: %s, playerCount: %s", gameData -> gameName, gameData -> gameID, gameData->playerCount);
+        printf("Parent process reading shmData.\n");
+        printf("ParentID: %i, ChildID: %i\n", gameData->parentID, gameData->childID);
+        printf("GameName: %s, gameID: %s, playerCount: %s", gameData -> gameName, gameData -> gameID, gameData->playerCount);
 
 
-      gameData->sem = 0;
+        gameData->sem = 0;
 
         // Leseseite der pipe schließen
         close(fd[1]);
@@ -185,11 +195,6 @@ int main(int argc, char* argv[]){
         shmctl(shmID, IPC_RMID, 0);
 
     }
-
-
-    freeaddrinfo(res);
-    close(sock);
-
 
 
     return 0;
