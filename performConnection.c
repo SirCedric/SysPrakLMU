@@ -86,62 +86,76 @@ void printBoard(char *board){
 
 
 int performConnection(int *socket, char gameID[BUF_SIZE]){
-    
-//    // Wenn eine Verbindung zustande kommt wird die Version gesendet.
-//    if(strncmp(readfromServer(socket), "+", 1) == 0){
-//        
-//        printf("Verbindung zum Server hergestellt\n");
-//        sendToServer(socket, "VERSION 2.0\n");
-//    } else {
-//        perror("Fehler bei der Verbindung!");
-//        return -1;
-//    }
-//
-//    // Wenn die Version stimmt wird die Game ID gesendet.
-//    if(strncmp(readfromServer(socket), "+", 1) == 0){
-//        
-//        printf("Version wurde akzeptiert.\n");
-//        
-//        sendToServer(socket, gameID);
-//    } else {
-//        perror("Fehler bei der Versionsnummer!");
-//        return -1;
-//    }
-//
-//    
-//    if(strncmp(readfromServer(socket), "+", 1) == 0){
-//        printf("Game ID wurde akzepiert.\n");
-//    } else {
-//        perror("Game ID wurde nicht akzepiert!");
-//        return -1;
-//    }
-    
-    // erste Nachricht empfangen
-    readfromServer(socket, true);
-    
-    // Versionsnummer schicken
-    sendToServer(socket, "VERSION 2.0\n");
-    
-    // Antwort empfangen
-    readfromServer(socket, true);
-    // Game ID senden
-    sendToServer(socket, gameID);
 
-    // Antwort empfangen
-    readfromServer(socket, true);
-    
-    // Antwort empfangen
-    readfromServer(socket, true);
-    
-    // Spieler senden
-    sendToServer(socket, "PLAYER 0\n");
-    
-    // Antwort empfangen
-    readfromServer(socket, true);
-    
-    
-    char *board = readfromServer(socket, false);
-    printBoard(board);
+    ssize_t size;
+    char *word, *brkt;
+    char *sep = "\n";
+    bool gameover = false;
+
+do{
+
+    memset(buf, 0, BUF_SIZE);
+
+    size = recv(*socket, buf, BUF_SIZE, 0);
+
+    for (word = strtok_r(buf, sep, &brkt); word; word = strtok_r(NULL, sep, &brkt)){
+
+        if (strncmp(word, "+ MNM Gameserver", 14) == 0) {
+            printf("Bitte Version schicken\n");
+            strcpy(message, "VERSION 2.2\n");
+            send(*socket, message, strlen(message), 0);
+            printf("Client: %s", message);
+            memset(message, 0, BUF_SIZE);
+        }
+        if (strncmp(word, "+ Client version accepted", 24) == 0) {
+            printf("Bitte GameID senden\n");
+            send(*socket, gameID, strlen(gameID), 0);
+            printf("%s", gameID);
+        }
+        if (strncmp(word, "+ Game", 6) == 0) {
+            printf("Bitte Spielernummer senden\n");
+            strcpy(message, "PLAYER\n");
+            send(*socket, message, strlen(message), 0);
+            printf("%s", message);
+            memset(message, 0, BUF_SIZE);
+        }
+        if (strncmp(word, "+ WAIT", 6) == 0) {
+            printf("Bitte warten Sie einen Moment\n");
+            strcpy(message, "OKWAIT\n");
+            send(*socket, message, strlen(message), 0);
+            printf("Warte...\n");
+            memset(message, 0, BUF_SIZE);
+        }
+        if (strncmp(word, "+ ENDBOARD", 10) == 0 && !gameover) {
+            printf("Bitte senden Sie einen Spielzug\n");
+            strcpy(message, "THINKING\n");
+            send(*socket, message, strlen(message), 0);
+            printf("Berechne den Spielzug...");
+            memset(message, 0, BUF_SIZE);
+        }
+        if (strncmp(word, "+ OKTHINK", 9) == 0) {
+            // TODO Thinker ansteuern
+        }
+        if(strncmp(word, "+ GAMEOVER", 10) == 0){
+            printf("Das Spiel ist vorbei\n");
+            gameover = true;
+        }
+        if (strncmp(word, "+ ENDBOARD", 10) == 0 && gameover) {
+
+        }
+        //if(strncmp(token, ) == 0){
+        //
+        //}
+        if (strncmp(word, "- No free player", 16) == 0) {
+            printf("Es ist ein Fehler aufgetreten: Kein freier Spieler!\n");
+        }
+        if (strncmp(word, "- TIMEOUT", 9) == 0) {
+            printf("Hoppla, die Antwort hat zu lange gedautert: TIMEOUT\n");
+        }
+    }
+
+}while(strncmp(word, "+ QUIT", 6) != 0);
+printf("Exit while()\n");
 
     return 0;
 }

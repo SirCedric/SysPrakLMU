@@ -18,7 +18,7 @@
 int main(int argc, char* argv[]){
 
     char gameID[BUF_SIZE];
-    int playerCount;
+    char playerCount[BUF_SIZE];
     int sock;
     void *ptr;
     char addrstr[100];
@@ -29,7 +29,7 @@ int main(int argc, char* argv[]){
     pipe(fd);
 
     srand(time(NULL));
-    key_t key = rand();
+    //key_t key = rand();
 
     // auslesen von client.conf
     struct parameters config = getConfig("client.conf");
@@ -67,7 +67,11 @@ int main(int argc, char* argv[]){
         return -1;
     }
 
-    playerCount = atoi(argv[4]);
+    strncpy(playerCount, "", sizeof(buf));
+    strcpy(playerCount, "PLAYER ");
+    strcat(playerCount, argv[4]);
+    strcat(playerCount, "\n");
+
 
 
     // Creates Socket IPv4
@@ -111,14 +115,16 @@ int main(int argc, char* argv[]){
     else if (pid == 0){ //Kindprozess
 
         // Schreibseite der pipe schließen
-        close(fd[1]);        
+        close(fd[1]);
+
+
 
         printf("Connector: performConnection()\n");
         if(performConnection(&sock, gameID) != 0){
-            perror("performConnection");
-            return -1;
+            perror("performConnection(): ");
         }
 
+        /*
         struct shmData *ptr, *gameData;
         int shmID;
 
@@ -140,13 +146,22 @@ int main(int argc, char* argv[]){
         gameData->parentID = getppid();
         strcpy(gameData->gameName, "Checkers");
         strcpy(gameData->gameID, gameID);
-        gameData -> playerCount = playerCount;
+        strcpy(gameData->playerCount, playerCount);
 
 
 
         printf("Connector: Process ID = %i. Parent ID = %i\n", gameData -> childID, gameData -> parentID);
-        printf("Connector: GameName = %s. GameID = %s. Playercount = %i.\n", gameData -> gameName, gameData -> gameID, gameData -> playerCount);
+        printf("Connector: GameName = %s. GameID = %s. Playercount = %s.\n", gameData -> gameName, gameData -> gameID, gameData -> playerCount);
 
+        //printf("Connector: protocol()\n");
+        //if(protocol(&sock) != 0){
+        //    perror("protocol()");
+        //    return -1;
+        //}
+
+
+        shmdt(ptr);
+         */
 
     }
     else{ // Elterprozess
@@ -155,10 +170,11 @@ int main(int argc, char* argv[]){
         close(fd[1]);        
 
         if (wait(&status) != pid){
-            perror("wait()\n");
+            perror("wait()");
             return -1;
         }
 
+        /*
         struct shmData *ptr, *gameData;
         int shmID;
 
@@ -182,7 +198,10 @@ int main(int argc, char* argv[]){
 
 
         printf("Thinker: Process ID = %i. Parent ID = %i\n", gameData -> parentID, gameData -> childID);
-        printf("Thinker: GameName = %s. GameID = %s. Playercount = %i.\n", gameData -> gameName, gameData -> gameID, gameData -> playerCount);
+        printf("Thinker: GameName = %s. GameID = %s. Playercount = %s.\n", gameData -> gameName, gameData -> gameID, gameData -> playerCount);
+
+        shmdt(ptr);
+         */
     }
 
 
@@ -195,6 +214,7 @@ int main(int argc, char* argv[]){
 
     freeaddrinfo(res);
     close(sock);
+
 
 
     return 0;
