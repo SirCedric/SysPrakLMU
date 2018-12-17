@@ -221,7 +221,6 @@ do{
         }
     }
 }while(!quit);
-printf("Exit while()\n");
 
    return 0;
 }
