@@ -146,6 +146,7 @@ int performConnection(int *socket, char gameID[BUF_SIZE]){
     char *word, *brkt;
     char *sep = "\n";
     bool gameover = false;
+    bool quit = false;
 
 do{
 
@@ -163,11 +164,20 @@ do{
             memset(message, 0, BUF_SIZE);
         }
         if (strncmp(word, "+ Client version accepted", 24) == 0) {
+            printf("Ihre Version wurde akzeptiert\n");
             printf("Bitte GameID senden\n");
             send(*socket, gameID, strlen(gameID), 0);
             printf("%s", gameID);
         }
+        if(strncmp(word, "+ PLAYING", 9) == 0){
+            char fieldSize[8];
+            char plus[1];
+            char playing[7];
+            sscanf(word, "%s %s %s", plus, playing, fieldSize);
+            printf("Sie spielen das Spiel: \"Checkers\"\n");
+        }
         if (strncmp(word, "+ Game", 6) == 0) {
+            printf("Der Spielname lautet: %s\n", word);
             printf("Bitte Spielernummer senden\n");
             strcpy(message, "PLAYER\n");
             send(*socket, message, strlen(message), 0);
@@ -185,7 +195,7 @@ do{
             printf("Bitte senden Sie einen Spielzug\n");
             strcpy(message, "THINKING\n");
             send(*socket, message, strlen(message), 0);
-            printf("Berechne den Spielzug...");
+            printf("Berechne den Spielzug...\n");
             memset(message, 0, BUF_SIZE);
         }
         if (strncmp(word, "+ OKTHINK", 9) == 0) {
@@ -200,13 +210,18 @@ do{
         }
         if (strncmp(word, "- No free player", 16) == 0) {
             printf("Es ist ein Fehler aufgetreten: Kein freier Spieler!\n");
+            quit = true;
         }
         if (strncmp(word, "- TIMEOUT", 9) == 0) {
             printf("Hoppla, die Antwort hat zu lange gedautert: TIMEOUT\n");
+            quit = true;
+        }
+        if(strncmp(word, "+ QUIT", 6) == 0){
+            quit = true;
         }
     }
 
-}while(strncmp(word, "+ QUIT", 6) != 0);
+}while(!quit);
 printf("Exit while()\n");
 
    return 0;
