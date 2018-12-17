@@ -216,11 +216,19 @@ do{
             printf("Hoppla, die Antwort hat zu lange gedautert: TIMEOUT\n");
             quit = true;
         }
+<<<<<<< HEAD
         if(strncmp(word, "+ QUIT", 6) == 0){
+=======
+        if (strncmp(word, "+ QUIT", 6) == 0) {
+>>>>>>> 5a371bfa22cf0cdd2011eb31a1355904dbee53e4
             quit = true;
         }
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5a371bfa22cf0cdd2011eb31a1355904dbee53e4
 }while(!quit);
 printf("Exit while()\n");
 
