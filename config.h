@@ -5,9 +5,11 @@
 #endif
 
 #define BUF_SIZE 500
+#define ZEILENLÄNGE 100
 
 char buf[BUF_SIZE];
 char message[BUF_SIZE];
+char line[BUF_SIZE];
 
 struct parameters{
 	char hostName[BUF_SIZE];
@@ -26,7 +28,7 @@ struct player{
 struct shmData{
 	char gameName[BUF_SIZE];
 	char gameID[BUF_SIZE];
-	int playerCount;
+	char playerCount[BUF_SIZE];
 	pid_t childID;
 	pid_t parentID;
 	struct player playerData;
@@ -37,4 +39,3 @@ struct shmData{
 struct parameters getConfig(char filename[BUF_SIZE]);
 
 int performConnection(int *socket, char gameID[BUF_SIZE]);
-
