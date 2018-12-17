@@ -28,9 +28,6 @@ int main(int argc, char* argv[]){
     int fd[2];
     pipe(fd);
 
-    srand(time(NULL));
-    key_t key = rand();
-
     int shmID;
     key_t key = IPC_PRIVATE;
 
@@ -139,7 +136,7 @@ int main(int argc, char* argv[]){
 
         strcpy(gameData->gameID, gameID);
         strcpy(gameData->gameName, "Checkers");
-        gameData->playerCount = playerCount;
+        strcpy(gameData->playerCount, playerCount);
         gameData->childID = getpid();
         gameData->parentID = getppid();
 
@@ -157,12 +154,24 @@ int main(int argc, char* argv[]){
 
     }
     else{ // Elterprozess
+
+        struct shmData *gameData, *ptr;
+
+        if((ptr = (struct shmData*) shmat(shmID, 0, 0)) == (struct shmData*) -1){
+            perror("shmat parent");
+            return -1;
+        }
+
+        gameData = ptr;
+
+        while(!gameData->sem) usleep(100);
+
       printf("Parent process reading shmData.\n");
       printf("ParentID: %i, ChildID: %i\n", gameData->parentID, gameData->childID);
-      printf("GameName: %s, gameID: %s, playerCount: %i", gameData -> gameName, gameData -> gameID, gameData->playerCount);
+      printf("GameName: %s, gameID: %s, playerCount: %s", gameData -> gameName, gameData -> gameID, gameData->playerCount);
+
 
       gameData->sem = 0;
-
 
         // Leseseite der pipe schließen
         close(fd[1]);
