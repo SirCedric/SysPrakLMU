@@ -146,6 +146,7 @@ int performConnection(int *socket, char gameID[BUF_SIZE]){
     char *word, *brkt;
     char *sep = "\n";
     bool gameover = false;
+    bool quit = false;
 
 do{
 
@@ -200,13 +201,19 @@ do{
         }
         if (strncmp(word, "- No free player", 16) == 0) {
             printf("Es ist ein Fehler aufgetreten: Kein freier Spieler!\n");
+            quit = true;
         }
         if (strncmp(word, "- TIMEOUT", 9) == 0) {
             printf("Hoppla, die Antwort hat zu lange gedautert: TIMEOUT\n");
+            quit = true;
+        }
+        if (strncmp(word, "+ QUIT", 6) == 0) {
+            quit = true;
         }
     }
 
-}while(strncmp(word, "+ QUIT", 6) != 0);
+
+}while(!quit);
 printf("Exit while()\n");
 
    return 0;
