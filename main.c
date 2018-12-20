@@ -44,7 +44,7 @@ int main(int argc, char* argv[]){
         return -1;
     }
 
-    
+
 
 ////////// Split into Connector and Thinker Process ///////////
     if((pid = fork()) < 0){
@@ -58,41 +58,35 @@ int main(int argc, char* argv[]){
 
 
 ////////// Verarbeitung der Kommandozeilenparameter /////////
-        if(argc != 5){
+        int flag;
+        while((flag = getopt(argc, argv, "g:p:")) != -1){
+          switch(flag){
+          case 'g':
+            if(strlen(optarg) != 13){
+              errno = 22;
+              perror("GameID");
+              return -1;
+            } else strcpy(gameID, optarg);
+            break;
+          case 'p' :
+            if(atoi(optarg) < 0 || atoi(optarg) > 2){
+              errno = 22;
+              perror("PlayerCount");
+              return -1;
+          } else strcpy(playerCount, optarg);
+            break;
+          default:
             errno = 22;
-            perror("argc");
+            perror("args");
             return -1;
         }
-
-        if(strcmp(argv[1], "-g") != 0 || strcmp(argv[3], "-p") != 0){
-            errno = 22;
-            perror("Flags");
-            return -1;
-        }
-
-    if(atoi(argv[4]) != 1 && atoi(argv[4]) != 2 && atoi(argv[4]) != 0){
-        errno = 22;
-        perror("playerCount");
-        return -1;
-    }
-
-        if(strlen(argv[2]) != 13){
-          errno = 22;
-          perror("GameID");
-          return -1;
-        }
-
+      }
 
         strncpy(gameID, "", sizeof(buf));
         strcpy(gameID, "ID ");
         strcat(gameID, argv[2]);
         strcat(gameID, "\n");
 
-        if(atoi(argv[4]) != 1 && atoi(argv[4]) != 2){
-            errno = 22;
-            perror("playerCount");
-            return -1;
-        }
 
         strncpy(playerCount, "", sizeof(buf));
         strcpy(playerCount, "PLAYER ");
@@ -100,7 +94,7 @@ int main(int argc, char* argv[]){
         strcat(playerCount, "\n");
 
 
-////////// Connect to server ////////// 
+////////// Connect to server //////////
 
         // Creates Socket IPv4
         sock = socket(AF_INET, SOCK_STREAM, 0);
