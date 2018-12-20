@@ -142,7 +142,6 @@ void connector(int *socket){
 
 int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_SIZE], struct shmData *gameData){
 
-    ssize_t size;
     char *word, *brkt;
     char *sep = "\n";
 
@@ -163,12 +162,13 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
     int player;
     char playerName[ZEILENLAENGE] = "";
     int ready;
+    int time;
 
     do{
 
         memset(buf, 0, BUF_SIZE);
 
-        size = recv(*socket, buf, BUF_SIZE, 0);
+        recv(*socket, buf, BUF_SIZE, 0);
 
         for (word = strtok_r(buf, sep, &brkt); word; word = strtok_r(NULL, sep, &brkt)){
 
@@ -185,8 +185,13 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
                 send(*socket, gameID, strlen(gameID), 0);
                 printf("%s", gameID);
             }
+            if(strncmp(word, "+ MOVE", 6) == 0){
+                sscanf(word, "%*c %*s %i", &time);
+                time /= 1000;
+                printf("Sie haben %i Sekunden um einen Zug zu schicken!\n", time);
+            }
             if(readGameName){
-                sscanf(word, "%*c %s", gameName);
+                sscanf(word, "%*c %[^\0]s", gameName);
                 printf("Der Spielname lautet: %s\n", gameName);
                 strcpy(gameData -> gameName, gameName);
                 printf("Bitte Spielernummer senden\n");
