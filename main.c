@@ -37,6 +37,81 @@ int main(int argc, char* argv[]){
     // (möglicherweise unnötig, muss nochmal testen -max)
     setlocale(LC_ALL, "en_US.UTF-8");
 
+////////// auslesen von client.conf /////////
+    struct parameters config = getConfig("client.conf");
+
+
+////////// Verarbeitung der Kommandozeilenparameter /////////
+    int flag;
+    while((flag = getopt(argc, argv, "g:p:")) != -1){
+        switch(flag){
+            case 'g':
+                if(strlen(optarg) != 13){
+                    errno = 22;
+                    perror("GameID");
+                    return -1;
+                } else strcpy(gameID, optarg);
+                break;
+            case 'p' :
+                if(atoi(optarg) < 0 || atoi(optarg) > 2){
+                    errno = 22;
+                    perror("PlayerCount");
+                    return -1;
+                } else strcpy(playerCount, optarg);
+                break;
+            default:
+                errno = 22;
+                perror("args");
+                return -1;
+        }
+    }
+
+    strncpy(gameID, "", sizeof(buf));
+    strcpy(gameID, "ID ");
+    strcat(gameID, argv[2]);
+    strcat(gameID, "\n");
+
+
+    strncpy(playerCount, "", sizeof(buf));
+    strcpy(playerCount, "PLAYER ");
+    strcat(playerCount, argv[4]);
+    strcat(playerCount, "\n");
+
+
+////////// Connect to server //////////
+
+    // Creates Socket IPv4
+    sock = socket(AF_INET, SOCK_STREAM, 0);
+    if(sock < 0) {
+        errno = 1;
+        perror("socket");
+        return -1;
+    }
+
+
+    // connect to server with getaddrinfo
+    struct addrinfo hints;
+    memset(&hints,0,sizeof(hints));
+    hints.ai_family=AF_INET;
+    hints.ai_socktype=SOCK_STREAM;
+    hints.ai_protocol=0;
+    hints.ai_flags=AI_ADDRCONFIG;
+    struct addrinfo* res=0;
+    int err=getaddrinfo(config.hostName,config.portNr,&hints,&res);
+    if (err!=0) {
+        perror("getadrrinfo");
+        return -1;
+    }
+
+
+    if(connect(sock, res->ai_addr, res->ai_addrlen) < 0){
+        perror("connect");
+        return -1;
+    }
+    ptr = &((struct sockaddr_in *) res->ai_addr)->sin_addr;
+    inet_ntop (res->ai_family, ptr, addrstr, 100);
+    printf ("IPv%d address: %s\n", res->ai_family,
+            addrstr);
 
 
     if((shmID = shmget(key, sizeof(struct shmData), IPC_CREAT | 0666)) < 0){
@@ -53,81 +128,6 @@ int main(int argc, char* argv[]){
     }
     else if (pid == 0){ //Kindprozess
 
-////////// auslesen von client.conf /////////
-        struct parameters config = getConfig("client.conf");
-
-
-////////// Verarbeitung der Kommandozeilenparameter /////////
-        int flag;
-        while((flag = getopt(argc, argv, "g:p:")) != -1){
-          switch(flag){
-          case 'g':
-            if(strlen(optarg) != 13){
-              errno = 22;
-              perror("GameID");
-              return -1;
-            } else strcpy(gameID, optarg);
-            break;
-          case 'p' :
-            if(atoi(optarg) < 0 || atoi(optarg) > 2){
-              errno = 22;
-              perror("PlayerCount");
-              return -1;
-          } else strcpy(playerCount, optarg);
-            break;
-          default:
-            errno = 22;
-            perror("args");
-            return -1;
-        }
-      }
-
-        strncpy(gameID, "", sizeof(buf));
-        strcpy(gameID, "ID ");
-        strcat(gameID, argv[2]);
-        strcat(gameID, "\n");
-
-
-        strncpy(playerCount, "", sizeof(buf));
-        strcpy(playerCount, "PLAYER ");
-        strcat(playerCount, argv[4]);
-        strcat(playerCount, "\n");
-
-
-////////// Connect to server //////////
-
-        // Creates Socket IPv4
-        sock = socket(AF_INET, SOCK_STREAM, 0);
-        if(sock < 0) {
-            errno = 1;
-            perror("socket");
-            return -1;
-        }
-
-
-        // connect to server with getaddrinfo
-        struct addrinfo hints;
-        memset(&hints,0,sizeof(hints));
-        hints.ai_family=AF_INET;
-        hints.ai_socktype=SOCK_STREAM;
-        hints.ai_protocol=0;
-        hints.ai_flags=AI_ADDRCONFIG;
-        struct addrinfo* res=0;
-        int err=getaddrinfo(config.hostName,config.portNr,&hints,&res);
-        if (err!=0) {
-            perror("getadrrinfo");
-            return -1;
-        }
-
-
-        if(connect(sock, res->ai_addr, res->ai_addrlen) < 0){
-            perror("connect");
-            return -1;
-        }
-        ptr = &((struct sockaddr_in *) res->ai_addr)->sin_addr;
-        inet_ntop (res->ai_family, ptr, addrstr, 100);
-        printf ("IPv%d address: %s\n", res->ai_family,
-            addrstr);
 
 
 ////////// Create shared memory //////////
