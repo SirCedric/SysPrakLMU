@@ -30,7 +30,45 @@ int main(int argc, char* argv[]){
 
     int shmID;
     key_t key = IPC_PRIVATE;
+    ////////// auslesen von client.conf /////////
+    struct parameters config = getConfig("client.conf");
 
+
+    ////////// Verarbeitung der Kommandozeilenparameter ////////
+    int flag;
+    while((flag = getopt(argc, argv, "g:p:")) != -1){
+      switch(flag){
+        case 'g':
+          if(strlen(optarg) != 13){
+            errno = 22;
+            perror("GameID");
+            return -1;
+        } else strcpy(gameID, optarg);
+            break;
+        case 'p' :
+          if(atoi(optarg) < 0 || atoi(optarg) > 2){
+            errno = 22;
+            perror("PlayerCount");
+            return -1;
+        } else strcpy(playerCount, optarg);
+            break;
+        default:
+            errno = 22;
+            perror("args");
+            return -1;
+        }
+    }
+
+    strncpy(gameID, "", sizeof(buf));
+    strcpy(gameID, "ID ");
+    strcat(gameID, argv[2]);
+    strcat(gameID, "\n");
+
+
+    strncpy(playerCount, "", sizeof(buf));
+    strcpy(playerCount, "PLAYER ");
+    strcat(playerCount, argv[4]);
+    strcat(playerCount, "\n");
 
     // setzt, die Formatausgabe so, dass wir nachher
     // Unicode Symbole verwednen können.
@@ -53,45 +91,6 @@ int main(int argc, char* argv[]){
     }
     else if (pid == 0){ //Kindprozess
 
-////////// auslesen von client.conf /////////
-        struct parameters config = getConfig("client.conf");
-
-
-////////// Verarbeitung der Kommandozeilenparameter /////////
-        int flag;
-        while((flag = getopt(argc, argv, "g:p:")) != -1){
-          switch(flag){
-          case 'g':
-            if(strlen(optarg) != 13){
-              errno = 22;
-              perror("GameID");
-              return -1;
-            } else strcpy(gameID, optarg);
-            break;
-          case 'p' :
-            if(atoi(optarg) < 0 || atoi(optarg) > 2){
-              errno = 22;
-              perror("PlayerCount");
-              return -1;
-          } else strcpy(playerCount, optarg);
-            break;
-          default:
-            errno = 22;
-            perror("args");
-            return -1;
-        }
-      }
-
-        strncpy(gameID, "", sizeof(buf));
-        strcpy(gameID, "ID ");
-        strcat(gameID, argv[2]);
-        strcat(gameID, "\n");
-
-
-        strncpy(playerCount, "", sizeof(buf));
-        strcpy(playerCount, "PLAYER ");
-        strcat(playerCount, argv[4]);
-        strcat(playerCount, "\n");
 
 
 ////////// Connect to server //////////
