@@ -140,13 +140,25 @@ void connector(int *socket){
     }
 }
 
-int performConnection(int *socket, char gameID[BUF_SIZE]){
+int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_SIZE]){
 
     ssize_t size;
     char *word, *brkt;
     char *sep = "\n";
     bool gameover = false;
     bool quit = false;
+    bool isReady = false;
+
+    // Spielerdaten
+    int hisNumber = 0;
+    int myNumber = 0;
+    char hisName[ZEILENLÄNGE] = "";
+    char myName[ZEILENLÄNGE] = "";
+
+    char plus[1];
+    int player;
+    char playerName[ZEILENLÄNGE] = "";
+    int ready;
 
 do{
 
@@ -170,20 +182,57 @@ do{
             printf("%s", gameID);
         }
         if(strncmp(word, "+ PLAYING", 9) == 0){
-            char fieldSize[8];
+            char gamename[8];
             char plus[1];
             char playing[7];
-            sscanf(word, "%s %s %s", plus, playing, fieldSize);
-            printf("Sie spielen das Spiel: \"Checkers\"\n");
+            sscanf(word, "%s %s %s", plus, playing, gamename);
+            if(strcmp(gamename, "Checkers") != 0){
+                fprintf(stderr, "Es tut mir leid, aber dieser Client kann nur Dame spielen! Ihr ausgewähltes Spiel ist jedoch: %s.\nDie Sitzung wird beendet!\n", gamename);
+                return -1;
+            }
+            printf("Sie spielen das Spiel: \"%s\"\n", gamename);
         }
         if (strncmp(word, "+ Game", 6) == 0) {
             printf("Der Spielname lautet: %s\n", word);
             printf("Bitte Spielernummer senden\n");
-            strcpy(message, "PLAYER\n");
-            send(*socket, message, strlen(message), 0);
-            printf("%s", message);
+            send(*socket, playerCount, strlen(playerCount), 0);
+            printf("%s", playerCount);
             memset(message, 0, BUF_SIZE);
         }
+        if(strncmp(word, "+ YOU", 5) == 0){
+            char plus[1];
+            char you[3];
+            sscanf(word, "%s %s %i %s", plus, you, &myNumber, myName);
+            if(myNumber == 0){
+                hisNumber = 1;
+                printf("Sie, %s, sind Spieler %i und spielen mit den hellen Figuren.\nSie müssen den ersten Zug machen!\n", myName, myNumber);
+                strcpy(gameData -> )
+            }
+            if(myNumber == 1){
+                hisNumber = 0;
+                printf("Sie, %s sind Spieler %i und spielen mit den dunklen Figuren.\nIhr Gegner muss den ersten Zug machen!\n",
+                       myName, myNumber);
+            }
+        }
+        if(isReady){
+            sscanf(word, "%s %i %s %i", plus, &player, playerName, &ready);
+            if(player == hisNumber){
+                strcpy(hisName, playerName);
+            if(ready == 0){
+                printf("Ihr Mitspieler: %s ist noch nicht bereit!\n", playerName);
+            }
+            if(ready == 1){
+                printf("Ihr Mitspieler: %s ist bereit zu spielen!\n", playerName);
+            }
+            }
+            isReady = false;
+        }
+        if(strncmp(word, "+ TOTAL", 7) == 0){
+            sscanf(word, "")
+            printf("Gesamt: %s\n", word);
+            isReady = true;
+        }
+
         if (strncmp(word, "+ WAIT", 6) == 0) {
             printf("Bitte warten Sie einen Moment\n");
             strcpy(message, "OKWAIT\n");
@@ -200,6 +249,7 @@ do{
         }
         if (strncmp(word, "+ OKTHINK", 9) == 0) {
             // TODO Thinker ansteuern
+            printf("Sag dem Hirn bescheid!\n");
         }
         if(strncmp(word, "+ GAMEOVER", 10) == 0){
             printf("Das Spiel ist vorbei\n");
