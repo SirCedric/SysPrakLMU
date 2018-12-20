@@ -20,7 +20,7 @@ struct parameters getConfig(char filename[BUF_SIZE]){
 
 	while (fgets(lineBUF_SIZE, BUF_SIZE, config) != NULL) {
 		
-		sscanf(lineBUF_SIZE, "%s = %s", paraName, paraVal);
+		sscanf(lineBUF_SIZE, " %s = %s", paraName, paraVal);
 		
 		if (lineBUF_SIZE[0] == '#'||(lineBUF_SIZE[0] == '/' && lineBUF_SIZE[1] == '/')) {
 			strcpy(paraName, "null");
@@ -37,12 +37,9 @@ struct parameters getConfig(char filename[BUF_SIZE]){
 		else if ((strcmp(paraName, "gametype") == 0)) {
 			strcpy(result.gameType, paraVal);
 		}
-
 	}
 
 	fclose(config);
 
-	
-	
 	return result;
 }
