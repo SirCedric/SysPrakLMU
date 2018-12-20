@@ -5,7 +5,7 @@
 #endif
 
 #define BUF_SIZE 500
-#define ZEILENLÄNGE 100
+#define ZEILENLAENGE 100
 
 char buf[BUF_SIZE];
 char message[BUF_SIZE];
@@ -40,4 +40,4 @@ struct shmData{
 struct parameters getConfig(char filename[BUF_SIZE]);
 
 
-int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_SIZE]);
+int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_SIZE], struct shmData *gameData);

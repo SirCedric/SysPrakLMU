@@ -22,19 +22,19 @@ void sendToServer(int *socket, char message[BUF_SIZE], bool print){
 
     memset(buf, 0, BUF_SIZE);
     strcpy(buf, message);
-    
+
     if (write(*socket, buf, strlen(buf)) < 0) {
         perror("Fehler beim senden!");
     } else if (print == true){
         printf("Client: %s", buf);
     }
-    
+
 }
 
-char *readFromServer(int *socket, bool print){
-    
+char *readfromServer(int *socket, bool print){
+
     memset(buf,0,BUF_SIZE);
-    
+
     if (read(*socket, buf, BUF_SIZE) < 0) {
         perror("Fehler beim empfangen!");
     } else {
@@ -46,10 +46,10 @@ char *readFromServer(int *socket, bool print){
 }
 
 void printBoard(char *board){
-    
+
     char step1[500] = "";
     char step2[500] = "";
-        
+
     sscanf(board, "%*[^8,8]8,8\n%[^Y]s", step1);
 
     for (int i = 0;i<500;i++) {
@@ -60,7 +60,7 @@ void printBoard(char *board){
             strcat(step2, cToStr);
         }
     }
-    
+
     // create board array
     char boardArray[8][8];
     int counter = 0;
@@ -70,7 +70,7 @@ void printBoard(char *board){
             counter++;
         }
     }
-    
+
     // print board array
     printf(" +----------------+\n");
     for (int i = 0; i < 8; i++) {
@@ -108,7 +108,7 @@ void printBoard(char *board){
                         // white field
                         printf("--");
                     }
-                }   
+                }
             }
         }
         printf("|\n");
@@ -117,138 +117,168 @@ void printBoard(char *board){
     printf("  A B C D E F G H\n");
 }
 
+void connector(int *socket){
 
-int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_SIZE]){
 
+    if(strncmp(readfromServer(socket, false), "+ WAIT", 6) == 0){
+
+        sendToServer(socket, "OKWAIT\n", false);
+        printf("Server sent WAIT message\n");
+
+    }
+    else if(strncmp(message, "-", 1) == 0){
+
+        printf("!Server: %s", message);
+
+    }
+    else if(strncmp(message, "+ GAMEOVER", 10) == 0){
+
+        printf("Server sent GAMEOVER message\n");
+
+    } else {
+        connector(socket);
+    }
+}
+
+int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_SIZE], struct shmData *gameData){
+
+    ssize_t size;
     char *word, *brkt;
     char *sep = "\n";
+
+    // Booleans
     bool gameover = false;
     bool quit = false;
     bool isReady = false;
+    bool readGameName = false;
 
     // Spielerdaten
     int hisNumber = 0;
     int myNumber = 0;
-    char hisName[ZEILENLÄNGE] = "";
-    char myName[ZEILENLÄNGE] = "";
+    char hisName[ZEILENLAENGE] = "";
+    char myName[ZEILENLAENGE] = "";
+    char gameName[ZEILENLAENGE] = "";
+    int totalPlayers = 0;
 
-    char plus[1];
     int player;
-    char playerName[ZEILENLÄNGE] = "";
+    char playerName[ZEILENLAENGE] = "";
     int ready;
 
-do{
+    do{
 
-    memset(buf, 0, BUF_SIZE);
+        memset(buf, 0, BUF_SIZE);
 
-    readFromServer(socket, false);
+        size = recv(*socket, buf, BUF_SIZE, 0);
 
-    for (word = strtok_r(buf, sep, &brkt); word; word = strtok_r(NULL, sep, &brkt)){
+        for (word = strtok_r(buf, sep, &brkt); word; word = strtok_r(NULL, sep, &brkt)){
 
-        if (strncmp(word, "+ MNM Gameserver", 14) == 0) {
-            printf("Server: Bitte Version schicken\n");
-            sendToServer(socket, "VERSION 2.2\n", true);
-        }
-        if (strncmp(word, "+ Client version accepted", 24) == 0) {
-            printf("Server: Ihre Version wurde akzeptiert\n");
-            printf("Server: Bitte GameID senden\n");
-            sendToServer(socket, gameID, true);
-        }
-        if(strncmp(word, "+ PLAYING", 9) == 0){
-            char gamename[8];
-            char plus[1];
-            char playing[7];
-            sscanf(word, "%s %s %s", plus, playing, gamename);
-            if(strcmp(gamename, "Checkers") != 0){
-                fprintf(stderr, "Es tut mir leid, aber dieser Client kann nur Dame spielen! Ihr ausgewähltes Spiel ist jedoch: %s.\nDie Sitzung wird beendet!\n", gamename);
-                return -1;
+            if (strncmp(word, "+ MNM Gameserver", 14) == 0) {
+                printf("Bitte Version schicken\n");
+                strcpy(message, "VERSION 2.2\n");
+                send(*socket, message, strlen(message), 0);
+                printf("Client: %s", message);
+                memset(message, 0, BUF_SIZE);
             }
-            printf("Sie spielen das Spiel: \"%s\"\n", gamename);
-        }
-        if (strncmp(word, "+ Game", 6) == 0) {
-            printf("Der Spielname lautet: %s\n", word);
-            printf("Bitte Spielernummer senden\n");
-            send(*socket, playerCount, strlen(playerCount), 0);
-            printf("%s", playerCount);
-            memset(message, 0, BUF_SIZE);
-            sscanf(word, "%s %s %s", plus, playing, fieldSize);
-            printf("Server: Sie spielen das Spiel: \"Checkers\"\n");
-        }
-        if (strncmp(word, "+ Game", 6) == 0) {
-            printf("Server: Der Spielname lautet: %s\n", word);
-            printf("Server: Bitte Spielernummer senden\n");
-            // TODO aktuell ist noch nur Spieler 0 hardecoded
-            // noch zu änder
-            sendToServer(socket, "PLAYER 0\n", true);
-        }
-        if(strncmp(word, "+ YOU", 5) == 0){
-            char plus[1];
-            char you[3];
-            sscanf(word, "%s %s %i %s", plus, you, &myNumber, myName);
-            if(myNumber == 0){
-                hisNumber = 1;
-                printf("Sie, %s, sind Spieler %i und spielen mit den hellen Figuren.\nSie müssen den ersten Zug machen!\n", myName, myNumber);
-                strcpy(gameData -> )
+            if (strncmp(word, "+ Client version accepted", 24) == 0) {
+                printf("Ihre Version wurde akzeptiert\n");
+                printf("Bitte GameID senden\n");
+                send(*socket, gameID, strlen(gameID), 0);
+                printf("%s", gameID);
             }
-            if(myNumber == 1){
-                hisNumber = 0;
-                printf("Sie, %s sind Spieler %i und spielen mit den dunklen Figuren.\nIhr Gegner muss den ersten Zug machen!\n",
-                       myName, myNumber);
+            if(readGameName){
+                sscanf(word, "%*c %s", gameName);
+                printf("Der Spielname lautet: %s\n", gameName);
+                strcpy(gameData -> gameName, gameName);
+                printf("Bitte Spielernummer senden\n");
+                send(*socket, playerCount, strlen(playerCount), 0);
+                printf("%s", playerCount);
+                memset(message, 0, BUF_SIZE);
+                readGameName = false;
             }
-        }
-        if(isReady){
-            sscanf(word, "%s %i %s %i", plus, &player, playerName, &ready);
-            if(player == hisNumber){
-                strcpy(hisName, playerName);
-            if(ready == 0){
-                printf("Ihr Mitspieler: %s ist noch nicht bereit!\n", playerName);
+            if(strncmp(word, "+ PLAYING", 9) == 0){
+                char gamekindname[8];
+                char playing[7];
+                sscanf(word, "%*c %s %s", playing, gamekindname);
+                if(strcmp(gamekindname, "Checkers") != 0){
+                    fprintf(stderr, "Es tut mir leid, aber dieser Client kann nur Dame spielen! Ihr ausgewähltes Spiel ist jedoch: %s.\nDie Sitzung wird beendet!\n", gamekindname);
+                    return -1;
+                }
+                printf("Sie spielen das Spiel: \"%s\"\n", gamekindname);
+                readGameName = true;
             }
-            if(ready == 1){
-                printf("Ihr Mitspieler: %s ist bereit zu spielen!\n", playerName);
+            if(strncmp(word, "+ YOU", 5) == 0){
+                char you[3];
+                sscanf(word, "%*c %s %i %s", you, &myNumber, myName);
+                if(myNumber == 0){
+                    hisNumber = 1;
+                    printf("Sie, %s, sind Spieler %i und spielen mit den hellen Figuren.\nSie müssen den ersten Zug machen!\n", myName, myNumber);
+                    strcpy(gameData -> playerData.name, myName);
+                    gameData -> playerData.num = myNumber;
+                }
+                if(myNumber == 1){
+                    hisNumber = 0;
+                    printf("Sie, %s sind Spieler %i und spielen mit den dunklen Figuren.\nIhr Gegner muss den ersten Zug machen!\n", myName, myNumber);
+                    strcpy(gameData -> playerData.name, myName);
+                    gameData -> playerData.num = myNumber;
+                }
             }
+            if(isReady){
+                sscanf(word, "%*c %i %s %i", &player, playerName, &ready);
+                if(player == hisNumber){
+                    strcpy(hisName, playerName);
+                    if(ready == 0){
+                        printf("Ihr Mitspieler: %s ist noch nicht bereit!\n", playerName);
+                    }
+                    if(ready == 1){
+                        printf("Ihr Mitspieler: %s ist bereit zu spielen!\n", playerName);
+                    }
+                }
+                isReady = false;
             }
-            isReady = false;
-        }
-        if(strncmp(word, "+ TOTAL", 7) == 0){
-            sscanf(word, "")
-            printf("Gesamt: %s\n", word);
-            isReady = true;
-        }
+            if(strncmp(word, "+ TOTAL", 7) == 0){
+                sscanf(word, "%*c %*s %i", &totalPlayers);
+                printf("Es sind insgesamt %i Spieler verbunden\n", totalPlayers);
+                isReady = true;
+            }
 
-        if (strncmp(word, "+ WAIT", 6) == 0) {
-            printf("Server: Bitte warten Sie einen Moment\n");
-            sendToServer(socket, "OKWAIT\n", false);
-            printf("Warte...\n");
-        }
-        if (strncmp(word, "+ ENDBOARD", 10) == 0 && !gameover) {
-            printf("Server: Bitte senden Sie einen Spielzug\n");
-            sendToServer(socket, "THINKING\n", false);
-            printf("Berechne den Spielzug...\n");
-        }
-        if (strncmp(word, "+ OKTHINK", 9) == 0) {
-            // TODO Thinker ansteuern
-            printf("Sag dem Hirn bescheid!\n");
-        }
-        if(strncmp(word, "+ GAMEOVER", 10) == 0){
-            printf("Das Spiel ist vorbei\n");
-            gameover = true;
-        }
-        if (strncmp(word, "+ ENDBOARD", 10) == 0 && gameover) {
+            if (strncmp(word, "+ WAIT", 6) == 0) {
+                printf("Bitte warten Sie einen Moment\n");
+                strcpy(message, "OKWAIT\n");
+                send(*socket, message, strlen(message), 0);
+                printf("Warte...\n");
+                memset(message, 0, BUF_SIZE);
+            }
+            if (strncmp(word, "+ ENDBOARD", 10) == 0 && !gameover) {
+                printf("Bitte senden Sie einen Spielzug\n");
+                strcpy(message, "THINKING\n");
+                send(*socket, message, strlen(message), 0);
+                printf("Berechne den Spielzug...\n");
+                memset(message, 0, BUF_SIZE);
+            }
+            if (strncmp(word, "+ OKTHINK", 9) == 0) {
+                // TODO Thinker ansteuern
+                printf("Sag dem Hirn bescheid!\n");
+            }
+            if(strncmp(word, "+ GAMEOVER", 10) == 0){
+                printf("Das Spiel ist vorbei\n");
+                gameover = true;
+            }
+            if (strncmp(word, "+ ENDBOARD", 10) == 0 && gameover) {
 
+            }
+            if (strncmp(word, "- No free player", 16) == 0) {
+                printf("Es ist ein Fehler aufgetreten: Kein freier Spieler!\n");
+                quit = true;
+            }
+            if (strncmp(word, "- TIMEOUT", 9) == 0) {
+                printf("Hoppla, die Antwort hat zu lange gedautert: TIMEOUT\n");
+                quit = true;
+            }
+            if (strncmp(word, "+ QUIT", 6) == 0) {
+                quit = true;
+            }
         }
-        if (strncmp(word, "- No free player", 16) == 0) {
-            printf("Es ist ein Fehler aufgetreten: Kein freier Spieler!\n");
-            quit = true;
-        }
-        if (strncmp(word, "- TIMEOUT", 9) == 0) {
-            printf("Hoppla, die Antwort hat zu lange gedauert: TIMEOUT\n");
-            quit = true;
-        }
-        if (strncmp(word, "+ QUIT", 6) == 0) {
-            quit = true;
-        }
-    }
-}while(!quit);
+    }while(!quit);
 
-   return 0;
+    return 0;
 }

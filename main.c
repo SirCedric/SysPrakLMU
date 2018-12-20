@@ -160,7 +160,7 @@ int main(int argc, char* argv[]){
         close(fd[1]);
 
         printf("Connector: performConnection()\n");
-        if(performConnection(&sock, gameID, playerCount) != 0){
+        if(performConnection(&sock, gameID, playerCount, gameData) != 0){
             perror("performConnection(): ");
         }
 
