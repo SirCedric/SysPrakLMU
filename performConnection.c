@@ -117,29 +117,6 @@ void printBoard(char *board){
     printf("  A B C D E F G H\n");
 }
 
-void connector(int *socket){
-
-
-    if(strncmp(readfromServer(socket, false), "+ WAIT", 6) == 0){
-
-        sendToServer(socket, "OKWAIT\n", false);
-        printf("Server sent WAIT message\n");
-
-    }
-    else if(strncmp(message, "-", 1) == 0){
-
-        printf("!Server: %s", message);
-
-    }
-    else if(strncmp(message, "+ GAMEOVER", 10) == 0){
-
-        printf("Server sent GAMEOVER message\n");
-
-    } else {
-        connector(socket);
-    }
-}
-
 int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_SIZE], struct shmData *gameData){
 
     char *word, *brkt;
@@ -252,6 +229,9 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
                 send(*socket, message, strlen(message), 0);
                 printf("Warte...\n");
                 memset(message, 0, BUF_SIZE);
+            }
+            if(strncmp(word, "+ BOARD", 7) == 0){
+                
             }
             if (strncmp(word, "+ ENDBOARD", 10) == 0 && !gameover) {
                 printf("Bitte senden Sie einen Spielzug\n");
