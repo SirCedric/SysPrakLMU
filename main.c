@@ -30,7 +30,45 @@ int main(int argc, char* argv[]){
 
     int shmID;
     key_t key = IPC_PRIVATE;
+    ////////// auslesen von client.conf /////////
+    struct parameters config = getConfig("client.conf");
 
+
+    ////////// Verarbeitung der Kommandozeilenparameter ////////
+    int flag;
+    while((flag = getopt(argc, argv, "g:p:")) != -1){
+      switch(flag){
+        case 'g':
+          if(strlen(optarg) != 13){
+            errno = 22;
+            perror("GameID");
+            return -1;
+        } else strcpy(gameID, optarg);
+            break;
+        case 'p' :
+          if(atoi(optarg) < 0 || atoi(optarg) > 2){
+            errno = 22;
+            perror("PlayerCount");
+            return -1;
+        } else strcpy(playerCount, optarg);
+            break;
+        default:
+            errno = 22;
+            perror("args");
+            return -1;
+        }
+    }
+
+    strncpy(gameID, "", sizeof(buf));
+    strcpy(gameID, "ID ");
+    strcat(gameID, argv[2]);
+    strcat(gameID, "\n");
+
+
+    strncpy(playerCount, "", sizeof(buf));
+    strcpy(playerCount, "PLAYER ");
+    strcat(playerCount, argv[4]);
+    strcat(playerCount, "\n");
 
     // setzt, die Formatausgabe so, dass wir nachher
     // Unicode Symbole verwednen können.
@@ -76,33 +114,7 @@ int main(int argc, char* argv[]){
     strcpy(playerCount, "PLAYER ");
     strcat(playerCount, argv[4]);
     strcat(playerCount, "\n");
-
-
-////////// Connect to server //////////
-
-    // Creates Socket IPv4
-    sock = socket(AF_INET, SOCK_STREAM, 0);
-    if(sock < 0) {
-        errno = 1;
-        perror("socket");
-        return -1;
-    }
-
-
-    // connect to server with getaddrinfo
-    struct addrinfo hints;
-    memset(&hints,0,sizeof(hints));
-    hints.ai_family=AF_INET;
-    hints.ai_socktype=SOCK_STREAM;
-    hints.ai_protocol=0;
-    hints.ai_flags=AI_ADDRCONFIG;
-    struct addrinfo* res=0;
-    int err=getaddrinfo(config.hostName,config.portNr,&hints,&res);
-    if (err!=0) {
-        perror("getadrrinfo");
-        return -1;
-    }
-
+    
 
     if(connect(sock, res->ai_addr, res->ai_addrlen) < 0){
         perror("connect");
