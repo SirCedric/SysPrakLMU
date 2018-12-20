@@ -31,7 +31,7 @@ void sendToServer(int *socket, char message[BUF_SIZE], bool print){
     
 }
 
-char *readfromServer(int *socket, bool print){
+char *readFromServer(int *socket, bool print){
     
     memset(buf,0,BUF_SIZE);
     
@@ -117,32 +117,9 @@ void printBoard(char *board){
     printf("  A B C D E F G H\n");
 }
 
-void connector(int *socket){
-
-
-    if(strncmp(readfromServer(socket, false), "+ WAIT", 6) == 0){
-
-        sendToServer(socket, "OKWAIT\n", false);
-        printf("Server sent WAIT message\n");
-
-    }
-    else if(strncmp(message, "-", 1) == 0){
-
-        printf("!Server: %s", message);
-
-    }
-    else if(strncmp(message, "+ GAMEOVER", 10) == 0){
-        
-        printf("Server sent GAMEOVER message\n");
-
-    } else {
-        connector(socket);
-    }
-}
 
 int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_SIZE]){
 
-    ssize_t size;
     char *word, *brkt;
     char *sep = "\n";
     bool gameover = false;
@@ -164,22 +141,18 @@ do{
 
     memset(buf, 0, BUF_SIZE);
 
-    size = recv(*socket, buf, BUF_SIZE, 0);
+    readFromServer(socket, false);
 
     for (word = strtok_r(buf, sep, &brkt); word; word = strtok_r(NULL, sep, &brkt)){
 
         if (strncmp(word, "+ MNM Gameserver", 14) == 0) {
-            printf("Bitte Version schicken\n");
-            strcpy(message, "VERSION 2.2\n");
-            send(*socket, message, strlen(message), 0);
-            printf("Client: %s", message);
-            memset(message, 0, BUF_SIZE);
+            printf("Server: Bitte Version schicken\n");
+            sendToServer(socket, "VERSION 2.2\n", true);
         }
         if (strncmp(word, "+ Client version accepted", 24) == 0) {
-            printf("Ihre Version wurde akzeptiert\n");
-            printf("Bitte GameID senden\n");
-            send(*socket, gameID, strlen(gameID), 0);
-            printf("%s", gameID);
+            printf("Server: Ihre Version wurde akzeptiert\n");
+            printf("Server: Bitte GameID senden\n");
+            sendToServer(socket, gameID, true);
         }
         if(strncmp(word, "+ PLAYING", 9) == 0){
             char gamename[8];
@@ -198,6 +171,15 @@ do{
             send(*socket, playerCount, strlen(playerCount), 0);
             printf("%s", playerCount);
             memset(message, 0, BUF_SIZE);
+            sscanf(word, "%s %s %s", plus, playing, fieldSize);
+            printf("Server: Sie spielen das Spiel: \"Checkers\"\n");
+        }
+        if (strncmp(word, "+ Game", 6) == 0) {
+            printf("Server: Der Spielname lautet: %s\n", word);
+            printf("Server: Bitte Spielernummer senden\n");
+            // TODO aktuell ist noch nur Spieler 0 hardecoded
+            // noch zu änder
+            sendToServer(socket, "PLAYER 0\n", true);
         }
         if(strncmp(word, "+ YOU", 5) == 0){
             char plus[1];
@@ -234,18 +216,14 @@ do{
         }
 
         if (strncmp(word, "+ WAIT", 6) == 0) {
-            printf("Bitte warten Sie einen Moment\n");
-            strcpy(message, "OKWAIT\n");
-            send(*socket, message, strlen(message), 0);
+            printf("Server: Bitte warten Sie einen Moment\n");
+            sendToServer(socket, "OKWAIT\n", false);
             printf("Warte...\n");
-            memset(message, 0, BUF_SIZE);
         }
         if (strncmp(word, "+ ENDBOARD", 10) == 0 && !gameover) {
-            printf("Bitte senden Sie einen Spielzug\n");
-            strcpy(message, "THINKING\n");
-            send(*socket, message, strlen(message), 0);
+            printf("Server: Bitte senden Sie einen Spielzug\n");
+            sendToServer(socket, "THINKING\n", false);
             printf("Berechne den Spielzug...\n");
-            memset(message, 0, BUF_SIZE);
         }
         if (strncmp(word, "+ OKTHINK", 9) == 0) {
             // TODO Thinker ansteuern
@@ -263,7 +241,7 @@ do{
             quit = true;
         }
         if (strncmp(word, "- TIMEOUT", 9) == 0) {
-            printf("Hoppla, die Antwort hat zu lange gedautert: TIMEOUT\n");
+            printf("Hoppla, die Antwort hat zu lange gedauert: TIMEOUT\n");
             quit = true;
         }
         if (strncmp(word, "+ QUIT", 6) == 0) {
