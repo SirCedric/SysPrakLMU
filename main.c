@@ -66,7 +66,7 @@ int main(int argc, char* argv[]){
     strcat(gameID, argv[2]);
     strcat(gameID, "\n");
 
-    if(atoi(argv[4]) != 1 && atoi(argv[4]) != 2){
+    if(atoi(argv[4]) != 1 && atoi(argv[4]) != 2 && atoi(argv[4]) != 0){
         errno = 22;
         perror("playerCount");
         return -1;
@@ -147,7 +147,7 @@ int main(int argc, char* argv[]){
         close(fd[1]);
 
         printf("Connector: performConnection()\n");
-        if(performConnection(&sock, gameID) != 0){
+        if(performConnection(&sock, gameID, playerCount) != 0){
             perror("performConnection(): ");
         }
 
