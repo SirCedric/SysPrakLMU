@@ -168,7 +168,7 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
                 printf("Sie haben %i Sekunden um einen Zug zu schicken!\n", time);
             }
             if(readGameName){
-                sscanf(word, "%*c %[^\0]s", gameName);
+                sscanf(word, "%*c %[^\n]s", gameName);
                 printf("Der Spielname lautet: %s\n", gameName);
                 strcpy(gameData -> gameName, gameName);
                 printf("Bitte Spielernummer senden\n");
