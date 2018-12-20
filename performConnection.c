@@ -45,77 +45,78 @@ char *readfromServer(int *socket, bool print){
     return message;
 }
 
-void printBoard(char *board){
 
-    char step1[500] = "";
-    char step2[500] = "";
-
-    sscanf(board, "%*[^8,8]8,8\n%[^Y]s", step1);
-
-    for (int i = 0;i<500;i++) {
-        if (step1[i] == 'w' || step1[i] == '*' || step1[i] == 'b') {
-            char cToStr[2];
-            cToStr[0] = step1[i];
-            cToStr[1] = '\0';
-            strcat(step2, cToStr);
+void printBoard(char *board, int boardSize)
+{
+	
+    char boardArray[boardSize][boardSize];
+    
+    char tmpstr[500];
+    strcpy(tmpstr, board);
+    
+    int i = 0;
+    int j = 0;
+    int k = 0;
+    while (tmpstr[i] != '\0' && k < boardSize) 
+    {
+        if (tmpstr[i] == 'w' || tmpstr[i] == '*' || tmpstr[i] == 'b') 
+        {
+            boardArray[k][j] = tmpstr[i];
+            j++;
         }
+        if (j == boardSize)
+        {
+            k++;
+            j = 0;
+        }	
+        i++;
     }
-
-    // create board array
-    char boardArray[8][8];
-    int counter = 0;
-    for (int i = 0; i < 8; i++) {
-        for (int j = 0; j < 8; j++) {
-            boardArray[i][j] = step2[counter];
-            counter++;
-        }
-    }
-
+        
+    
     // print board array
     printf(" +----------------+\n");
-    for (int i = 0; i < 8; i++) {
-        printf("%i|", (8-i));
-        for (int j = 0; j < 8; j++) {
-            if (boardArray[i][j] == 'b'){ // black man
-                printf("\u26c0 ");
+    for (i = 0; i < boardSize; i++) 
+    {
+        printf("%i|", (boardSize-i));
+        for (j = 0; j < boardSize; j++) 
+        {
+            if (boardArray[i][j] == 'b')
+            { // black man
+                    printf("\u26c0 ");
             }
-            else if (boardArray[i][j] == 'B'){ // black king
-                printf("\u26c1 ");
+            else if (boardArray[i][j] == 'B')
+            { // black king
+                    printf("\u26c1 ");
             }
-            else if (boardArray[i][j] == 'w'){ // white man
-                printf("\u26c2 ");
+            else if (boardArray[i][j] == 'w')
+            { // white man
+                    printf("\u26c2 ");
             }
-            else if (boardArray[i][j] == 'W'){ // white king
-                printf("\u26c3 ");
+            else if (boardArray[i][j] == 'W')
+            { // white king
+                    printf("\u26c3 ");
             }
-            else {
-                if(i % 2 == 0){
-                    if (j % 2 == 0){
-                        // white field
-                        printf("--");
-                    }
-                    else {
-                        // black field
-                        printf("**");
-                    }
+            else 
+            {
+                if((i % 2 == 0 && j % 2 == 0) || (i % 2 != 0 && j % 2 != 0))
+                {
+                    // white field
+                    printf("--");
                 }
-                else {
-                    if (j % 2 == 0){
-                        // black field
-                        printf("**");
+                else 
+                {
+                    // black field
+                    printf("**");
                     }
-                    else {
-                        // white field
-                        printf("--");
-                    }
-                }
             }
         }
         printf("|\n");
     }
+
     printf(" +----------------+\n");
     printf("  A B C D E F G H\n");
 }
+
 
 void connector(int *socket){
 
@@ -269,7 +270,7 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
                 gameover = true;
             }
             if (strncmp(word, "+ ENDBOARD", 10) == 0 && gameover) {
-
+                printf("%s\n", buf);
             }
             if (strncmp(word, "- No free player", 16) == 0) {
                 printf("Es ist ein Fehler aufgetreten: Kein freier Spieler!\n");
