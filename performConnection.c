@@ -25,7 +25,7 @@ void sendToServer(int *socket, char message[BUF_SIZE], bool print){
 
     if (write(*socket, buf, strlen(buf)) < 0) {
         perror("Fehler beim senden!");
-    } else if (print == true){
+    } else if (print){
         printf("Client: %s", buf);
     }
 
@@ -127,6 +127,7 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
     bool quit = false;
     bool isReady = false;
     bool readGameName = false;
+    bool getBoard;
 
     // Spielerdaten
     int hisNumber = 0;
@@ -141,6 +142,12 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
     int ready;
     int time;
 
+    // Board data
+    int BoardX = 0;
+    int BoardY = 0;
+    char board[BUF_SIZE] = "";
+    char boardLine[ZEILENLAENGE];
+
     do{
 
         memset(buf, 0, BUF_SIZE);
@@ -148,6 +155,7 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
         recv(*socket, buf, BUF_SIZE, 0);
 
         for (word = strtok_r(buf, sep, &brkt); word; word = strtok_r(NULL, sep, &brkt)){
+
 
             if (strncmp(word, "+ MNM Gameserver", 14) == 0) {
                 printf("Bitte Version schicken\n");
@@ -189,8 +197,7 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
                 readGameName = true;
             }
             if(strncmp(word, "+ YOU", 5) == 0){
-                char you[3];
-                sscanf(word, "%*c %s %i %s", you, &myNumber, myName);
+                sscanf(word, "%*c %*s %i %s", &myNumber, myName);
                 if(myNumber == 0){
                     hisNumber = 1;
                     printf("Sie, %s, sind Spieler %i und spielen mit den hellen Figuren.\nSie müssen den ersten Zug machen!\n", myName, myNumber);
@@ -222,22 +229,35 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
                 printf("Es sind insgesamt %i Spieler verbunden\n", totalPlayers);
                 isReady = true;
             }
-
-            if (strncmp(word, "+ WAIT", 6) == 0) {
-                printf("Bitte warten Sie einen Moment\n");
-                strcpy(message, "OKWAIT\n");
-                send(*socket, message, strlen(message), 0);
-                printf("Warte...\n");
-                memset(message, 0, BUF_SIZE);
+            if(getBoard){
+                if(strncmp(word, "+ ENDBOARD", 10) == 0){
+                    getBoard = false;
+                    printBoard(board);
+                }else {
+                    sscanf(word, "%*c %[^\n]s", boardLine);
+                    strcat(board, boardLine);
+                    strcat(board, "\n");
+                    //printf("%s", board);
+                }
             }
             if(strncmp(word, "+ BOARD", 7) == 0){
-                
+                sscanf(word, "%*c %*s %i,%i", &BoardX, &BoardY);
+                printf("Das Board ist %i x %i groß\n", BoardX, BoardY);
+                getBoard = true;
+                strcpy(board, "");
             }
             if (strncmp(word, "+ ENDBOARD", 10) == 0 && !gameover) {
                 printf("Bitte senden Sie einen Spielzug\n");
                 strcpy(message, "THINKING\n");
                 send(*socket, message, strlen(message), 0);
                 printf("Berechne den Spielzug...\n");
+                memset(message, 0, BUF_SIZE);
+            }
+            if (strncmp(word, "+ WAIT", 6) == 0) {
+                printf("Bitte warten Sie einen Moment\n");
+                strcpy(message, "OKWAIT\n");
+                send(*socket, message, strlen(message), 0);
+                printf("Warte...\n");
                 memset(message, 0, BUF_SIZE);
             }
             if (strncmp(word, "+ OKTHINK", 9) == 0) {
