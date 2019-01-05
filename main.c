@@ -102,7 +102,6 @@ int main(int argc, char* argv[]){
     }
 
 
-
     if(connect(sock, res->ai_addr, res->ai_addrlen) < 0){
         perror("connect");
         return -1;
