@@ -35,6 +35,14 @@ struct shmData{
 	struct player playerData;
 };
 
+/*
+struct board{
+    int sizeX;
+    int sizeY;
+    char boardArray[sizeY][sizeX];
+};
+ */
+
 
 
 struct parameters getConfig(char filename[BUF_SIZE]);
