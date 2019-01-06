@@ -46,10 +46,10 @@ char *readfromServer(int *socket, bool print){
 }
 
 
-void printBoard(char *board, int boardSize)
+void printBoard(char *board, int boardX, int boardY)
 {
 	
-    char boardArray[boardSize][boardSize];
+    char boardArray[boardX][boardY];
     
     char tmpstr[500];
     strcpy(tmpstr, board);
@@ -57,14 +57,14 @@ void printBoard(char *board, int boardSize)
     int i = 0;
     int j = 0;
     int k = 0;
-    while (tmpstr[i] != '\0' && k < boardSize) 
+    while (tmpstr[i] != '\0' && k < boardY)
     {
         if (tmpstr[i] == 'w' || tmpstr[i] == '*' || tmpstr[i] == 'b') 
         {
             boardArray[k][j] = tmpstr[i];
             j++;
         }
-        if (j == boardSize)
+        if (j == boardX)
         {
             k++;
             j = 0;
@@ -75,10 +75,10 @@ void printBoard(char *board, int boardSize)
     
     // print board array
     printf(" +----------------+\n");
-    for (i = 0; i < boardSize; i++) 
+    for (i = 0; i < boardY; i++)
     {
-        printf("%i|", (boardSize-i));
-        for (j = 0; j < boardSize; j++) 
+        printf("%i|", (boardY-i));
+        for (j = 0; j < boardX; j++)
         {
             if (boardArray[i][j] == 'b')
             { // black man
@@ -127,7 +127,7 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
     bool quit = false;
     bool isReady = false;
     bool readGameName = false;
-    bool getBoard;
+    bool getBoard = false;
 
     // Spielerdaten
     int hisNumber = 0;
@@ -142,9 +142,11 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
     int ready;
     int time;
 
+    char won[3];
+
     // Board data
-    int BoardX = 0;
-    int BoardY = 0;
+    int boardX = 0;
+    int boardY = 0;
     char board[BUF_SIZE] = "";
     char boardLine[ZEILENLAENGE];
 
@@ -232,7 +234,7 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
             if(getBoard){
                 if(strncmp(word, "+ ENDBOARD", 10) == 0){
                     getBoard = false;
-                    printBoard(board);
+                    printBoard(board, boardX, boardY);
                 }else {
                     sscanf(word, "%*c %[^\n]s", boardLine);
                     strcat(board, boardLine);
@@ -241,8 +243,8 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
                 }
             }
             if(strncmp(word, "+ BOARD", 7) == 0){
-                sscanf(word, "%*c %*s %i,%i", &BoardX, &BoardY);
-                printf("Das Board ist %i x %i groß\n", BoardX, BoardY);
+                sscanf(word, "%*c %*s %i,%i", &boardX, &boardY);
+                printf("Das Board ist %i x %i groß\n", boardX, boardY);
                 getBoard = true;
                 strcpy(board, "");
             }
@@ -271,6 +273,44 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
             if (strncmp(word, "+ ENDBOARD", 10) == 0 && gameover) {
                 printf("%s\n", buf);
             }
+            if(strncmp(word, "+ PLAYER0WON", 12) == 0){
+                sscanf(word, "%*c %*s %s", won);
+                if(strncmp(won, "Yes", 3) == 0){
+                    if(myNumber == 0) {
+                        printf("%s hat gewonnen!\n", myName);
+                    }
+                    if(hisNumber == 0){
+                        printf("%s hat gewonnen!\n", hisName);
+                    }
+                }
+                if(strncmp(won, "No", 2) == 0){
+                    if(myNumber == 0) {
+                        printf("%s hat verloren!\n", myName);
+                    }
+                    if(hisNumber == 0){
+                        printf("%s hat verloren!\n", hisName);
+                    }
+                }
+            }
+            if(strncmp(word, "+ PLAYER1WON", 12) == 0){
+                sscanf(word, "%*c %*s %s", won);
+                if(strncmp(won, "Yes", 3) == 0){
+                    if(myNumber == 1) {
+                        printf("%s hat gewonnen!\n", myName);
+                    }
+                    if(hisNumber == 1){
+                        printf("%s hat gewonnen!\n", hisName);
+                    }
+                }
+                if(strncmp(won, "No", 2) == 0){
+                    if(myNumber == 1) {
+                        printf("%s hat verloren!\n", myName);
+                    }
+                    if(hisNumber == 1){
+                        printf("%s hat verloren!\n", hisName);
+                    }
+                }
+            }
             if (strncmp(word, "- No free player", 16) == 0) {
                 printf("Es ist ein Fehler aufgetreten: Kein freier Spieler!\n");
                 quit = true;
@@ -280,6 +320,7 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
                 quit = true;
             }
             if (strncmp(word, "+ QUIT", 6) == 0) {
+                printf("Die Sitzung wird beendet!\n");
                 quit = true;
             }
         }
