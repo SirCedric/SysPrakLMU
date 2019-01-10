@@ -26,6 +26,7 @@ struct player{
 
 
 struct shmData{
+	int flag;
 	int sem;
 	char gameName[BUF_SIZE];
 	char gameID[BUF_SIZE];
@@ -44,8 +45,6 @@ struct board{
  */
 
 
-
 struct parameters getConfig(char filename[BUF_SIZE]);
-
 
 int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_SIZE], struct shmData *gameData);
