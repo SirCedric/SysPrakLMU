@@ -153,8 +153,6 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
 
     do{
 
-
-
         recv(*socket, buf, BUF_SIZE, 0);
 
         for (word = strtok_r(buf, sep, &brkt); word; word = strtok_r(NULL, sep, &brkt)){
@@ -240,7 +238,6 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
                     sscanf(word, "%*c %[^\n]s", boardLine);
                     strcat(board, boardLine);
                     strcat(board, "\n");
-                    //printf("%s", board);
                 }
             }
             if(strncmp(word, "+ BOARD", 7) == 0){
@@ -274,6 +271,9 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
             }
             if (strncmp(word, "+ ENDBOARD", 10) == 0 && gameover) {
                 printf("%s\n", buf);
+            }
+            if(strncmp(word, "+ MOVEOK", 8) == 0){
+                printf("Der Zug war erfolgreich\n");
             }
             if(strncmp(word, "+ PLAYER0WON", 12) == 0){
                 sscanf(word, "%*c %*s %s", won);
@@ -325,8 +325,8 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
                 printf("Die Sitzung wird beendet!\n");
                 quit = true;
             }
-        } memset(buf, 0, BUF_SIZE);
-    }while(!quit);
+          } memset(buf, 0, BUF_SIZE);
+        } while(!quit);
 
 
     return 0;
