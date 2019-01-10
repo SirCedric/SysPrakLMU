@@ -16,12 +16,175 @@
 #include "config.h"
 
 
-struct shmData *globalData;
-
 void think(){
   if(!globalData->flag) printf("Signal recieved, but not from Connector.\n");
-  else printf("Signal from Connector recieved. Board: %s\n", globalData->board);
-  globalData->flag = 0;
+  else printf("Signal from Connector recieved.\n");
+
+  char boardArray[globalData->boardSize][globalData->boardSize];
+
+  char tmpstr[500];
+  strcpy(tmpstr, globalData->board);
+
+  char move[BUF_SIZE];
+  int player = globalData->playerData.num;
+  int boardSize = globalData->boardSize;
+  int i = 0;
+  int j = 0;
+  int k = 0;
+  while (tmpstr[i] != '\0' && k < globalData->boardSize)
+  {
+      if (tmpstr[i] == 'w' || tmpstr[i] == '*' || tmpstr[i] == 'b')
+      {
+          boardArray[k][j] = tmpstr[i];
+          j++;
+      }
+      if (j == globalData->boardSize)
+      {
+          k++;
+          j = 0;
+      }
+      i++;
+  }
+
+ // print board array
+    printf(" +----------------+\n");
+    for (i = 0; i < boardSize; i++)
+    {
+        printf("%i|", (boardSize-i));
+        for (j = 0; j < boardSize; j++)
+        {
+            if (boardArray[i][j] == 'b')
+            { // black man
+                    printf("\u26c0 ");
+            }
+            else if (boardArray[i][j] == 'B')
+            { // black king
+                    printf("\u26c1 ");
+            }
+            else if (boardArray[i][j] == 'w')
+            { // white man
+                    printf("\u26c2 ");
+            }
+            else if (boardArray[i][j] == 'W')
+            { // white king
+                    printf("\u26c3 ");
+            }
+            else
+            {
+                if((i % 2 == 0 && j % 2 == 0) || (i % 2 != 0 && j % 2 != 0))
+                {
+                    // white field
+                    printf("--");
+                }
+                else
+                {
+                    // black field
+                    printf("**");
+                    }
+            }
+        }
+        printf("|\n");
+    }
+
+    printf(" +----------------+\n");
+    printf("  A B C D E F G H\n");
+
+
+  // first run through to check if stones can be taken from the opposing player
+	for (int i = 0; i < boardSize; i++) 
+	{
+		for (int j = 0; j < boardSize; j++) 
+		{
+			if (player == 0 && boardArray[i][j] == 'w' && i != 0) 
+			{	
+				// Could possibly take a stone
+				if (boardArray[i-1][j+1] == 'b' && i-1 >= 0 && j+1 < boardSize) 
+				{
+				    // check possibility
+				        if (boardArray[i-1-1][j+1+1] == '*' && i-1-1 >= 0 && j+1+1 < boardSize)
+					{
+					    sprintf(move, "%c%i:%c%i\n", 65+j, 8-i, 65+j+1+1, 8-i+1+1);
+                                            goto DONE;
+					}
+				}
+				// Could possibly take a stone
+				else if (boardArray[i-1][j-1] == 'b' && i-1 >= 0 && j-1 >= 0)
+				{
+					// check possibility
+					if (boardArray[i-1-1][j-1-1] == '*' && i-1-1 >= 0 && j-1-1 >= 0)
+					{
+					    sprintf(move, "%c%i:%c%i\n", 65+j, 8-i, 65+j-1-1, 8-i+1+1);
+                                            goto DONE;
+					}
+				}
+			}
+			else if (player == 1 && boardArray[i][j] == 'b' && i != boardSize-1)
+			{
+                            // Could possibly take a stone
+                            if (boardArray[i+1][j-1] == 'w' && i+1 < boardSize && j-1 >= 0)
+                            {
+                                  // check possibility
+                                  if (boardArray[i+1+1][j-1-1] == '*' && i+1+1 < boardSize && j-1-1 >= 0)
+                                  {
+                          
+                                      printf(move, "c%i:%c%i\n", 65+j, 8-i, 65+j-1-1, 8-i-1-1);
+                                        goto DONE;
+                                  }
+                            }
+                            // Could possibly take a stone
+                            else if (boardArray[i+1][j+1] == 'w' && i-1 >= 0 && j+1 < boardSize) 
+                            {
+                                // check possibility
+                                if (boardArray[i+1+1][j+1+1] == '*' && i+1+1 < boardSize && j+1+1 < boardSize)
+                                {
+                                    sprintf(move, "%c%i:%c%i\n", 65+j, 8-i, 65+j+1+1, 8-i-1-1);
+                                    goto DONE;
+                                }
+                            }
+			} 
+		}
+	}
+	
+	// Second run through if no stones can be taken
+	for (int i = 0; i < boardSize; i++) 
+		{
+			for (int j = 0; j < boardSize; j++) 
+			{
+				if (player == 0 && boardArray[i][j] == 'w' && i != 0) 
+				{	
+					if (boardArray[i-1][j+1] == '*' && i-1 >= 0 && j+1 < boardSize) 
+					{
+				            sprintf(move, "%c%i:%c%i\n", 65+j, 8-i, 65+j+1, 8-i+1);
+                                            goto DONE;
+					}
+					else if (boardArray[i-1][j-1] == '*' && j-1 >= 0 && i-1 >= 0) 
+					{
+					    sprintf(move, "%c%i:%c%i\n", 65+j, 8-i, 65+j-1, 8-i+1);
+                                            goto DONE;
+					}
+				}
+				else if (player == 1 && boardArray[i][j] == 'b' && i != boardSize-1)
+				{
+					if (boardArray[i+1][j+1] == '*' && i+1 < boardSize && j+1 < boardSize) 
+					{
+					    sprintf(move, "%c%i:%c%i\n", 65+j, 8-i, 65+j+1, 8-i-1);
+                                            goto DONE;
+					}
+					else if (boardArray[i+1][j-1] == '*' && i+1 < boardSize && j-1 >= 0) 
+					{
+				            sprintf(move, "%c%i:%c%i\n", 65+j, 8-i, 65+j-1, 8-i-1);
+                                            goto DONE;
+					}
+				} 
+			}
+		}
+  DONE:
+  printf("Zug: %s", move);
+  char result[BUF_SIZE] = "PLAY ";
+  strcat(result, move);
+  write(globalData->pipeFd[1], result, strlen(result));
+  globalData->flag = 1;
+
 }
 
 int main(int argc, char* argv[]){
@@ -135,7 +298,8 @@ int main(int argc, char* argv[]){
     }
     else if (pid == 0){ //Kindprozess
 
-
+        // Schreibseite der pipe schließen
+        close(fd[1]);
 
 ////////// Attach shared memory //////////
 
@@ -153,12 +317,12 @@ int main(int argc, char* argv[]){
         strcpy(gameData->playerCount, playerCount);
         gameData->childID = getpid();
         gameData->parentID = getppid();
+        gameData->pipeFd[0] = fd[0];
 
         // Nun dürfen die Daten vom Elternprozess gelesen werden.
         gameData->sem = 1;
 
-        // Schreibseite der pipe schließen
-        close(fd[1]);
+       
 
         printf("Connector: performConnection()\n");
         if(performConnection(&sock, gameID, playerCount, gameData) != 0){
@@ -171,6 +335,8 @@ int main(int argc, char* argv[]){
     }
     else{ // Elterprozess
 
+        // close read side of pipe
+        close(fd[0]);
 
         struct shmData *gameData, *ptr;
 
@@ -191,13 +357,12 @@ int main(int argc, char* argv[]){
 
 
         gameData->sem = 0;
+        gameData->pipeFd[1] = fd[1];
 
 
         signal(SIGUSR1, think);
 
-        // Leseseite der pipe schließen
-        close(fd[1]);
-
+       
         if (wait(&status) != pid){
             perror("wait()");
             return -1;
