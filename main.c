@@ -128,7 +128,7 @@ int main(int argc, char* argv[]){
 
 
 
-////////// Create shared memory //////////
+////////// Attach shared memory //////////
 
         struct shmData *gameData, *ptr;
 
@@ -162,7 +162,9 @@ int main(int argc, char* argv[]){
     }
     else{ // Elterprozess
 
+
         struct shmData *gameData, *ptr;
+
 
         if((ptr = (struct shmData*) shmat(shmID, 0, 0)) == (struct shmData*) -1){
             perror("shmat parent");
@@ -179,6 +181,15 @@ int main(int argc, char* argv[]){
 
 
         gameData->sem = 0;
+
+
+        void think(){
+          if(!gameData->flag) printf("Signal recieved, but not from Connector.\n");
+          else printf("Signal from Connector recieved.\n");
+          gameData->flag = 0;
+        }
+
+        signal(SIGUSR1, think);
 
         // Leseseite der pipe schließen
         close(fd[1]);

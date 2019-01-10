@@ -18,6 +18,7 @@
 
 #include "config.h"
 
+
 void sendToServer(int *socket, char message[BUF_SIZE], bool print){
 
     memset(buf, 0, BUF_SIZE);
@@ -48,18 +49,18 @@ char *readfromServer(int *socket, bool print){
 
 void printBoard(char *board, int boardX, int boardY)
 {
-	
+
     char boardArray[boardX][boardY];
-    
+
     char tmpstr[500];
     strcpy(tmpstr, board);
-    
+
     int i = 0;
     int j = 0;
     int k = 0;
     while (tmpstr[i] != '\0' && k < boardY)
     {
-        if (tmpstr[i] == 'w' || tmpstr[i] == '*' || tmpstr[i] == 'b') 
+        if (tmpstr[i] == 'w' || tmpstr[i] == '*' || tmpstr[i] == 'b')
         {
             boardArray[k][j] = tmpstr[i];
             j++;
@@ -68,11 +69,11 @@ void printBoard(char *board, int boardX, int boardY)
         {
             k++;
             j = 0;
-        }	
+        }
         i++;
     }
-        
-    
+
+
     // print board array
     printf(" +----------------+\n");
     for (i = 0; i < boardY; i++)
@@ -96,14 +97,14 @@ void printBoard(char *board, int boardX, int boardY)
             { // white king
                     printf("\u26c3 ");
             }
-            else 
+            else
             {
                 if((i % 2 == 0 && j % 2 == 0) || (i % 2 != 0 && j % 2 != 0))
                 {
                     // white field
                     printf("--");
                 }
-                else 
+                else
                 {
                     // black field
                     printf("**");
@@ -152,7 +153,7 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
 
     do{
 
-        memset(buf, 0, BUF_SIZE);
+
 
         recv(*socket, buf, BUF_SIZE, 0);
 
@@ -263,7 +264,8 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
                 memset(message, 0, BUF_SIZE);
             }
             if (strncmp(word, "+ OKTHINK", 9) == 0) {
-                // TODO Thinker ansteuern
+                gameData -> flag = 1;
+                kill(gameData -> parentID, SIGUSR1);
                 printf("Sag dem Hirn bescheid!\n");
             }
             if(strncmp(word, "+ GAMEOVER", 10) == 0){
@@ -323,8 +325,9 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
                 printf("Die Sitzung wird beendet!\n");
                 quit = true;
             }
-        }
+        } memset(buf, 0, BUF_SIZE);
     }while(!quit);
+
 
     return 0;
 }
