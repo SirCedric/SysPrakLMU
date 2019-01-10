@@ -15,6 +15,15 @@
 
 #include "config.h"
 
+
+struct shmData *globalData;
+
+void think(){
+  if(!globalData->flag) printf("Signal recieved, but not from Connector.\n");
+  else printf("Signal from Connector recieved.\n");
+  globalData->flag = 0;
+}
+
 int main(int argc, char* argv[]){
 
     char gameID[BUF_SIZE];
@@ -172,6 +181,7 @@ int main(int argc, char* argv[]){
         }
 
         gameData = ptr;
+        globalData = gameData;
 
         while(!gameData->sem) usleep(100);
 
@@ -182,12 +192,6 @@ int main(int argc, char* argv[]){
 
         gameData->sem = 0;
 
-
-        void think(){
-          if(!gameData->flag) printf("Signal recieved, but not from Connector.\n");
-          else printf("Signal from Connector recieved.\n");
-          gameData->flag = 0;
-        }
 
         signal(SIGUSR1, think);
 
