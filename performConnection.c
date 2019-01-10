@@ -73,7 +73,6 @@ void printBoard(char *board, int boardX, int boardY)
         i++;
     }
 
-
     // print board array
     printf(" +----------------+\n");
     for (i = 0; i < boardY; i++)
@@ -233,9 +232,12 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
             if(getBoard){
                 if(strncmp(word, "+ ENDBOARD", 10) == 0){
                     getBoard = false;
+                    printf("%s", board);
+                    gameData->boardSize = boardX;
+                    strcpy(gameData->board, board);
                     printBoard(board, boardX, boardY);
                 }else {
-                    sscanf(word, "%*c %[^\n]s", boardLine);
+                    sscanf(word, "%*c %*i %[^\n]s", boardLine);
                     strcat(board, boardLine);
                     strcat(board, "\n");
                 }

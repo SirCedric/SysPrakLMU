@@ -20,7 +20,7 @@ struct shmData *globalData;
 
 void think(){
   if(!globalData->flag) printf("Signal recieved, but not from Connector.\n");
-  else printf("Signal from Connector recieved.\n");
+  else printf("Signal from Connector recieved. Board: %s\n", globalData->board);
   globalData->flag = 0;
 }
 

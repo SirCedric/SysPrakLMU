@@ -28,21 +28,19 @@ struct player{
 struct shmData{
 	int flag;
 	int sem;
+	int boardSize;
 	char gameName[BUF_SIZE];
 	char gameID[BUF_SIZE];
 	char playerCount[BUF_SIZE];
+	char board[BUF_SIZE];
 	pid_t childID;
 	pid_t parentID;
 	struct player playerData;
 };
 
-/*
-struct board{
-    int sizeX;
-    int sizeY;
-    char boardArray[sizeY][sizeX];
-};
- */
+
+
+
 
 
 struct parameters getConfig(char filename[BUF_SIZE]);
