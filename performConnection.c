@@ -82,19 +82,19 @@ void printBoard(char *board, int boardX, int boardY)
         {
             if (boardArray[i][j] == 'b')
             { // black man
-                    printf("\u26c0 ");
+                printf("\u26c0 ");
             }
             else if (boardArray[i][j] == 'B')
             { // black king
-                    printf("\u26c1 ");
+                printf("\u26c1 ");
             }
             else if (boardArray[i][j] == 'w')
             { // white man
-                    printf("\u26c2 ");
+                printf("\u26c2 ");
             }
             else if (boardArray[i][j] == 'W')
             { // white king
-                    printf("\u26c3 ");
+                printf("\u26c3 ");
             }
             else
             {
@@ -107,7 +107,7 @@ void printBoard(char *board, int boardX, int boardY)
                 {
                     // black field
                     printf("**");
-                    }
+                }
             }
         }
         printf("|\n");
@@ -154,7 +154,7 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
 
     fd_set myFDs;
     int maxFD;
-    
+
 
     do{
 
@@ -173,11 +173,12 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
             read(gameData->pipeFd[0], message, sizeof(message));
             send(*socket, message, strlen(message), 0);
             printf("Zug %s wird gesendet.\n", message);
+            readfromServer(socket, true);
         }
         if (FD_ISSET(*socket, &myFDs))
         {
 
-        
+
             recv(*socket, buf, BUF_SIZE, 0);
 
             for (word = strtok_r(buf, sep, &brkt); word; word = strtok_r(NULL, sep, &brkt)){
@@ -301,10 +302,6 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
                 if(strncmp(word, "+ MOVEOK", 8) == 0){
                     printf("Der Zug war erfolgreich\n");
                 }
-                if(strncmp(word, "- Did not get the expected PLAY command", 39) == 0)
-                {
-                    printf("Zug wurde nicht akzeptiert!\n");
-                }
                 if(strncmp(word, "+ PLAYER0WON", 12) == 0){
                     sscanf(word, "%*c %*s %s", won);
                     if(strncmp(won, "Yes", 3) == 0){
@@ -355,10 +352,10 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
                     printf("Die Sitzung wird beendet!\n");
                     quit = true;
                 }
-              } memset(buf, 0, BUF_SIZE);
-            }
+            } memset(buf, 0, BUF_SIZE);
+        }
 
-        } while(!quit);
+    } while(!quit);
 
 
     return 0;
