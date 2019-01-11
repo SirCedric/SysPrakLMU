@@ -122,8 +122,6 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
     char *word, *brkt;
     char *sep = "\n";
 
-    int result;
-
     // Booleans
     bool gameover = false;
     bool quit = false;
@@ -165,15 +163,13 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
         if (*socket > gameData->pipeFd[0]) maxFD = *socket;
         else maxFD = gameData->pipeFd[0];
 
-        result = select(maxFD+1, &myFDs, NULL, NULL, NULL);
-
-
+        select(maxFD+1, &myFDs, NULL, NULL, NULL);
+        
         if (FD_ISSET(gameData->pipeFd[0], &myFDs))
         {
             read(gameData->pipeFd[0], message, sizeof(message));
             send(*socket, message, strlen(message), 0);
             printf("Zug %s wird gesendet.\n", message);
-            readfromServer(socket, true);
         }
         if (FD_ISSET(*socket, &myFDs))
         {
