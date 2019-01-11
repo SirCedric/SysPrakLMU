@@ -1,20 +1,22 @@
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <netdb.h>
+#include <sys/types.h>
 #include <stdio.h>
-#include <errno.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <netdb.h>
+#include <errno.h>
+#include <arpa/inet.h>
 #include <unistd.h>
+#include <sys/wait.h>
+#include <sys/shm.h>
+#include <sys/ipc.h>
+#include <time.h>
+#include <locale.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 #include <signal.h>
 #include <stdbool.h>
-
-
-#include <netinet/in.h>
-#include <unistd.h>
-#include <signal.h>
 
 #include "config.h"
 
@@ -47,75 +49,7 @@ char *readfromServer(int *socket, bool print){
 }
 
 
-void printBoard(char *board, int boardX, int boardY)
-{
 
-    char boardArray[boardX][boardY];
-
-    char tmpstr[500];
-    strcpy(tmpstr, board);
-
-    int i = 0;
-    int j = 0;
-    int k = 0;
-    while (tmpstr[i] != '\0' && k < boardY)
-    {
-        if (tmpstr[i] == 'w' || tmpstr[i] == '*' || tmpstr[i] == 'b')
-        {
-            boardArray[k][j] = tmpstr[i];
-            j++;
-        }
-        if (j == boardX)
-        {
-            k++;
-            j = 0;
-        }
-        i++;
-    }
-
-    // print board array
-    printf(" +----------------+\n");
-    for (i = 0; i < boardY; i++)
-    {
-        printf("%i|", (boardY-i));
-        for (j = 0; j < boardX; j++)
-        {
-            if (boardArray[i][j] == 'b')
-            { // black man
-                printf("\u26c0 ");
-            }
-            else if (boardArray[i][j] == 'B')
-            { // black king
-                printf("\u26c1 ");
-            }
-            else if (boardArray[i][j] == 'w')
-            { // white man
-                printf("\u26c2 ");
-            }
-            else if (boardArray[i][j] == 'W')
-            { // white king
-                printf("\u26c3 ");
-            }
-            else
-            {
-                if((i % 2 == 0 && j % 2 == 0) || (i % 2 != 0 && j % 2 != 0))
-                {
-                    // white field
-                    printf("--");
-                }
-                else
-                {
-                    // black field
-                    printf("**");
-                }
-            }
-        }
-        printf("|\n");
-    }
-
-    printf(" +----------------+\n");
-    printf("  A B C D E F G H\n");
-}
 
 int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_SIZE], struct shmData *gameData){
 
@@ -170,6 +104,7 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
             read(gameData->pipeFd[0], message, sizeof(message));
             send(*socket, message, strlen(message), 0);
             printf("Zug %s wird gesendet.\n", message);
+            readfromServer(socket, true);
         }
         if (FD_ISSET(*socket, &myFDs))
         {
