@@ -1,3 +1,4 @@
+/*
 #include <sys/types.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,7 +18,7 @@
 #include <arpa/inet.h>
 #include <signal.h>
 #include <stdbool.h>
-
+*/
 #include "config.h"
 
 
@@ -90,23 +91,24 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
 
     do{
 
+        // Set up set of file descriptors for select()
         FD_ZERO(&myFDs);
         FD_SET(*socket, &myFDs);
         FD_SET(gameData->pipeFd[0], &myFDs);
 
+        // Set fd with bigger ID as maxFD
         if (*socket > gameData->pipeFd[0]) maxFD = *socket;
         else maxFD = gameData->pipeFd[0];
 
         select(maxFD+1, &myFDs, NULL, NULL, NULL);
         
-        if (FD_ISSET(gameData->pipeFd[0], &myFDs))
+        if (FD_ISSET(gameData->pipeFd[0], &myFDs)) //Something was sent through the pipe
         {
             read(gameData->pipeFd[0], message, sizeof(message));
             send(*socket, message, strlen(message), 0);
             printf("Zug %s wird gesendet.\n", message);
-            readfromServer(socket, true);
         }
-        if (FD_ISSET(*socket, &myFDs))
+        if (FD_ISSET(*socket, &myFDs)) // New message from server
         {
 
 
@@ -281,6 +283,10 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
                 }
                 if (strncmp(word, "+ QUIT", 6) == 0) {
                     printf("Die Sitzung wird beendet!\n");
+                    quit = true;
+                }
+                if (strncmp(word, "- Invalid", 9) == 0) {
+                    printf("Zug wird nicht akzeptiert: %s\n", word);
                     quit = true;
                 }
             } memset(buf, 0, BUF_SIZE);
