@@ -135,7 +135,7 @@ void think()
                     if (boardArray[i+1+1][j-1-1] == '*' && i+1+1 < boardSize && j-1-1 >= 0)
                     {  
                         printf("MOVE: BSL");
-                        printf(move, "c%i:%c%i\n", 65+j, 8-i, 65+j-1-1, 8-i-1-1);
+                        sprintf(move, "%c%i:%c%i\n", 65+j, 8-i, 65+j-1-1, 8-i-1-1);
                         goto DONE;
                     }
                 }
