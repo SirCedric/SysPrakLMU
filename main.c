@@ -61,11 +61,6 @@ int main(int argc, char* argv[]){
     strcat(playerCount, argv[4]);
     strcat(playerCount, "\n");
 
-    // setzt, die Formatausgabe so, dass wir nachher
-    // Unicode Symbole verwednen können.
-    // (möglicherweise unnötig, muss nochmal testen -max)
-    setlocale(LC_ALL, "en_US.UTF-8");
-
 
     ////////// Connect to server //////////
 
