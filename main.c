@@ -37,11 +37,18 @@ int main(int argc, char* argv[]){
                 } else strcpy(gameID, optarg);
                 break;
             case 'p' :
-                if(atoi(optarg) < 0 || atoi(optarg) > 2){
+                if(atoi(optarg) < 1 || atoi(optarg) > 2){
                     errno = 22;
                     perror("PlayerCount");
                     return -1;
-                } else strcpy(playerCount, optarg);
+                } else{
+                    if(atoi(optarg) == 1){
+                        strcpy(playerCount, "PLAYER 0\n");
+                    }
+                    if(atoi(optarg) == 2){
+                        strcpy(playerCount, "PLAYER 1\n");
+                    }
+                }
                 break;
             default:
                 errno = 22;
@@ -54,12 +61,7 @@ int main(int argc, char* argv[]){
     strcpy(gameID, "ID ");
     strcat(gameID, argv[2]);
     strcat(gameID, "\n");
-
-
-    strncpy(playerCount, "", sizeof(buf));
-    strcpy(playerCount, "PLAYER ");
-    strcat(playerCount, argv[4]);
-    strcat(playerCount, "\n");
+    
 
     // setzt, die Formatausgabe so, dass wir nachher
     // Unicode Symbole verwednen können.
