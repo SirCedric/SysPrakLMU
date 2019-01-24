@@ -11,4 +11,4 @@ play: main.c performConnection.c parameter.c
 	./sysprak-client -g $(GAME_ID) -p $(PLAYER)
 
 clean:
-	rm -f *.o play./
+	rm -f *.o play./ sysprak-client
