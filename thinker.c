@@ -71,8 +71,8 @@ void think()
     char tmpstr[500];
     strcpy(tmpstr, globalData->board);
 
-    char move[BUF_SIZE];
-    int player = globalData->playerData.num;
+    //char move[BUF_SIZE];
+    //int player = globalData->playerData.num;
     int i = 0;
     int j = 0;
     int k = 0;
@@ -93,9 +93,13 @@ void think()
     }
 
     // printing out board recieved from connector
-    printBoard(boardArray, boardSize);    
+    printBoard(boardArray, boardSize);
+
+    // create padded array board
+    makePaddedBoard(boardArray, boardSize);
 
 
+    /*
     // first run through to check if stones can be taken from the opposing player
     for (int i = 0; i < boardSize; i++) 
     {
@@ -198,5 +202,15 @@ DONE:
     strcat(result, move);
     write(globalData->pipeFd[1], result, strlen(result));
     globalData->flag = 1;
+     */
 
 }
+/*
+void checkMove(char *position){
+    translatePosition(position);
+}
+
+void checkBash(char *position){
+    translatePositon(position);
+}
+ */
