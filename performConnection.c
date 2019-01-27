@@ -159,21 +159,21 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
                 if(strncmp(word, "+ YOU", 5) == 0){
                     sscanf(word, "%*c %*s %i %s", &myNumber, myName);
                     if(myNumber == 0){
-                        hisNumber = 1;
-                        printf("Sie, %s, sind Spieler %i und spielen mit den hellen Figuren.\nSie müssen den ersten Zug machen!\n", myName, myNumber);
+                        hisNumber = 2;
+                        printf("Sie, %s, sind Spieler %i und spielen mit den hellen Figuren.\nSie müssen den ersten Zug machen!\n", myName, myNumber+1);
                         strcpy(gameData -> playerData.name, myName);
-                        gameData -> playerData.num = myNumber;
+                        gameData -> playerData.num = myNumber+1;
                     }
                     if(myNumber == 1){
-                        hisNumber = 0;
-                        printf("Sie, %s sind Spieler %i und spielen mit den dunklen Figuren.\nIhr Gegner muss den ersten Zug machen!\n", myName, myNumber);
+                        hisNumber = 1;
+                        printf("Sie, %s sind Spieler %i und spielen mit den dunklen Figuren.\nIhr Gegner muss den ersten Zug machen!\n", myName, myNumber+1);
                         strcpy(gameData -> playerData.name, myName);
-                        gameData -> playerData.num = myNumber;
+                        gameData -> playerData.num = myNumber+1;
                     }
                 }
                 if(isReady){
                     sscanf(word, "%*c %i %s %i", &player, playerName, &ready);
-                    if(player == hisNumber){
+                    if(player+1 == hisNumber){
                         strcpy(hisName, playerName);
                         if(ready == 0){
                             printf("Ihr Mitspieler: %s ist noch nicht bereit!\n", playerName);
