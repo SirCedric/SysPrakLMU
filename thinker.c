@@ -98,6 +98,18 @@ void think()
     // create padded array board
     makePaddedBoard(boardArray, boardSize);
 
+    switch (globalData->playerData.num){
+        case 1:
+            //TODO call white functions
+            break;
+        case 2:
+            //TODO call black functions
+            break;
+        default:
+            printf("Die Spielernummer: %i existiert nicht!\n", globalData->playerData.num);
+            break;
+    }
+
 
     /*
     // first run through to check if stones can be taken from the opposing player
