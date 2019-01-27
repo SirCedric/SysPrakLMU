@@ -106,6 +106,25 @@ int main(int argc, char* argv[]){
     }
 
 
+    ////////// Initialize paddedBoardArray invalid fields //////////
+    paddedBoard[0] = -1;
+    paddedBoard[1] = -1;
+    paddedBoard[2] = -1;
+    paddedBoard[3] = -1;
+    paddedBoard[4] = -1;
+    paddedBoard[9] = -1;
+    paddedBoard[18] = -1;
+    paddedBoard[27] = -1;
+    paddedBoard[36] = -1;
+    paddedBoard[41] = -1;
+    paddedBoard[42] = -1;
+    paddedBoard[43] = -1;
+    paddedBoard[44] = -1;
+    paddedBoard[45] = -1;
+    paddedBoard[46] = -1;
+    paddedBoard[47] = -1;
+
+
 
     ////////// Split into Connector and Thinker Process ///////////
     if((pid = fork()) < 0){

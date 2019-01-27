@@ -205,12 +205,3 @@ DONE:
      */
 
 }
-/*
-void checkMove(char *position){
-    translatePosition(position);
-}
-
-void checkBash(char *position){
-    translatePositon(position);
-}
- */
