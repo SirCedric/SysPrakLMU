@@ -124,6 +124,41 @@ int main(int argc, char* argv[]){
     paddedBoard[46] = -1;
     paddedBoard[47] = -1;
 
+    ///////// Initialize String Field for paddedArray //////////////
+    strcpy(paddedToString[5], "A1");
+    strcpy(paddedToString[6], "C1");
+    strcpy(paddedToString[7], "E1");
+    strcpy(paddedToString[8], "G1");
+    strcpy(paddedToString[10], "B2");
+    strcpy(paddedToString[11], "D2");
+    strcpy(paddedToString[12], "F2");
+    strcpy(paddedToString[13], "H2");
+    strcpy(paddedToString[14], "A3");
+    strcpy(paddedToString[15], "C3");
+    strcpy(paddedToString[16], "E3");
+    strcpy(paddedToString[17], "G3");
+    strcpy(paddedToString[19], "B4");
+    strcpy(paddedToString[20], "D4");
+    strcpy(paddedToString[21], "F4");
+    strcpy(paddedToString[22], "H4");
+    strcpy(paddedToString[23], "A5");
+    strcpy(paddedToString[24], "C5");
+    strcpy(paddedToString[25], "E5");
+    strcpy(paddedToString[27], "G5");
+    strcpy(paddedToString[28], "B6");
+    strcpy(paddedToString[29], "D6");
+    strcpy(paddedToString[30], "F6");
+    strcpy(paddedToString[31], "H6");
+    strcpy(paddedToString[32], "A7");
+    strcpy(paddedToString[33], "C7");
+    strcpy(paddedToString[34], "E7");
+    strcpy(paddedToString[35], "G7");
+    strcpy(paddedToString[37], "B8");
+    strcpy(paddedToString[38], "D8");
+    strcpy(paddedToString[39], "F8");
+    strcpy(paddedToString[40], "H8");
+
+
 
 
     ////////// Split into Connector and Thinker Process ///////////

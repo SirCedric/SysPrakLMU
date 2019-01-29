@@ -71,8 +71,8 @@ void think()
     char tmpstr[500];
     strcpy(tmpstr, globalData->board);
 
-    //char move[BUF_SIZE];
-    //int player = globalData->playerData.num;
+    char move[BUF_SIZE];
+    int player = globalData->playerData.num;
     int i = 0;
     int j = 0;
     int k = 0;
@@ -96,7 +96,7 @@ void think()
     printBoard(boardArray, boardSize);
 
     // create padded array board
-    makePaddedBoard(boardArray, boardSize);
+    //makePaddedBoard(boardArray, boardSize);
 
     /*
 
