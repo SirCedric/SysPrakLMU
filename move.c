@@ -1,28 +1,31 @@
 #include "config.h"
 
-int checkMoveRightWhite(char *position) {
+int checkMoveRightWhite(int position) {
     if (paddedBoard[position + 5] == 0) {
         printf("Found possible move right.\n");
-        possibleMovesRight[movesRightFound] = position;
-        movesRightFound++;
+        possibleMoves[moveNumber] = position;
+        moveNumber++;
         return 0;
     }
     return 1;
 }
-int checkMoveLeftWhite{
+int checkMoveLeftWhite(int position){
         if(paddedBoard[position+4] == 0){
             printf("Found possible move left.\n");
-            possibleMovesLeft[movesLeftFound] = position;
-            movesLeftFound++;
+            strcat(possibleMoves[moveNumber], paddedToString[position]);
+            strcat(possibleMoves[moveNumber], ":");
+            strcat(possibleMoves[moveNumber], , paddedToString[position+4]);
+            moveNumber++;
             return 0;
         }
         return 1;
 }
 
-int checkBashRightWhite(char *position){
+int checkBashRightWhite(int position){
     if(paddedBoard[position+5] == 3 || paddedBoard[position+5] == 4){
         if(checkMoveRight((position+5)) == 0){
             //TODO save move
+            strcat()
         }
         else if(checkMoveLeft((position+4)) == 0){
             //TODO save move
@@ -37,7 +40,7 @@ int checkBashRightWhite(char *position){
     return 1;
 }
 
-int checkBashLeftWhite(char *position){
+int checkBashLeftWhite(int position){
     if(paddedBoard[position+4] == 3 || paddedBoard[position+4] == 4){
         if(checkMoveRight((position+5)) == 0){
             //TODO save move
@@ -56,7 +59,7 @@ int checkBashLeftWhite(char *position){
 }
 
 
-int checkMoveRightBlack(char *position) {
+int checkMoveRightBlack(int position) {
     if (paddedBoard[position - 5] == 0) {
         printf("Found possible move right.\n");
         possibleMovesRight[movesRightFound] = position;
@@ -65,7 +68,7 @@ int checkMoveRightBlack(char *position) {
     }
     return 1;
 }
-int checkMoveLeftBlack{
+int checkMoveLeftBlack(int position){
         if(paddedBoard[position-4] == 0){
             printf("Found possible move left.\n");
             possibleMovesLeft[movesLeftFound] = position;
@@ -75,7 +78,7 @@ int checkMoveLeftBlack{
         return 1;
 }
 
-int checkBashRightBlack(char *position){
+int checkBashRightBlack(int position){
     if(paddedBoard[position-5] == 1 || paddedBoard[position-5] == 2){
         if(checkMoveRight((position-5)) == 0){
             //TODO save move
@@ -93,7 +96,7 @@ int checkBashRightBlack(char *position){
     return 1;
 }
 
-int checkBashLeftBlack(char *position){
+int checkBashLeftBlack(int position){
     if(paddedBoard[position-4] == 1 || paddedBoard[position-4] == 2){
         if(checkMoveRight((position-5)) == 0){
             //TODO save move
