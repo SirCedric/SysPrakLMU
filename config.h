@@ -71,6 +71,11 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
 
 void think();
 
+int queenBashIndex;
+int queenMoveIndex;
+int bashIndex;
+int moveIndex;
+
 int paddedBoard[48];
 
 int moveNumber;

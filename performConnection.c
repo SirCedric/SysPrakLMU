@@ -106,7 +106,7 @@ int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_S
         {
             read(gameData->pipeFd[0], message, sizeof(message));
             send(*socket, message, strlen(message), 0);
-            printf("Zug %s wird gesendet.\n", message);
+            //printf("Zug %s wird gesendet.\n", message);
         }
         if (FD_ISSET(*socket, &myFDs)) // New message from server
         {
