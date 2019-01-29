@@ -70,3 +70,28 @@ struct parameters getConfig(char filename[BUF_SIZE]);
 int performConnection(int *socket, char gameID[BUF_SIZE], char playerCount[BUF_SIZE], struct shmData *gameData);
 
 void think();
+
+int paddedBoard[48];
+
+int moveNumber;
+
+
+char possibleMoves[12][24];
+
+char paddedToString[48][3];
+
+
+
+void makePaddedBoard(char **boardArray, int boardSize);
+
+int checkMoveLeftBlack(int position);
+int checkMoveLeftWhite(int position);
+
+int checkMoveRightBlack(int position);
+int checkMoveRightWhite(int position);
+
+int checkBashLeftBlack(int position);
+int checkBashLeftWhite(int position);
+
+int checkBashRightBlack(int position);
+int checkBashRightWhite(int position);

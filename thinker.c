@@ -98,9 +98,24 @@ void think()
     // create padded array board
     makePaddedBoard(boardArray, boardSize);
 
+    /*
+
+    moveNumber = 0;
+
     switch (globalData->playerData.num){
         case 1:
             //TODO call white functions
+            for(int i = 0; i < 48; i++){
+                if(paddedBoard[i] == 1){
+                    if(checkBashLeftWhite(paddedBoard[i]) == 0){
+                        strcat(possibleMovesLeft)
+
+                    }
+                }
+                if(paddedBoard[i] == 2){
+
+                }
+            }
             break;
         case 2:
             //TODO call black functions
@@ -110,8 +125,10 @@ void think()
             break;
     }
 
+     */
 
-    /*
+
+
     // first run through to check if stones can be taken from the opposing player
     for (int i = 0; i < boardSize; i++) 
     {
@@ -214,6 +231,5 @@ DONE:
     strcat(result, move);
     write(globalData->pipeFd[1], result, strlen(result));
     globalData->flag = 1;
-     */
 
 }
