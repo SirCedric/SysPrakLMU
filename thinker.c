@@ -1,6 +1,15 @@
 #include "config.h"
 
-
+// frees 2D char array with coresponding Index
+void freeList(char **list, int listIndex)
+{
+    // free list
+    for (int i = 0; i < listIndex; i++)
+    {
+        free(list[i]);
+    }
+    free(list);
+}
 
 // Gets char array pointer and prints out formated board
 void printBoard(char **board, int boardSize)
@@ -170,6 +179,7 @@ int queenCheckForMoveBash(char pos[], char **boardArray, int boardSize, char **q
                     boardArray[i+1+1][j+1+1] = playerQueen;
                     // recursively call function in case of multiple jumps
                     queenCheckForMoveBash(tmpPos, boardArray, boardSize, queenBashList); 
+                    free(move);
                     return 0;
                 }
                break;
@@ -209,6 +219,7 @@ int queenCheckForMoveBash(char pos[], char **boardArray, int boardSize, char **q
                     boardArray[i+1+1][j-1-1] = playerQueen;
                     // recursively call function in case of multiple jumps
                     queenCheckForMoveBash(tmpPos, boardArray, boardSize, queenBashList); 
+                    free(move);
                     return 0;
                 }
                 break;
@@ -248,6 +259,7 @@ int queenCheckForMoveBash(char pos[], char **boardArray, int boardSize, char **q
                     boardArray[i-1-1][j+1+1] = playerQueen;
                     // recursively call function in case of multiple jumps
                     queenCheckForMoveBash(tmpPos, boardArray, boardSize, queenBashList); 
+                    free(move);
                     return 0;
                 }
                 break;
@@ -287,6 +299,7 @@ int queenCheckForMoveBash(char pos[], char **boardArray, int boardSize, char **q
                     boardArray[i-1-1][j-1-1] = playerQueen;
                     // recursively call function in case of multiple jumps
                     queenCheckForMoveBash(tmpPos, boardArray, boardSize, queenBashList); 
+                    free(move);
                     return 0;
                 }
                 break;
@@ -491,7 +504,7 @@ int checkForBash(char pos[], char **boardArray, int boardSize, char **bashList)
     } 
     
     //TODO: Speicherverwaltung prüfen:
-    //free(move);
+    free(move);
     
     if (foundMove == false && strlen(tmpPos) > 2)  
     {
@@ -754,13 +767,47 @@ void think()
                     // choose random move and send to connector
                     strcat(result, queenMoveList[rand() % queenMoveIndex]);
                 }
+                // free queenMoveList
+                for (i = 0; i < queenMoveIndex; i++)
+                {
+                    free(queenMoveList[i]);
+                }
                 free(queenMoveList);
+            }
+            // free moveList
+            for (i = 0; i < moveIndex; i++)
+            {
+                free(moveList[i]);
             }
             free(moveList);
         }
+        // free queenMoveList
+        for (i = 0; i < bashIndex; i++)
+        {
+            free(bashList[i]);
+        }
+        free(bashList);
     }
-
+    // free queenBashList
+    for (i = 0; i < queenBashIndex; i++)
+    {
+        free(queenBashList[i]);
+    }
     free(queenBashList);
+
+    // free stoneList
+    for (i = 0; i < stoneListIndex; i++)
+    {
+        free(stoneList[i]);
+    }
+    free(stoneList);
+
+    // free boardArray
+    for (i = 0; i < boardSize; i++)
+    {
+        free(boardArray[i]);
+    }
+    free(boardArray);
 
     // finish PLAY message and send to connector through pipe
     strcat(result, "\n");
