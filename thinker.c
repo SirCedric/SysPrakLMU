@@ -444,7 +444,7 @@ int checkForBash(char pos[], char **boardArray, int boardSize, char **bashList)
             }
         }
     }
-    else if (player == 2 && (boardArray[i][j] == 'b' || boardArray[i][j] == 'B') && i != boardSize-1)
+    else if (player == 2 && (boardArray[i][j] == 'b' || boardArray[i][j] == 'B'))
     {
         // Could possibly take a stone
         // first check if move is in bounds
@@ -469,8 +469,9 @@ int checkForBash(char pos[], char **boardArray, int boardSize, char **bashList)
         }
         // Could possibly take a stone
         // first check if move is in bounds
-        if( i-1 >= 0 && j+1 < boardSize && i+1+1 < boardSize && j+1+1 < boardSize)
+        if( i+1 < boardSize && j+1 < boardSize && i+1+1 < boardSize && j+1+1 < boardSize)
         {
+            printf("!test.\n");
             if ((boardArray[i+1][j+1] == 'w' || boardArray[i+1][j+1] == 'W') && boardArray[i+1+1][j+1+1] == '*') 
             {
                 printf("MOVE: BCR\n");
