@@ -59,7 +59,7 @@ void resetBoard(char **boardArray, int boardSize)
     // translate recieved string into boardArray
     while (globalData->board[i] != '\0' && k < globalData->boardSize)
     {
-        if (globalData->board[i] == 'w' | globalData->board[i] == 'W' | globalData->board[i] == '*' | globalData->board[i] == 'b' | globalData->board[i] == 'B')
+        if ((globalData->board[i] == 'w') | (globalData->board[i] == 'W') | (globalData->board[i] == '*') | (globalData->board[i] == 'b') | (globalData->board[i] == 'B'))
         {
             boardArray[k][j] = globalData->board[i];
             j++;
@@ -246,8 +246,6 @@ int queenCheckForMoveBash(char pos[], char **boardArray, int boardSize, char **q
     char tmpPos[BUF_SIZE];
     strcpy(tmpPos, pos);
     
-    bool foundMove = false;
-    
     int player = globalData->playerData.num;
     char *move = malloc(2 * sizeof(char*));
     
@@ -283,7 +281,6 @@ int queenCheckForMoveBash(char pos[], char **boardArray, int boardSize, char **q
                 if ((boardArray[i+1][j+1] == opStone || boardArray[i+1][j+1] == opQueen) && boardArray[i+1+1][j+1+1] == '*')
                 {
                     printf("MOVE: QMDCR\n");
-                    foundMove = true;
                     move[0] = 65+j+1+1;
                     move[1] = 8-i-1-1+48;
                     strcat(tmpPos, ":");
@@ -321,12 +318,11 @@ int queenCheckForMoveBash(char pos[], char **boardArray, int boardSize, char **q
             {
                 if ((boardArray[i+1][j-1] == opStone || boardArray[i+1][j-1] == opQueen) && boardArray[i+1+1][j-1-1] == '*')
                 {
-                    printf("MOVE: QMDCL\n");
-                    foundMove = true;
-                    move[0] = 65+j-1-1;
+                    printf("MOVE: QMDCL!!!!!!");
                     move[1] = 8-i-1-1+48;
                     strcat(tmpPos, ":");
                     strcat(tmpPos, move);
+                    printf(" %s\n", move);
                     // execute move on board for recursive function call
                     boardArray[i][j] = '*';
                     boardArray[i+1][j-1] = '*';
@@ -361,7 +357,6 @@ int queenCheckForMoveBash(char pos[], char **boardArray, int boardSize, char **q
                 if ((boardArray[i-1][j+1] == opStone || boardArray[i-1][j+1] == opQueen) && boardArray[i-1-1][j+1+1] == '*')
                 {
                     printf("MOVE: QMUCR\n");
-                    foundMove = true;
                     move[0] = 65+j+1+1;
                     move[1] = 8-i+1+1+48;
                     strcat(tmpPos, ":");
@@ -401,7 +396,6 @@ int queenCheckForMoveBash(char pos[], char **boardArray, int boardSize, char **q
                 if ((boardArray[i-1][j-1] == opStone || boardArray[i-1][j-1] == opQueen) && boardArray[i-1-1][j-1-1] == '*')
                 {
                     printf("MOVE: QDCL\n");
-                    foundMove = true;
                     move[0] = 65+j-1-1;
                     move[1] = 8-i+1+1+48;
                     strcat(tmpPos, ":");
@@ -739,7 +733,7 @@ void think()
     // translate recieved string into boardArray
     while (globalData->board[i] != '\0' && k < globalData->boardSize)
     {
-        if (globalData->board[i] == 'w' | globalData->board[i] == 'W' | globalData->board[i] == '*' | globalData->board[i] == 'b' | globalData->board[i] == 'B')
+        if ((globalData->board[i] == 'w') | (globalData->board[i] == 'W') | (globalData->board[i] == '*') | (globalData->board[i] == 'b') | (globalData->board[i] == 'B'))
         {
             boardArray[k][j] = globalData->board[i];
 
