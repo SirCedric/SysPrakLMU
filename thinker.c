@@ -286,7 +286,7 @@ int queenCheckForMoveBash(char pos[], char **boardArray, int boardSize, char **q
                     strcat(tmpPos, ":");
                     strcat(tmpPos, move);
                     // execute move on board for recursive function call
-                    boardArray[i][j] = '*';
+                    boardArray[a[1]][a[0]] = '*';
                     boardArray[i+1][j+1] = '*';
                     boardArray[i+1+1][j+1+1] = playerQueen;
                     // recursively call function in case of multiple jumps
@@ -318,13 +318,13 @@ int queenCheckForMoveBash(char pos[], char **boardArray, int boardSize, char **q
             {
                 if ((boardArray[i+1][j-1] == opStone || boardArray[i+1][j-1] == opQueen) && boardArray[i+1+1][j-1-1] == '*')
                 {
-                    printf("MOVE: QMDCL!!!!!!");
+                    printf("MOVE: QMDCL\n");
+                    move[0] = 65+j-1-1;
                     move[1] = 8-i-1-1+48;
                     strcat(tmpPos, ":");
                     strcat(tmpPos, move);
-                    printf(" %s\n", move);
                     // execute move on board for recursive function call
-                    boardArray[i][j] = '*';
+                    boardArray[a[1]][a[0]] = '*';
                     boardArray[i+1][j-1] = '*';
                     boardArray[i+1+1][j-1-1] = playerQueen;
                     // recursively call function in case of multiple jumps
@@ -362,7 +362,7 @@ int queenCheckForMoveBash(char pos[], char **boardArray, int boardSize, char **q
                     strcat(tmpPos, ":");
                     strcat(tmpPos, move);
                     // execute move on board for recursive function call
-                    boardArray[i][j] = '*';
+                    boardArray[a[1]][a[0]] = '*';
                     boardArray[i-1][j+1] = '*';
                     boardArray[i-1-1][j+1+1] = playerQueen;
                     // recursively call function in case of multiple jumps
@@ -401,7 +401,7 @@ int queenCheckForMoveBash(char pos[], char **boardArray, int boardSize, char **q
                     strcat(tmpPos, ":");
                     strcat(tmpPos, move);
                     // execute move on board for recursive function call
-                    boardArray[i][j] = '*';
+                    boardArray[a[1]][a[0]] = '*';
                     boardArray[i-1][j-1] = '*';
                     boardArray[i-1-1][j-1-1] = playerQueen;
                     // recursively call function in case of multiple jumps
@@ -419,7 +419,7 @@ int queenCheckForMoveBash(char pos[], char **boardArray, int boardSize, char **q
     i = a[1];
     j = a[0];
     
-    //free(move);
+    free(move);
 
     return 0;
 }
@@ -483,7 +483,7 @@ int queenCheckForMove(char pos[], char **boardArray, int boardSize, char **queen
             }
         }
         
-        //free(move);
+        free(move);
 
     return 0;
 }
@@ -500,6 +500,7 @@ int checkForBash(char pos[], char **boardArray, int boardSize, char **bashList)
     
     int player = globalData->playerData.num;
     char *move = malloc(2 * sizeof(char*));
+
     
     int *a = translatePosition(tmpPos, 0);
     
@@ -600,6 +601,7 @@ int checkForBash(char pos[], char **boardArray, int boardSize, char **bashList)
         }
     } 
     
+    //TODO: Speicherverwaltung prüfen:
     //free(move);
     
     if (foundMove == false && strlen(tmpPos) > 2)  
@@ -607,6 +609,7 @@ int checkForBash(char pos[], char **boardArray, int boardSize, char **bashList)
         printf("writing bash move to bashList.\n");
         strcpy(bashList[bashIndex], tmpPos);
         bashIndex++;
+        printf("%s\n", bashList[bashIndex]);
         resetBoard(boardArray, boardSize);
         return 0;
     }
@@ -680,7 +683,7 @@ int checkForMove(char *pos, char **boardArray, int boardSize, char **moveList)
         }
     } 
     
-    //free(move);
+    free(move);
     
     return -1;
 }
@@ -874,13 +877,13 @@ void think()
                     strcat(result, queenMoveList[rand() % queenMoveIndex]);
                 }
                 
-                //free(queenMoveList);
+                free(queenMoveList);
             }
-            //free(moveList);
+            free(moveList);
         }
     }
 
-    //free(queenBashList);
+    free(queenBashList);
 
     // finish PLAY message and send to connector through pipe
     strcat(result, "\n");
