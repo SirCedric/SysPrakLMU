@@ -11,8 +11,6 @@ int main(int argc, char* argv[]){
     char gameID[BUF_SIZE];
     char playerCount[BUF_SIZE];
     int sock;
-    void *ptr;
-    char addrstr[100];
     int status;
     pid_t pid;
 
@@ -94,11 +92,7 @@ int main(int argc, char* argv[]){
         perror("connect");
         return -1;
     }
-    ptr = &((struct sockaddr_in *) res->ai_addr)->sin_addr;
-    inet_ntop (res->ai_family, ptr, addrstr, 100);
-    printf ("IPv%d address: %s\n", res->ai_family,
-            addrstr);
-
+    freeaddrinfo(res);
 
     if((shmID = shmget(key, sizeof(struct shmData), IPC_CREAT | 0666)) < 0){
         perror("shmget");
@@ -199,7 +193,6 @@ int main(int argc, char* argv[]){
             perror("performConnection(): ");
         }
 
-        freeaddrinfo(res);
         close(sock);
 
     }
