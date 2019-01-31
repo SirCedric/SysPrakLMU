@@ -1,6 +1,21 @@
 #include "config.h"
 
 
+struct posArray
+{
+    int pos[2];
+};
+
+// frees 2D char array with coresponding Index
+void freeList(char **list, int listIndex)
+{
+    // free list
+    for (int i = 0; i < listIndex; i++)
+    {
+        free(list[i]);
+    }
+    free(list);
+}
 
 // Gets char array pointer and prints out formated board
 void printBoard(char **board, int boardSize)
@@ -80,7 +95,7 @@ void resetBoard(char **boardArray, int boardSize)
 // backtrack is the amount of steps back you want to take in the given move
 // with move = "A3:B4:C5" and backtrack=0 you get "C5" as int array
 // with backtrack=1 you get B4 and so forth.
-int * translatePosition(char move[], int backtrack)
+struct posArray translatePosition(char move[], int backtrack)
 {
 	
     int length = strlen(move);
@@ -90,23 +105,23 @@ int * translatePosition(char move[], int backtrack)
     int x = move[length-2-backtrack];
     int y = move[length-1-backtrack];
     
-    static int retval[2];
-    retval[0] = x-65;
-    retval[1] = globalData->boardSize-(y-48);
+    struct posArray posPos;
+    posPos.pos[0] = x-65;
+    posPos.pos[1] = globalData->boardSize-(y-48);
     
-    return retval;
+    return posPos;
 }
 
-
+/*
 // Gets a board and a move, executes move on board
 // and returns changed board
 char** makeMove(char **board, char *move)
 {
         
     // get second to last position, save stone and empty field 
-    int *a = translatePosition(move, 1);
-    char tmp = board[a[1]][a[0]];
-    board[a[1]][a[0]] = '*';
+    struct posArray curPos = translatePosition(move, 1);
+    char tmp = board[curPos.pos[1]][curPos.pos[0]];
+    board[curPos.pos[1]][curPos.pos[0]] = '*';
 
     // get last position and move saved stone to that field
     int *b = translatePosition(move, 0);
@@ -115,6 +130,7 @@ char** makeMove(char **board, char *move)
     // return new board array
     return board;
 }
+*/
 
 //TODO: logic for queen:
 int queenCheckForMoveBash(char pos[], char **boardArray, int boardSize, char **queenBashList)
@@ -127,10 +143,10 @@ int queenCheckForMoveBash(char pos[], char **boardArray, int boardSize, char **q
 
     bool foundMove = false;
     
-    int *a = translatePosition(tmpPos, 0);
+    struct posArray curPos = translatePosition(tmpPos, 0);
     
-    int i = a[1];
-    int j = a[0];
+    int i = curPos.pos[1];
+    int j = curPos.pos[0];
 
     char playerQueen = 'W';
     char opStone = 'b';
@@ -165,11 +181,12 @@ int queenCheckForMoveBash(char pos[], char **boardArray, int boardSize, char **q
                     strcat(tmpPos, ":");
                     strcat(tmpPos, move);
                     // execute move on board for recursive function call
-                    boardArray[a[1]][a[0]] = '*';
+                    boardArray[curPos.pos[1]][curPos.pos[0]] = '*';
                     boardArray[i+1][j+1] = '*';
                     boardArray[i+1+1][j+1+1] = playerQueen;
                     // recursively call function in case of multiple jumps
                     queenCheckForMoveBash(tmpPos, boardArray, boardSize, queenBashList); 
+                    free(move);
                     return 0;
                 }
                break;
@@ -179,8 +196,8 @@ int queenCheckForMoveBash(char pos[], char **boardArray, int boardSize, char **q
         else break;
     }
     // reset position
-    i = a[1];
-    j = a[0];
+    i = curPos.pos[1];
+    j = curPos.pos[0];
     
         
     // second run through
@@ -204,11 +221,12 @@ int queenCheckForMoveBash(char pos[], char **boardArray, int boardSize, char **q
                     strcat(tmpPos, ":");
                     strcat(tmpPos, move);
                     // execute move on board for recursive function call
-                    boardArray[a[1]][a[0]] = '*';
+                    boardArray[curPos.pos[1]][curPos.pos[0]] = '*';
                     boardArray[i+1][j-1] = '*';
                     boardArray[i+1+1][j-1-1] = playerQueen;
                     // recursively call function in case of multiple jumps
                     queenCheckForMoveBash(tmpPos, boardArray, boardSize, queenBashList); 
+                    free(move);
                     return 0;
                 }
                 break;
@@ -218,8 +236,8 @@ int queenCheckForMoveBash(char pos[], char **boardArray, int boardSize, char **q
         else break;
     }
     // reset position
-    i = a[1];
-    j = a[0];
+    i = curPos.pos[1];
+    j = curPos.pos[0];
 
 
     // third run through
@@ -243,11 +261,12 @@ int queenCheckForMoveBash(char pos[], char **boardArray, int boardSize, char **q
                     strcat(tmpPos, ":");
                     strcat(tmpPos, move);
                     // execute move on board for recursive function call
-                    boardArray[a[1]][a[0]] = '*';
+                    boardArray[curPos.pos[1]][curPos.pos[0]] = '*';
                     boardArray[i-1][j+1] = '*';
                     boardArray[i-1-1][j+1+1] = playerQueen;
                     // recursively call function in case of multiple jumps
                     queenCheckForMoveBash(tmpPos, boardArray, boardSize, queenBashList); 
+                    free(move);
                     return 0;
                 }
                 break;
@@ -258,8 +277,8 @@ int queenCheckForMoveBash(char pos[], char **boardArray, int boardSize, char **q
         else break;
     }
     // reset position
-    i = a[1];
-    j = a[0];
+    i = curPos.pos[1];
+    j = curPos.pos[0];
 
     // fourth run through
     while(i >=0 && i < boardSize && j >= 0 && j < boardSize)
@@ -282,11 +301,12 @@ int queenCheckForMoveBash(char pos[], char **boardArray, int boardSize, char **q
                     strcat(tmpPos, ":");
                     strcat(tmpPos, move);
                     // execute move on board for recursive function call
-                    boardArray[a[1]][a[0]] = '*';
+                    boardArray[curPos.pos[1]][curPos.pos[0]] = '*';
                     boardArray[i-1][j-1] = '*';
                     boardArray[i-1-1][j-1-1] = playerQueen;
                     // recursively call function in case of multiple jumps
                     queenCheckForMoveBash(tmpPos, boardArray, boardSize, queenBashList); 
+                    free(move);
                     return 0;
                 }
                 break;
@@ -297,8 +317,8 @@ int queenCheckForMoveBash(char pos[], char **boardArray, int boardSize, char **q
         else break;
     }
     // reset position
-    i = a[1];
-    j = a[0];
+    i = curPos.pos[1];
+    j = curPos.pos[0];
     
     free(move);
 
@@ -322,10 +342,11 @@ int queenCheckForMove(char pos[], char **boardArray, int boardSize, char **queen
 {
     char *move = calloc(2, sizeof(char*));
     
-    int *a = translatePosition(pos, 0);
+    struct posArray curPos = translatePosition(pos, 0);
+
     
-    int i = a[1];
-    int j = a[0];
+    int i = curPos.pos[1];
+    int j = curPos.pos[0];
     
     printf("i:%i, j:%i, field:%c\n", i, j, boardArray[i][j]);
 
@@ -391,10 +412,10 @@ int checkForBash(char pos[], char **boardArray, int boardSize, char **bashList)
     int player = globalData->playerData.num;
     char *move = calloc(2, sizeof(char*));
 
-    int *a = translatePosition(tmpPos, 0);
+    struct posArray curPos = translatePosition(tmpPos, 0);
     
-    int i = a[1];
-    int j = a[0];
+    int i = curPos.pos[1];
+    int j = curPos.pos[0];
 
     //printf("Before: %s, i: %i, j: %i\n", tmpPos, i, j);
     
@@ -491,13 +512,18 @@ int checkForBash(char pos[], char **boardArray, int boardSize, char **bashList)
     } 
     
     //TODO: Speicherverwaltung prüfen:
-    //free(move);
+    free(move);
     
     if (foundMove == false && strlen(tmpPos) > 2)  
     {
         printf("writing bash move(%s) to bashList.\n", tmpPos);
         strcpy(bashList[bashIndex], tmpPos);
         bashIndex++;
+        for (int i = 0; i < bashIndex; i++)
+        {
+            printf("%s\n", bashList[i]);
+        }
+        printf("bashIndex: %i\n", bashIndex);
         printf("%s\n", bashList[bashIndex]);
         resetBoard(boardArray, boardSize);
         return 0;
@@ -514,10 +540,10 @@ int checkForMove(char *pos, char **boardArray, int boardSize, char **moveList)
     int player = globalData->playerData.num;
     char *move = calloc(2, sizeof(char*));
     
-    int *a = translatePosition(pos, 0);
+    struct posArray curPos = translatePosition(pos, 0);
     
-    int i = a[1];
-    int j = a[0];
+    int i = curPos.pos[1];
+    int j = curPos.pos[0];
     
     printf("i:%i, j:%i, field:%c\n", i, j, boardArray[i][j]);
     // Second run through if no stones can be taken
@@ -601,7 +627,6 @@ void think()
     int j = 0;
     int k = 0;
     char result[BUF_SIZE] = "PLAY ";
-    srand(time(NULL));
 
     char **stoneList = (char**) calloc(boardSize*3/2, sizeof(char*));
     
@@ -676,7 +701,7 @@ void think()
     // if queen moves are available, choose one and send it.
     if (queenBashIndex > 0)
     {
-        strcat(result, queenBashList[rand() % queenBashIndex]);
+        strcat(result, queenBashList[0]);
     }
     // if there is no queen move available
     else
@@ -694,17 +719,15 @@ void think()
         printf("checking for possible bashes:\n");
         for (i = 0; i < stoneListIndex; i++) 
         {
-            
             checkForBash(stoneList[i], boardArray, boardSize, bashList);
         }
         
         // check if move was found that could take stone
         if (bashIndex > 0)
         {
-            strcat(result, bashList[rand() % bashIndex]);
-
+            strcat(result, bashList[0]);
         }
-        //if not generate a list of movable stones and move a random one
+        //if not generate a list of movable stones and move the first one
         else 
         {
             // create List with possible moves
@@ -727,8 +750,8 @@ void think()
             }
             if (moveIndex > 0)
             {
-                // choose random move and send to connector
-                strcat(result, moveList[rand() % moveIndex]);
+                // choose first move and send to connector
+                strcat(result, moveList[0]);
             }
             else
             {
@@ -751,16 +774,50 @@ void think()
 
                 if (queenMoveIndex > 0)
                 {
-                    // choose random move and send to connector
-                    strcat(result, queenMoveList[rand() % queenMoveIndex]);
+                    // choose first move and send to connector
+                    strcat(result, queenMoveList[0]);
+                }
+                // free queenMoveList
+                for (i = 0; i < boardSize*3*2; i++)
+                {
+                    free(queenMoveList[i]);
                 }
                 free(queenMoveList);
             }
+            // free moveList
+            for (i = 0; i < boardSize*3*2; i++)
+            {
+                free(moveList[i]);
+            }
             free(moveList);
         }
+        // free bashList
+        for (i = 0; i < boardSize*3*3; i++)
+        {
+            free(bashList[i]);
+        }
+        free(bashList);
     }
-
+    // free queenBashList
+    for (i = 0; i < boardSize*3*3; i++)
+    {
+        free(queenBashList[i]);
+    }
     free(queenBashList);
+
+    // free stoneList
+    for (i = 0; i < boardSize*3/2; i++)
+    {
+        free(stoneList[i]);
+    }
+    free(stoneList);
+
+    // free boardArray
+    for (i = 0; i < boardSize; i++)
+    {
+        free(boardArray[i]);
+    }
+    free(boardArray);
 
     // finish PLAY message and send to connector through pipe
     strcat(result, "\n");
