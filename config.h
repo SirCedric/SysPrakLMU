@@ -86,17 +86,4 @@ char possibleMoves[12][24];
 char paddedToString[48][3];
 
 
-
-void makePaddedBoard(char **boardArray, int boardSize);
-
-int checkMoveLeftBlack(int position);
-int checkMoveLeftWhite(int position);
-
-int checkMoveRightBlack(int position);
-int checkMoveRightWhite(int position);
-
-int checkBashLeftBlack(int position);
-int checkBashLeftWhite(int position);
-
-int checkBashRightBlack(int position);
-int checkBashRightWhite(int position);
+void freeList(char **list, int listIndex);
