@@ -715,7 +715,6 @@ void think()
         printf("checking for possible bashes:\n");
         for (i = 0; i < stoneListIndex; i++) 
         {
-            
             checkForBash(stoneList[i], boardArray, boardSize, bashList);
         }
         
@@ -723,7 +722,6 @@ void think()
         if (bashIndex > 0)
         {
             strcat(result, bashList[rand() % bashIndex]);
-
         }
         //if not generate a list of movable stones and move a random one
         else 
@@ -776,35 +774,35 @@ void think()
                     strcat(result, queenMoveList[rand() % queenMoveIndex]);
                 }
                 // free queenMoveList
-                for (i = 0; i < queenMoveIndex; i++)
+                for (i = 0; i < boardSize*3*2; i++)
                 {
                     free(queenMoveList[i]);
                 }
                 free(queenMoveList);
             }
             // free moveList
-            for (i = 0; i < moveIndex; i++)
+            for (i = 0; i < boardSize*3*2; i++)
             {
                 free(moveList[i]);
             }
             free(moveList);
         }
-        // free queenMoveList
-        for (i = 0; i < bashIndex; i++)
+        // free bashList
+        for (i = 0; i < boardSize*3*3; i++)
         {
             free(bashList[i]);
         }
         free(bashList);
     }
     // free queenBashList
-    for (i = 0; i < queenBashIndex; i++)
+    for (i = 0; i < boardSize*3*3; i++)
     {
         free(queenBashList[i]);
     }
     free(queenBashList);
 
     // free stoneList
-    for (i = 0; i < stoneListIndex; i++)
+    for (i = 0; i < boardSize*3/2; i++)
     {
         free(stoneList[i]);
     }
