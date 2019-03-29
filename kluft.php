@@ -28,10 +28,10 @@
     <!-- Ende Cookie Plugin -->
 
 </head>
-<body  style="background-image: url('https://lysq6w.ch.files.1drv.com/y4mektjTZA07TfNgwFbPXzecRz2k_sJXBlzm8aw52tZPsooBzsY4EKxti37qKcvSjLZ3EEDdult4py3roqo-uNvArz5G1jVghZhewQ8Hf6tXKEBuk2QDUGrccA0L5T_x-TcdeYjurN9wcyAKq6tqJ6CFfKS3Gfeal9UmMC0gMXU9btTUwADcvaXKjQ3hJbfF6H6MA8AW7_qcx7yXnkW28-IOw?width=1024&height=683&cropmode=none'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
+<body  style="background-image: url('images/Backgound/Kluft.JPG'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
 <div class="mdl-layout mdl-js-layout">
     <?php
-    include "php-helper/headerTest.php";
+    include "php-helper/header.php";
     ?>
 
     <main class="mdl-layout__content">

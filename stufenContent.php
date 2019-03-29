@@ -31,19 +31,19 @@
 <?php
 $article = $_GET["article"];
 if($article == 1){
-    echo "<body  style=\"background-image: url('https://kqcbag.ch.files.1drv.com/y4m0tzQHJ-FfuQUkzc0uOGou-TlM_4KcSsfL2mRYXUtjGbJYKYTlrC2W7FsejoLIFFDnebEFANXxK8_roxlsyqhDvzTXACPic_Is63Pzlb70eJAtxQmks11EmLs2N8D4AWoDXAOIVaBsInA1nce1JpgAwuQK0GjBkvXtcAaIdmkk4ivbpNtwvjN6z-c6XhEyh3aWtqmX_X1pONoWjozAVpRgQ?width=1024&height=768&cropmode=none'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;\">";
+    echo "<body  style=\"background-image: url('images/Backgound/Hintergrund-Woes.jpg'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;\">";
 }
 if($article == 2){
-    echo "<body  style=\"background-image: url('https://kkcbag.ch.files.1drv.com/y4mEJu-kDjzelGLzHO2zGvSBCw0NKH6OETHOsLEjxEi5eZA2DealgHT3K97kZOt0n_LHUuwxWOC5SOU4fissmXrnIPJoIRql27qU4Nu3RnoGBG7uG3ztAmna-87mmg4yLLcN8-2o5TEEzQGGfeLRi-7BC8dxG0GQ7bc08Ay5X1wkryL84Odk9G9jYGPBICxX0wplJga4tZc7eTkeP0ZezdLJw?width=1024&height=576&cropmode=none'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;\">";
+    echo "<body  style=\"background-image: url('images/Backgound/Hintergrund Jupfis.jpeg'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;\">";
 }
 if($article == 3){
-    echo "<body  style=\"background-image: url('https://k6dfrg.ch.files.1drv.com/y4mSNn7v0_r0D29hd47eF-dwEYUYGNzPanJ0HfInLJkHuQagLoTiQMIyCsX_P6G8rfJFQuC-MnQai9azvOioSy_aqlPhOWvKb8fJ6C0urbTCrcBgA9XDAxkvrqt-Cc9BuMg0KaQJ2Yv2edL_VzLtokX1MRMnds3zmzUWPhFXaZGeUUVw-f7r8o_RBY8Z10BLyGxQGwT9cRjwJKPfc0Y1hHCzQ?width=1024&height=619&cropmode=none'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;\">";
+    echo "<body  style=\"background-image: url('images/Backgound/Promobild Roh 3_FarbabgleichWeich2_Schnitt.png'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;\">";
 }
 if($article == 4){
-    echo "<body  style=\"background-image: url('https://lacpxq.ch.files.1drv.com/y4mdgDiwj3QDxcrbA3l7Dz3W8qwb5IX1WuskMmcL3lNqLJOIcaeBbweKW3ars1L1tuTNiB07mLmxcDXRWz0WqYdfOxJFnl6MYf-8CJNs599jbG8CMu7yoz644cWO2qUspyf8KtgoxozDQvJh-kRxfAm3ndLqTRhq81JjzGl2qWkYb4z_3IpykpUzQH32OHRXU6qjLj1T2cesSH-VamAfmc4CQ?width=1024&height=683&cropmode=none'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;\">";
+    echo "<body  style=\"background-image: url('images/Backgound/RoverBackground.JPG'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;\">";
 }
 if($article == 5){
-    echo "<body  style=\"background-image: url('https://jqao6q.ch.files.1drv.com/y4mn_jmESbgppSJLwhwSVtWaxkW1AuUfJuAo81mkrLhCi_gLyawiokaSLXDAVQOh_btN440pNOEA_m58lr9CpHyKZIGFaP6ezvbNTFDaZYrfQXknrUSj0KvWNor5NdjBZY19cHqCthrKGMyyLSXldrKp3gnz2ztqUihh8TwR8WrIxxArW4b5CDSE80OVIsKwuhre8dflzohUtsMffcel2h7hw?width=1024&height=683&cropmode=none'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;\">";
+    echo "<body  style=\"background-image: url('images/Backgound/LeiterrundeBackground.JPG'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;\">";
 }
 
 else{
@@ -52,7 +52,7 @@ else{
 ?>
 <div class="mdl-layout mdl-js-layout">
     <?php
-    include "php-helper/headerTest.php";
+    include "php-helper/header.php";
     ?>
 
     <main class="mdl-layout__content">

@@ -37,7 +37,7 @@ else
 */
 ?>
 <?php
-include "php-helper/headerTest.php";
+include "php-helper/header.php";
 ?>
 <?php
 include 'logInOutDialog.php';

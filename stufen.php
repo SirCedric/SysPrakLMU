@@ -28,10 +28,10 @@
     <!-- Ende Cookie Plugin -->
 
 </head>
-<body  style="min-width: 100%; background-image: url('https://j6cpxq.ch.files.1drv.com/y4mG1LpBjet9Of-6RUuA5-dGfqX88OW57COa5u2Fbtk0xIV6vJC2mIk-ZQCwlU2M60OZ8E8BuXejJj8kWU_x_W0epj5Q99m4QuhJdCGiBIiUF14j0WoenhWkzCb8MsHg7ua9OryTq9BmhQLunnmJtKfcUjlUR9vLvEdvdaYarrEVY4plcph4h9g8FsLNAen9OfGfTVuvnM9QjD6Slv-vRteuw?width=1024&height=683&cropmode=none'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
+<body  style="min-width: 100%; background-image: url('images/Backgound/StufenBackground.JPG'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
   <div class="mdl-layout mdl-js-layout">
       <?php
-      include "php-helper/headerTest.php";
+      include "php-helper/header.php";
       ?>
       <main class="mdl-layout__content">
           <div class="page-content">

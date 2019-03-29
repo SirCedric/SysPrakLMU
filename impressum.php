@@ -28,11 +28,11 @@
     <!-- Ende Cookie Plugin -->
 
 </head>
-<body  style="background-image: url('https://mqao6q.ch.files.1drv.com/y4m3O5dPO5by4TNZllspSQR85hSs4m_Ncm_enKDQ4GgCPtUmVmwkHNvJv25RWvlxLBwoe9ADIZ4bzK9_-VQzcLO3cFqQf_v-Q-bR08QnWAAvh6xXnJKmYh7x7VqfR49F-18LghFrlWCm-sTIZAKrYtZ92KONFkLNxwQxoWTLiyXaMLtS6mCgayKwq6jufI8LSaAUBDDOp_ttJsJFc2knjoXYg?width=1024&height=683&cropmode=none'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
+<body  style="background-image: url('images/Backgound/ImpressungBackground.JPG'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
 <div class="mdl-layout mdl-js-layout">
     <?php
     require_once('/home/www/rover/forum/SSI.php');
-    include "php-helper/headerTest.php";
+    include "php-helper/header.php";
     ?>
     <main class="mdl-layout__content">
         <div class="page-content"><!-- Your content goes here -->

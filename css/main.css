@@ -183,3 +183,8 @@ div.CN_index_Main_Card-logo img{
     margin: 0 auto;
     display: block;
 }
+
+img{
+    max-width: 100%;
+    height: auto;
+}

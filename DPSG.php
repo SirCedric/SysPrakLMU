@@ -29,10 +29,10 @@
     <!-- Ende Cookie Plugin -->
 
 </head>
-<body  style="background-image: url('https://iysq6w.ch.files.1drv.com/y4m7hvWJ5f53E1GbYW-J0EE6YyGJHOUt4OAng_Y_Q0368hv0mgaLM3tyuKFjertjBnVdTvRygZdEf9dcur9xlF8YI0pbbe-OgYTqoIWW7nlPxe7C5BMSN-M4c_Aj0rrXbqkNj_uXpWuZY-w29XVKbGnyZPCrrxO2FQugjjIMRbIWKLWlDmDsXK5tm0Rdmj5-mMvISVlzzU-1GBNBDXPKKbIhw?width=1024&height=683&cropmode=none'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
+<body  style="background-image: url('images/Backgound/DPSGBackground.JPG'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
 <div class="mdl-layout mdl-js-layout">
     <?php
-    include "php-helper/headerTest.php";
+    include "php-helper/header.php";
     ?>
     <main class="mdl-layout__content">
         <div class="page-content"><!-- Your content goes here -->
@@ -43,7 +43,7 @@
                         <div class="mdl-card__title">
                             <h2 class="center_text mdl-card__title-text">Die Deutsche Pfadfinderschaft Sankt Georg</h2>
                         </div>
-                        <div class="mdl-card__supporting-text">
+                        <!--<div class="mdl-card__supporting-text">
                             <ul class="demo-list-two mdl-list">
 
                                 <li class="mdl-list__item mdl-list__item--two-line">
@@ -67,7 +67,7 @@
                                 <span class="mdl-list__item-sub-title"><center>Was wir eigentlich machen</center></span>
                             </span>
                                 </li>
-                        </div>
+                        </div>-->
 
                         <div class="mdl-card__supporting-text">
                             <ul class="demo-list-two mdl-list">

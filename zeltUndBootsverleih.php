@@ -32,7 +32,7 @@
 <body class="mainColor">
 <div class="mdl-layout mdl-js-layout">
     <?php
-    include "php-helper/headerTest.php";
+    include "php-helper/header.php";
     ?>
     <main class="mdl-layout__content">
         <div class="page-content"><!-- Your content goes here -->
@@ -41,23 +41,20 @@
                 <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
                     <div class="mdl-card mdl-shadow--2dp CN_full-size_card">
                         <div class="mdl-card__title">
-                            <h2 class="mdl-card__title-text">Zelt- & Bootsverleih</h2>
+                            <h2 class="center_text mdl-card__title-text">Zelt- & Bootsverleih</h2>
                         </div>
                         <div class="mdl-card__supporting-text">
                             <ul class="demo-list-two mdl-list">
 
                                 <li class="mdl-list__item mdl-list__item--two-line">
                             <span class="mdl-list__item-primary-content">
-                              <i class="material-icons mdl-list__item-avatar">person</i>
-                              <span>Zeltverleih</span>
-                              <span class="mdl-list__item-sub-title">Hier erhalten Sie mehr Informationen zu unserem Zeltverleih</span>
-                            </span>
-                                    <span class="mdl-list__item-secondary-content">
-                              <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="zelt.php">
-                                  zu den zelten
+                              <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="zelt.php">
+                                  Zeltverleih
                               </a>
+                                <span class="mdl-list__item-sub-title"><center>Hier erhalten Sie mehr Informationen zu unserem Zeltverleih</center></span>
                             </span>
                                 </li>
+
                         </div>
 
                         <div class="mdl-card__supporting-text">
@@ -65,14 +62,10 @@
 
                                 <li class="mdl-list__item mdl-list__item--two-line">
                             <span class="mdl-list__item-primary-content">
-                              <i class="material-icons mdl-list__item-avatar">person</i>
-                              <span>Bootsverleih</span>
-                              <span class="mdl-list__item-sub-title">Hier erhalten Sie mehr Informationen zu unserem Bootsverleih</span>
-                            </span>
-                                    <span class="mdl-list__item-secondary-content">
-                              <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="boot.php">
-                                  Zu den Booten
+                              <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="boot.php">
+                                  Bootsverleih
                               </a>
+                                <span class="mdl-list__item-sub-title"><center>Hier erhalten Sie mehr Informationen zu unserem Bootsverleih</center></span>
                             </span>
                                 </li>
                         </div>

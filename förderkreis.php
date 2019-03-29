@@ -28,10 +28,10 @@
     <!-- Ende Cookie Plugin -->
 
 </head>
-<body  style="background-image: url('https://kkao6q.ch.files.1drv.com/y4mfWT-8Zk6jKX6ichUFqvR2NWcEn4iy5cyQQb6rqyGoqNhqQeGj5JoucEEyGPCC0jiw_WEzHH3RtJ_61WxOuNF_mmkBOQm5wT5UKGo2Q5NB6TwbgRDSpLO2Ebr-fu8B4BiesEovwE3JMsWKiPBlNKjw5ffF18dLX1ty-q9uz1icBtkaYHS56c_xmDY6wxra61-nNHx4iMCVd2jakQWh2gujA?width=1024&height=683&cropmode=none'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
+<body  style="background-image: url('images/Backgound/FoerderkreisBackground.JPG'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
 <div class="mdl-layout mdl-js-layout">
     <?php
-    include "php-helper/headerTest.php";
+    include "php-helper/header.php";
     ?>
 
     <main class="mdl-layout__content">

@@ -32,10 +32,10 @@
     <!-- Ende Cookie Plugin -->
 
 </head>
-<body id="body" style="background-image: url('https://mqcpxq.ch.files.1drv.com/y4mblKTqV6zMdykEhlm-WffJsz4qO1NUgJEl0wYpLBzrxr1rXC9lYObu9XcLajgRmCvvh1b59wRghoW-G4qQ3M-xqG3go4OJINC0MtN3lT8JZfpbw6W1PwADtLgTc1ZTFyeoz86mPxvTK0PL3ilQkKJ9Bm1wPePSqxb9CM7UJNttx3O6jRV3wpdFSg181cU_QWpg9HLmfXc607gJIggCfiMNA?width=1024&height=683&cropmode=none'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
+<body id="body" style="background-image: url('images/Backgound/NewsBackground.jpg'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
 <div class="mdl-layout mdl-js-layout">
     <?php
-    include "php-helper/headerTest.php";
+    include "php-helper/header.php";
     ?>
 
     <main class="mdl-layout__content">

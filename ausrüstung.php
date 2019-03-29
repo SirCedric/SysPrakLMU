@@ -28,10 +28,10 @@
     <!-- Ende Cookie Plugin -->
 
 </head>
-<body  style="background-image: url('https://kqbzda.ch.files.1drv.com/y4mSq4qRkxmWPtG9r-0sb8w5o8iSCh0G1MQXC5DxGAoi4LhCen1ew_2gJTDLAMj4StBp-rcGh2xabx6Uswyd_Pkp2Gy0zt84Djiilesh61ZzWdhc2r_ncRyRCG1X6gFZy_bepECLuDyyUf_WVfDdSoy7ByrZua3TskZ_8ckNmq1DK3LJhcYZgiqT0P6j4E0mKxSQp_7wfbKRS7uZ0IYOCDqHA?width=768&height=1024&cropmode=none'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
+<body  style="background-image: url('images/Backgound/AusruestungBackground.JPG'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
 <div class="mdl-layout mdl-js-layout">
     <?php
-    include "php-helper/headerTest.php";
+    include "php-helper/header.php";
     ?>
     <main class="mdl-layout__content">
         <div class="page-content"><!-- Your content goes here -->

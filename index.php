@@ -31,10 +31,10 @@ require_once('/home/www/rover/forum/SSI.php');
     <!-- Ende Cookie Plugin -->
 
 </head>
-<body  style="background-image: url('https://k6ao6q.ch.files.1drv.com/y4mKkv2fmRXuxGa-8b0k4wbkhA56z32kgTC8uI6NeZ4FZuNRjvgCR-llTDGrxczXoNlJlhUBcq5LpBCxCE4_ll4_bWwtfqkYJjE8XOAgR8MDbntZKolCN8xVUIVGyzrxuLjKt0YHlut-2DJsQwX37bdhTTyuMGl6TdZhx9Hi1-4pML--8sZMA1QUTM8xJxy2X-gpTeU4lvZlVHBJa--F2FdNw?width=1024&height=683&cropmode=none'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
+<body  style="background-image: url('images/Backgound/HomeBackground.JPG'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
 <div class="mdl-layout mdl-js-layout">
     <?php
-    include "php-helper/headerTest.php";
+    include "php-helper/header.php";
     ?>
     <main class="mdl-layout__content">
         <div class="page-content"><!-- Your content goes here -->
@@ -60,7 +60,7 @@ require_once('/home/www/rover/forum/SSI.php');
                 </div>
 
                 <?php
-                include 'aktuellsteNewsTest.php';
+                include 'aktuellsteNews.php';
                 ?>
 
             </div>

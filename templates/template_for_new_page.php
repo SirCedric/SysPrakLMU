@@ -21,7 +21,7 @@
       if(isset($_SESSION['username'])){
           include "php-helper/header_loggedIn.php";
       }else {
-          include "php-helper/header.php";
+          include "php-helper/headerOld.php";
       }
       ?>
       <main class="mdl-layout__content">

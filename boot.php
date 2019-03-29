@@ -32,7 +32,7 @@
 <body class="mainColor">
 <div class="mdl-layout mdl-js-layout">
     <?php
-    include "php-helper/headerTest.php";
+    include "php-helper/header.php";
     ?>
 
     <main class="mdl-layout__content">

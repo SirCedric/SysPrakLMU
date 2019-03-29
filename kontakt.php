@@ -36,7 +36,7 @@ header('Content-Type: text/html; charset=utf-8');
 <div class="mdl-layout mdl-js-layout">
     <?php
     require_once('/home/www/rover/forum/SSI.php');
-    include "php-helper/headerTest.php";
+    include "php-helper/header.php";
     ?>
     <main class="mdl-layout__content">
         <div class="page-content"><!-- Your content goes here -->
@@ -66,7 +66,7 @@ header('Content-Type: text/html; charset=utf-8');
 
             $fields = array	(
                 // 'Feldname'		=>		 Typ, Pflichtfeld?, Ergänzungen (z.B. bei select-Feld)
-                'Empfänger'         => array('select', true, array('Vorstand', 'Platzwart', 'Webmaster', 'Förderkreis', 'Zeltverleih', 'Bootsverleih', 'Wölflingsleiter', 'Jupfileiter', 'Pfadileiter', 'Roverleiter')),
+                'Empfänger'         => array('select', true, array('Vorstand', 'Platzwart', 'Webmaster', 'Förderkreis', 'Zeltverleih', 'Bootsverleih', 'Wölflingsleiter', 'Jupfileiter', 'Pfadileiter', 'Roverleiter', 'Leiterrunde')),
                 'Anrede' 			=> array('select', true, array('Frau', 'Herr')),
                 'Vorname' 			=> array('text', false),
                 'Nachname'			=> array('text', true),
@@ -99,28 +99,31 @@ header('Content-Type: text/html; charset=utf-8');
                             $adminMail = 'jwidhopf@web.de';
                         }
                         if($_POST[field2url($name)] == 'Förderkreis'){
-                            $adminMail = 'ktrooper83@gmail.com';
+                            $adminMail = 'foerderkreis@dpsg-windrose.de';
                         }
                         if($_POST[field2url($name)] == 'Webmaster'){
                             $adminMail = 'webmaster@dpsg-windrose.de';
                         }
                         if($_POST[field2url($name)] == 'Wölflingsleiter'){
-                            $adminMail = 'ktrooper83@gmail.com';
+                            $adminMail = 'woeleiter@dpsg-windrose.de';
                         }
                         if($_POST[field2url($name)] == 'Jupfileiter'){
-                            $adminMail = 'ktrooper83@gmail.com';
+                            $adminMail = 'jupfileiter@dpsg-windrose.de';
                         }
                         if($_POST[field2url($name)] == 'Pfadileiter'){
-                            $adminMail = 'ktrooper83@gmail.com';
+                            $adminMail = 'pfadileiter@dpsg-windrose.de';
                         }
                         if($_POST[field2url($name)] == 'Roverleiter'){
-                            $adminMail = 'ktrooper83@gmail.com';
+                            $adminMail = 'roverleiter@dpsg-windrose.de';
+                        }
+                        if($_POST[field2url($name)] == 'Leiterrunde'){
+                            $adminMail = 'leiterrunde@dpsg-windrose.de';
                         }
                         if($_POST[field2url($name)] == 'Zeltverleih'){
-                            $adminMail = 'ktrooper83@gmail.com';
+                            $adminMail = 'stavo@dpsg-windrose.de';
                         }
                         if($_POST[field2url($name)] == 'Bootsverleih'){
-                            $adminMail = 'ktrooper83@gmail.com';
+                            $adminMail = 'stavo@dpsg-windrose.de';
                         }
                     }
                     if ( !( !$settings[1] || ( $settings[1] && isset($_POST[field2url($name)]) && $_POST[field2url($name)] != '' ) ) ) {

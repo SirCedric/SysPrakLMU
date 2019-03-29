@@ -34,7 +34,7 @@ require_once('/home/www/rover/forum/SSI.php');
 <body  class="mainColor">
 <div class="mdl-layout mdl-js-layout">
     <?php
-    include "php-helper/headerTest.php";
+    include "php-helper/header.php";
     ?>
     <main class="mdl-layout__content">
         <div class="page-content"><!-- Your content goes here -->

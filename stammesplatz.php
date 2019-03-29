@@ -28,10 +28,10 @@
     <!-- Ende Cookie Plugin -->
 
 </head>
-<body  style="background-image: url('https://m6cpxq.ch.files.1drv.com/y4mg_O-RATqWo2zfdUIVvrIihUteKCsXZhLCVJYL4NRJV8h2NyRh20up5dnSe-N9XLWjWWFTYIA4dYNjW__A5a-ELKp2APQlKLiIj4C786Vdcbx91lMY5yoCyeB7xPaS9W6IVC8927_3MAnF3-NztIj9Rveo4gkQv3iWe_zVMyddQXfFHfsS9JbhsxwW1W806bfNIaFMidw2dMbDGZjzHc8dQ?width=1024&height=683&cropmode=none'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
+<body  style="background-image: url('images/Backgound/StammesplatzBackground.JPG'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
 <div class="mdl-layout mdl-js-layout">
     <?php
-    include "php-helper/headerTest.php";
+    include "php-helper/header.php";
     ?>
 
     <main class="mdl-layout__content">
