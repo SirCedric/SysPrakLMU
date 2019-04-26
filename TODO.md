@@ -1,9 +1,5 @@
-# was noch zu tun ist
+#Neue Features
 
-## Login Seite
-Ist erledigt, zusätzlich Registrierung programmiert
-## Impressum
+##Forum neu implementieren
 
-## Forum
-template für threaderstellung, Umfragen etc.
-eventuell bereits sicherheitsrechte einbauen(Wer darf auf was zugreifen <--> Datenbank)
+##Blogposts auf der Startseite verfassen können
