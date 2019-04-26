@@ -28,26 +28,7 @@
     <!-- Ende Cookie Plugin -->
 
 </head>
-<?php
-$article = $_GET["article"];
-if ($article == 1) {
-    echo "<body  style=\"background-image: url('images/Backgound/Hintergrund-Woes.jpg'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;\">";
-}
-if ($article == 2) {
-    echo "<body  style=\"background-image: url('images/Backgound/Hintergrund Jupfis.jpeg'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;\">";
-}
-if ($article == 3) {
-    echo "<body  style=\"background-image: url('images/Backgound/Promobild Roh 3_FarbabgleichWeich2_Schnitt.png'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;\">";
-}
-if ($article == 4) {
-    echo "<body  style=\"background-image: url('images/Backgound/RoverBackground.JPG'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;\">";
-}
-if ($article == 5) {
-    echo "<body  style=\"background-image: url('images/Backgound/LeiterrundeBackground.JPG'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;\">";
-} else {
-    echo "<body class=\"mainColor\">";
-}
-?>
+<body class="mainColor">
 <div class="mdl-layout mdl-js-layout">
     <?php
     include "php-helper/header.php";
@@ -62,21 +43,11 @@ if ($article == 5) {
                     $Headline = "";
                     $ContentPart = "";
 
-                    //$servername = "localhost";
-                    //$username = "Website";
-                    //$password = "Rdt-bEX-Z37-ov5";
-                    //$dbname = "neueSeite";
-                    //parameter uebergabe aus der URL
-                    $article = $_GET["article"];
-
-                    // Create connection
-                    //$conn = new mysqli($servername, $username, $password, $dbname);
-                    // Check connection
                     if ($link->connect_error) {
                         die("Connection failed: " . $link->connect_error);
                     }
 
-                    $sql = "SELECT Headline, Content FROM Stufen WHERE stufenID=$article";
+                    $sql = "SELECT Headline, Content FROM Ausrüstung WHERE id=2";
                     $result = $link->query($sql);
 
                     while ($row = $result->fetch_assoc()) {
@@ -84,14 +55,14 @@ if ($article == 5) {
                         $ContentPart = $row["Content"];
                         //echo "id: " . $row["Headline"]. "<br>";
 
-                        echo "<div class='CN_index_Main_Card mdl-card mdl-shadow--4dp mdl-cell mdl-cell--10-col mdl-cell--10-col-tablet mdl-cell--12-col-phone'>";
-                        echo "<div class='mdl-card__title'>";
+                        echo "<div class='mdl-card news_Card_location mdl-shadow--4dp mdl-cell mdl-cell--5-col mdl-cell--5-col-phone mdl-cell--5-col-tablet'>";
+                        echo "<div class='mdl-card__title headline'>";
                         echo "<h3>$Headline</h3>";
                         echo "</div>";
-                        echo "<div class='mdl-color-text--grey-700 mdl-card__supporting-text CN_index_Main_Card-text'>";
+                        echo "<div class='mdl-color-text--grey-700 mdl-card__supporting-text'>";
                         echo "<p>$ContentPart</p>";
                         echo "<div class=\"mdl-card__actions mdl-card--border\">";
-                        echo "<a class=\"mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect\" href=\"stufen.php\">
+                        echo "<a class=\"mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect\" href=\"ausruestung.php\">
                             Zurück zur Übersicht
                             </a>";
                         echo "</div>";

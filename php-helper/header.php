@@ -64,16 +64,16 @@ require_once('/home/www/rover/forum/SSI.php');
         <a class="mdl-navigation__link" href="aktuelles.php">News</a>
         <a class="mdl-navigation__link" href="DPSG.php">Die DPSG</a>
         <a class="mdl-navigation__link" href="stammesInfo.php">Über Uns</a>
-        <a class="mdl-navigation__link" href="ausrüstung.php">Ausrüstung</a>
+        <a class="mdl-navigation__link" href="ausruestung.php">Ausrüstung</a>
         <a class="mdl-navigation__link" href="zeltUndBootsverleih.php">Zelt- & Bootsverleih</a>
-        <a class="mdl-navigation__link" href="förderkreis.php">Förderkreis</a>
+        <a class="mdl-navigation__link" href="foerderkreis.php">Förderkreis</a>
         <a class="mdl-navigation__link" href="https://onedrive.live.com/?authkey=%21AGIouanNsyXzU0Q&id=1722EAB2D67ECA0E%211758&cid=1722EAB2D67ECA0E" onclick='window.open(this.href); return false;'>Galerie</a>
 
         <?php
         if($context['user']['is_guest']){
 
         }else{
-            echo '<span class="mdl-layout-text center_ssi"><b><u>Online:</u></b></br>', ssi_whosOnline() ,'</span>';
+            echo '<span class="mdl-layout-text center_ssi_welcome"><b><u>Online:</u></b></br>', ssi_whosOnline() ,'</span>';
         }
         ?>
 

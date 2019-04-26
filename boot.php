@@ -36,50 +36,52 @@
     ?>
 
     <main class="mdl-layout__content">
-        <div class="page-content">
-            <div class="mdl-grid">
-                <?php
-                require_once 'config.php';
-                $Headline = "";
-                $ContentPart = "";
+        <div id="page-container">
+            <div class="page-content" id="page-container">
+                <div class="mdl-grid">
+                    <?php
+                    require_once 'config/config.php';
+                    $Headline = "";
+                    $ContentPart = "";
 
-                if ($link->connect_error) {
-                    die("Connection failed: " . $link->connect_error);
-                }
+                    if ($link->connect_error) {
+                        die("Connection failed: " . $link->connect_error);
+                    }
 
-                $sql = "SELECT Headline, Content FROM ZeltBoot WHERE id=2";
-                $result = $link->query($sql);
+                    $sql = "SELECT Headline, Content FROM ZeltBoot WHERE id=2";
+                    $result = $link->query($sql);
 
-                while($row = $result->fetch_assoc()) {
-                    $Headline = $row["Headline"];
-                    $ContentPart = $row["Content"];
-                    //echo "id: " . $row["Headline"]. "<br>";
+                    while ($row = $result->fetch_assoc()) {
+                        $Headline = $row["Headline"];
+                        $ContentPart = $row["Content"];
+                        //echo "id: " . $row["Headline"]. "<br>";
 
-                    echo "<div class='mdl-card news_Card_location mdl-shadow--4dp mdl-cell mdl-cell--10-col mdl-cell--12-col-phone mdl-cell--10-col-tablet'>";
-                    echo "<div class='mdl-card__title headline'>";
-                    echo "<h3>$Headline</h3>";
-                    echo "</div>";
-                    echo "<div class='mdl-color-text--grey-700 mdl-card__supporting-text'>";
-                    echo "<p>$ContentPart</p>";
-                    echo "<div class=\"mdl-card__actions mdl-card--border\">";
-                    echo "<a class=\"mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect\" href=\"zeltUndBootsverleih.php\">
+                        echo "<div class='mdl-card news_Card_location mdl-shadow--4dp mdl-cell mdl-cell--10-col mdl-cell--12-col-phone mdl-cell--10-col-tablet'>";
+                        echo "<div class='mdl-card__title headline'>";
+                        echo "<h3>$Headline</h3>";
+                        echo "</div>";
+                        echo "<div class='mdl-color-text--grey-700 mdl-card__supporting-text'>";
+                        echo "<p>$ContentPart</p>";
+                        echo "<div class=\"mdl-card__actions mdl-card--border\">";
+                        echo "<a class=\"mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect\" href=\"zeltUndBootsverleih.php\">
                             Zurück zur Übersicht
                             </a>";
-                    echo "</div>";
-                    echo "</div>";
-                    echo "</div>";
+                        echo "</div>";
+                        echo "</div>";
+                        echo "</div>";
 
-                }
-                $link->close();
+                    }
+                    $link->close();
 
 
-                ?>
+                    ?>
 
+                </div>
             </div>
-        </div>
             <?php
             include 'php-helper/footer.php';
             ?>
+        </div>
     </main>
 </div>
 </body>

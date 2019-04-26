@@ -28,66 +28,72 @@
     <!-- Ende Cookie Plugin -->
 
 </head>
-<body  style="background-image: url('images/Backgound/AusruestungBackground.JPG'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
+<body style="background-image: url('images/Backgound/AusruestungBackground.JPG'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
 <div class="mdl-layout mdl-js-layout">
     <?php
     include "php-helper/header.php";
     ?>
     <main class="mdl-layout__content">
-        <div class="page-content"><!-- Your content goes here -->
-            <div class="mdl-grid">
+        <div id="page-container">
+            <div class="page-content" id="content-wrap"><!-- Your content goes here -->
+                <div class="mdl-grid">
 
-                <div class="center_text mdl-cell mdl-cell--10-col mdl-cell--10-col-tablet mdl-cell--12-col-phone">
-                    <div class="mdl-card mdl-shadow--2dp CN_full-size_card_stammesinfo">
-                        <div class="mdl-card__title">
-                            <h2 class="center_text mdl-card__title-text">Alles was es über unsere Ausrüstung zu erwähnen gibt</h2>
-                        </div>
-                        <div class="mdl-card__supporting-text">
-                            <ul class="demo-list-two mdl-list">
+                    <div class="center_text mdl-cell mdl-cell--10-col mdl-cell--10-col-tablet mdl-cell--12-col-phone">
+                        <div class="mdl-card mdl-shadow--2dp CN_full-size_card_stammesinfo">
+                            <div class="mdl-card__title">
+                                <h2 class="center_text mdl-card__title-text">Alles was es über unsere Ausrüstung zu
+                                    erwähnen gibt</h2>
+                            </div>
+                            <div class="mdl-card__supporting-text">
+                                <ul class="demo-list-two mdl-list">
 
-                                <li class="mdl-list__item mdl-list__item--two-line">
+                                    <li class="mdl-list__item mdl-list__item--two-line">
                             <span class="mdl-list__item-primary-content">
-                              <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="kluft.php">
+                              <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                                 href="kluft.php">
                                   Zur Kluft
                               </a>
                                 <span class="mdl-list__item-sub-title"><center>Hier erfahren Sie alles wissenswerte über unsere Kluft</center></span>
                             </span>
-                                </li>
-                        </div>
+                                    </li>
+                            </div>
 
-                        <div class="mdl-card__supporting-text">
-                            <ul class="demo-list-two mdl-list">
+                            <div class="mdl-card__supporting-text">
+                                <ul class="demo-list-two mdl-list">
 
-                                <li class="mdl-list__item mdl-list__item--two-line">
+                                    <li class="mdl-list__item mdl-list__item--two-line">
                             <span class="mdl-list__item-primary-content">
-                              <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="abPäckchen.php">
+                              <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                                 href="abPaeckchen.php">
                                   Das Allzeit-Bereit-Päckchen
                               </a>
                                 <span class="mdl-list__item-sub-title"><center>Das Allzeit-Bereit-Päckchen gehört zur Grundausrüstung</center></span>
                             </span>
-                                </li>
-                        </div>
+                                    </li>
+                            </div>
 
-                        <div class="mdl-card__supporting-text">
-                            <ul class="demo-list-two mdl-list">
+                            <div class="mdl-card__supporting-text">
+                                <ul class="demo-list-two mdl-list">
 
-                                <li class="mdl-list__item mdl-list__item--two-line">
+                                    <li class="mdl-list__item mdl-list__item--two-line">
                             <span class="mdl-list__item-primary-content">
-                              <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="packliste.php">
+                              <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                                 href="packliste.php">
                                   Zur Packliste
                               </a>
                                 <span class="mdl-list__item-sub-title"><center>Damit nichts daheim vergessen wird</center></span>
                             </span>
-                                </li>
-                        </div>
+                                    </li>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
             <?php
             include 'php-helper/footer.php';
             ?>
+        </div>
     </main>
 </div>
 </body>

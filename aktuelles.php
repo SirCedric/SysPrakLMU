@@ -1,8 +1,8 @@
-    <?php
-    require_once('/home/www/rover/forum/SSI.php');
-    ?>
+<?php
+require_once('/home/www/rover/forum/SSI.php');
+?>
 
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html class="mdl-js">
 <head>
     <meta charset="utf-8">
@@ -32,24 +32,27 @@
     <!-- Ende Cookie Plugin -->
 
 </head>
-<body id="body" style="background-image: url('images/Backgound/NewsBackground.jpg'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
+<body id="body"
+      style="background-image: url('images/Backgound/NewsBackground.jpg'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
 <div class="mdl-layout mdl-js-layout">
     <?php
     include "php-helper/header.php";
     ?>
 
     <main class="mdl-layout__content">
-        <div class="page-content"><!-- Your content goes here -->
-            <div class="mdl-grid">
-<?php
-include 'aktuellesTest.php';
-?>
+        <div id="page-container">
+            <div class="page-content" id="content-wrap"><!-- Your content goes here -->
+                <div class="mdl-grid">
+                    <?php
+                    include 'aktuellesTest.php';
+                    ?>
 
+                </div>
             </div>
+            <?php
+            include 'php-helper/footer.php';
+            ?>
         </div>
-        <?php
-        include 'php-helper/footer.php';
-        ?>
     </main>
 </div>
 </body>

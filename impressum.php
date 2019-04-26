@@ -28,34 +28,34 @@
     <!-- Ende Cookie Plugin -->
 
 </head>
-<body  style="background-image: url('images/Backgound/ImpressungBackground.JPG'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
+<body style="background-image: url('images/Backgound/ImpressungBackground.JPG'); background-repeat: no-repeat; width: 100%; height: 100%; background-position: center;background-repeat: no-repeat;background-size: cover;">
 <div class="mdl-layout mdl-js-layout">
     <?php
     require_once('/home/www/rover/forum/SSI.php');
     include "php-helper/header.php";
     ?>
     <main class="mdl-layout__content">
-        <div class="page-content"><!-- Your content goes here -->
-            <div class="mdl-grid">
-                <style>
-                    .demo-card-wide.mdl-card {
-                        width: 80%;
-                        margin: 0 auto;
-                        margin-bottom: 10px;
-                    }
-                </style>
+        <div id="page-container">
+            <div class="page-content" id="content-wrap"><!-- Your content goes here -->
+                <div class="mdl-grid">
+                    <style>
+                        .demo-card-wide.mdl-card {
+                            width: 80%;
+                            margin: 0 auto;
+                            margin-bottom: 10px;
+                        }
+                    </style>
 
 
-
-                <div class="mdl-layout-spacer"></div>
-                <div class="mdl-cell mdl-cell--10-col mdl-cell--10-col-tablet mdl-cell--12-col-phone">
-                    <div class="demo-card-wide mdl-card mdl-shadow--4dp CN_index_Main_Card">
-                        <div class="mdl-card__title">
-                            <h2 class="mdl-card__title-text">Stammesvorstand</h2>
-                        </div>
-                        <div class="mdl-card__supporting-text">
-                            <ul class="demo-list-icon mdl-list">
-                                <li class="mdl-list__item">
+                    <div class="mdl-layout-spacer"></div>
+                    <div class="mdl-cell mdl-cell--10-col mdl-cell--10-col-tablet mdl-cell--12-col-phone">
+                        <div class="demo-card-wide mdl-card mdl-shadow--4dp CN_index_Main_Card">
+                            <div class="mdl-card__title">
+                                <h2 class="mdl-card__title-text">Stammesvorstand</h2>
+                            </div>
+                            <div class="mdl-card__supporting-text">
+                                <ul class="demo-list-icon mdl-list">
+                                    <li class="mdl-list__item">
                         <span class="mdl-list__item-primary-content">
                         <i class="material-icons mdl-list__item-icon">person</i>
                         Kilian Hohl</br>
@@ -63,8 +63,8 @@
                             81825 München</br>
                             E-Mail: stavo@dpsg-windrose.de
                     </span>
-                                </li>
-                                <li class="mdl-list__item">
+                                    </li>
+                                    <li class="mdl-list__item">
                         <span class="mdl-list__item-primary-content">
                         <i class="material-icons mdl-list__item-icon">person</i>
                         Dominik Hohl</br>
@@ -72,38 +72,39 @@
                             85586 Poing</br>
                             E-Mail: stavo@dpsg-windrose.de
                       </span>
-                                </li>
-                            </ul>
-                            <div class="mdl-card__menu">
-                                <a class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" href="mailto:stavo@dpsg-windrose.de">
-                                    <i class="material-icons">share</i>
-                                </a>
+                                    </li>
+                                </ul>
+                                <div class="mdl-card__menu">
+                                    <a class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                                       href="mailto:stavo@dpsg-windrose.de">
+                                        <i class="material-icons">share</i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                              </div>
-                          </div>
-                <!-- -->
-                <div class="mdl-layout-spacer"></div>
-            </div>
-            <div class="mdl-grid">
+                    </div>
+                    <!-- -->
+                    <div class="mdl-layout-spacer"></div>
+                </div>
+                <div class="mdl-grid">
 
-                <style>
-                    .demo-card-wide.mdl-card {
-                        width: 80%;
-                        margin: 0 auto;
-                        margin-bottom: 10px;
-                    }
-                </style>
+                    <style>
+                        .demo-card-wide.mdl-card {
+                            width: 80%;
+                            margin: 0 auto;
+                            margin-bottom: 10px;
+                        }
+                    </style>
 
-                <div class="mdl-layout-spacer"></div>
-                <div class="mdl-cell mdl-cell--10-col mdl-cell--10-col-tablet mdl-cell--12-col-phone">
-                    <div class="demo-card-wide mdl-card mdl-shadow--4dp CN_index_Main_Card">
-                        <div class="mdl-card__title">
-                            <h2 class="mdl-card__title-text">Administrator</h2>
-                        </div>
-                        <div class="mdl-card__supporting-text">
-                            <ul class="demo-list-icon mdl-list">
-                                <li class="mdl-list__item">
+                    <div class="mdl-layout-spacer"></div>
+                    <div class="mdl-cell mdl-cell--10-col mdl-cell--10-col-tablet mdl-cell--12-col-phone">
+                        <div class="demo-card-wide mdl-card mdl-shadow--4dp CN_index_Main_Card">
+                            <div class="mdl-card__title">
+                                <h2 class="mdl-card__title-text">Administrator</h2>
+                            </div>
+                            <div class="mdl-card__supporting-text">
+                                <ul class="demo-list-icon mdl-list">
+                                    <li class="mdl-list__item">
                       <span class="mdl-list__item-primary-content">
                       <i class="material-icons mdl-list__item-icon">person</i>
                       Martin Donauer </br>
@@ -113,43 +114,45 @@
                           </br>
 
                       </span>
-                                </li>
-                                <li class="mdl-list__item">
+                                    </li>
+                                    <li class="mdl-list__item">
                                     <span class="mdl-list__item-primary-content">
                                 <i class="material-icons mdl-list__item-icon">person</i>
                                 Cedric Kummer </br>
-                                Flurstraße 10 </br>
-                                85646 Anzing </br>
-                                E-Mail: webmaster@dpsg-windrose.de
+                                        Flurstraße 10 </br>
+                                        85646 Anzing </br>
+                                        E-Mail: webmaster@dpsg-windrose.de
                                     </span>
-                                </li>
+                                    </li>
 
-                            </ul>
-                            <div class="mdl-card__menu">
-                                <a class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" href="mailto:webmaster@dpsg-windrose.de">
-                                    <i class="material-icons">share</i>
-                                </a>
+                                </ul>
+                                <div class="mdl-card__menu">
+                                    <a class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                                       href="mailto:webmaster@dpsg-windrose.de">
+                                        <i class="material-icons">share</i>
+                                    </a>
 
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="mdl-layout-spacer"></div>
+                    <div class="mdl-layout-spacer"></div>
 
-               <!-- <div class="mdl-layout-spacer"></div>-->
+                    <!-- <div class="mdl-layout-spacer"></div>-->
 
-                <span class="ImpressumHaftungshinweis">
+                    <span class="ImpressumHaftungshinweis">
                     </br>
-                    </br>
-                    </br>
-                    </br>
-                    Haftungshinweis: Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich
+                        </br>
+                        </br>
+                        </br>
+                        Haftungshinweis: Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich
                 </span>
+                </div>
             </div>
-        </div>
             <?php
             include 'php-helper/footer.php';
             ?>
+        </div>
     </main>
 </div>
 </body>

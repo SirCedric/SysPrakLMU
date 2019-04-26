@@ -35,48 +35,52 @@
     include "php-helper/header.php";
     ?>
     <main class="mdl-layout__content">
-        <div class="page-content"><!-- Your content goes here -->
-            <div class="mdl-grid">
+        <div id="page-container">
+            <div class="page-content" id="content-wrap"><!-- Your content goes here -->
+                <div class="mdl-grid">
 
-                <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
-                    <div class="mdl-card mdl-shadow--2dp CN_full-size_card">
-                        <div class="mdl-card__title">
-                            <h2 class="center_text mdl-card__title-text">Zelt- & Bootsverleih</h2>
-                        </div>
-                        <div class="mdl-card__supporting-text">
-                            <ul class="demo-list-two mdl-list">
+                    <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                        <div class="mdl-card mdl-shadow--2dp CN_full-size_card">
+                            <div class="mdl-card__title">
+                                <h2 class="center_text mdl-card__title-text">Zelt- & Bootsverleih</h2>
+                            </div>
+                            <div class="mdl-card__supporting-text">
+                                <ul class="demo-list-two mdl-list">
 
-                                <li class="mdl-list__item mdl-list__item--two-line">
+                                    <li class="mdl-list__item mdl-list__item--two-line">
                             <span class="mdl-list__item-primary-content">
-                              <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="zelt.php">
+                              <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                                 href="zelt.php">
                                   Zeltverleih
                               </a>
                                 <span class="mdl-list__item-sub-title"><center>Hier erhalten Sie mehr Informationen zu unserem Zeltverleih</center></span>
                             </span>
-                                </li>
+                                    </li>
 
-                        </div>
+                            </div>
 
-                        <div class="mdl-card__supporting-text">
-                            <ul class="demo-list-two mdl-list">
+                            <div class="mdl-card__supporting-text">
+                                <ul class="demo-list-two mdl-list">
 
-                                <li class="mdl-list__item mdl-list__item--two-line">
+                                    <li class="mdl-list__item mdl-list__item--two-line">
                             <span class="mdl-list__item-primary-content">
-                              <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="boot.php">
+                              <a class="center_text mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                                 href="boot.php">
                                   Bootsverleih
                               </a>
                                 <span class="mdl-list__item-sub-title"><center>Hier erhalten Sie mehr Informationen zu unserem Bootsverleih</center></span>
                             </span>
-                                </li>
-                        </div>
+                                    </li>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
             <?php
             include 'php-helper/footer.php';
             ?>
+        </div>
     </main>
 </div>
 </body>
